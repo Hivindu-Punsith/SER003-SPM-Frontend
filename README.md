@@ -1,6 +1,6 @@
 # SER003-SPM
 
-# Our sexy gym
+# Our gym
 
 ![4860874](https://user-images.githubusercontent.com/89182652/184527218-cd098f8b-2c0a-49bb-a0ca-fb707309f591.png)
 
