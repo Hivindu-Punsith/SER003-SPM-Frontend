@@ -1,0 +1,11 @@
+#responsive {
+    width:22%;
+    height:40px;
+}
+
+@media (max-width:768px) {
+    #responsive {
+        width:80%;
+        height:40px;
+    }
+}
