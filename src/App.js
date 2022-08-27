@@ -1,10 +1,15 @@
+import axios from "axios";
+import { AuthContextProvider } from "./components/context/Auth.context.js";
+import SiteRouter from "./Router.js";
 
-function App() {
+axios.defaults.withCredentials = true;
+
+const App = () => {
   return (
-    <div className="App">
-      <label>GYM App </label>
-    </div>
+    <AuthContextProvider>
+      <SiteRouter />
+    </AuthContextProvider>
   );
-}
+};
 
 export default App;
