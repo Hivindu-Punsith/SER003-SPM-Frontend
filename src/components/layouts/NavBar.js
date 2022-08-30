@@ -40,18 +40,18 @@ const NavBar = ()=> {
                     </td>
                     <td>
                       <Link to="/login">
-                        <Button className="btn btn-success" type="submit" style={{  display:Token == undefined ? "flex" : "none", marginLeft:"20px" , textDecoration:"none"}}>
+                        <Button className="btn btn-secondary" type="submit" style={{  display:Token == undefined ? "flex" : "none", marginLeft:"20px" , textDecoration:"none"}}>
                          {"Login"}
                         </Button>
                       </Link>
                     </td>
                     <td>
-                      <Button onClick={handleSubmit} className="btn btn-warning" type="submit" style={{  display:Token == undefined ? "none" : "flex" , textDecoration:"none"}}>
+                      <Button onClick={handleSubmit} className="btn btn-secondary" type="submit" style={{  display:Token == undefined ? "none" : "flex" , textDecoration:"none"}}>
                         {"Logout"}
                       </Button>
                     </td>
                     <td>
-                      <Button  className="btn btn-success" type="submit" href="/profile" style={{ display: Token == undefined ? "none" : "flex" , marginLeft:"20px" , textDecoration:"none"}}>
+                      <Button  className="btn btn-secondary" type="submit" href="/profile" style={{ display: Token == undefined ? "none" : "flex" , marginLeft:"20px" , textDecoration:"none"}}>
                         Profile
                       </Button>
                     </td>
@@ -72,7 +72,7 @@ const NavBar = ()=> {
               <div className="navbar-nav">
 
                 {/* User pages */}
-                <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/store">Store</a>
+                <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/admin-products">Store</a>
                 <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/equipment">Equipment</a>
                 <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/memberships">Memberships</a>
                 <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/workout-plans">Workout Plans</a>
@@ -81,12 +81,12 @@ const NavBar = ()=> {
                 <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/members">Members</a>
                 <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/instructor-requests">Instructor Requests</a>
                 <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/equipment">Equipment</a>
-                <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/store">Store</a>
+                <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/admin-products">Store</a>
 
 
                 {/* admin pages */}                
                 <a style={{ display: userRole == "admin" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/users">Users</a>
-                <a style={{ display: userRole == "admin" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/store">Store</a>
+                <a style={{ display: userRole == "admin" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/admin-products">Store</a>
                 <a style={{ display: userRole == "admin" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/memberships">Memberships</a>
                 <a style={{ display: userRole == "admin" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/equipment">Equipment</a>
 

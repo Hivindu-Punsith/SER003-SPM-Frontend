@@ -12,6 +12,11 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Dashboard from "./components/layouts/Dashboard";
 
+//store management
+import ViewProducts from "./components/Products/ViewProducts";
+import ClientViewProducts from "./components/Products/ClientViewProducts";
+
+
 const SiteRouter = () => {
 
   const { Token, userRole , userLogged } = useContext(AuthContext);
@@ -29,6 +34,10 @@ const SiteRouter = () => {
                 <Route path="/" element={<Dashboard/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/login" element={<Login/>}/>
+
+                <Route path="/admin-products" element={<ViewProducts/>}/>
+                <Route path="/client-products" element={<ClientViewProducts/>}/>
+              
               </>
               )
               :
