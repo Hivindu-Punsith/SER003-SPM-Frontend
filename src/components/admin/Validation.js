@@ -1,11 +1,13 @@
 
-export const ValidateSignUp=(formData) =>{
+export const ValidateAddNewUser=(formData) =>{
 
     const messages ={
-       NAME_EMPTY :"The name should at least be 3 letters...",
+       FULL_NAME_EMPTY :"The name should at least be 3 letters...",
        EMAIL_EMPTY : "Email must contain @ and atleast 3 letter before for the prefix...",
-       STUDENT_IT_NUMBER_EMPTY : " Enter valid Registration number...",
-       MOBILE_NO_EMPTY : "Enter a valid mobile number..."
+       WEIGHT_EMPTY : " Enter valid Weight...",
+       HEIGHT_EMPTY : " Enter valid height...",
+       MOBILE_NO_EMPTY : "Enter a valid mobile number...",
+       DOB_EMPTY:"Date of Birth is empty..."
 
     };
 
@@ -14,9 +16,9 @@ export const ValidateSignUp=(formData) =>{
             message : null
     };
 
-    if(formData.name.length <= 2 )
+    if(formData.fullName.length <= 2 )
     {
-        output.message = messages.NAME_EMPTY;
+        output.message = messages.FULL_NAME_EMPTY;
         output.status = false;
         return output;
     
@@ -33,9 +35,21 @@ export const ValidateSignUp=(formData) =>{
         output.status = false;
         return output;
     }
-    if((formData.ITnumber.length < 10) || (formData.ITnumber.length > 10))
+    if(formData.weight.length <= 0)
     {
-        output.message = messages.STUDENT_IT_NUMBER_EMPTY;
+        output.message = messages.WEIGHT_EMPTY;
+        output.status = false;
+        return output;
+    }
+    if(formData.height.length <= 0)
+    {
+        output.message = messages.HEIGHT_EMPTY;
+        output.status = false;
+        return output;
+    }
+    if(formData.dateOfBirth.length <= 0)
+    {
+        output.message = messages.DOB_EMPTY;
         output.status = false;
         return output;
     }
