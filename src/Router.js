@@ -11,6 +11,8 @@ import NavBar from "./components/layouts/NavBar";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Dashboard from "./components/layouts/Dashboard";
+import HandleUsers from "./components/admin/HandleUsers";
+import ReqInstructor from "./components/user/ReqInstructor";
 
 //store management
 import ViewProducts from "./components/Products/ViewProducts";
@@ -34,10 +36,11 @@ const SiteRouter = () => {
                 <Route path="/" element={<Dashboard/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/login" element={<Login/>}/>
-
                 <Route path="/admin-products" element={<ViewProducts/>}/>
-                <Route path="/client-products" element={<ClientViewProducts/>}/>
-              
+                <Route path="/client-products" element={<ClientViewProducts/>}/>          
+                <Route path="/users" element={<HandleUsers/>}/>
+                <Route path="/req-instructor" element={<ReqInstructor/>}/>
+
               </>
               )
               :

@@ -85,7 +85,7 @@ const Login = () => {
                     type="submit" 
                     className="btn btn-primary" 
                    id='responsive'
-				    value="Register" 
+				    value="Login" 
                 />
 			</form>
             <br/>
