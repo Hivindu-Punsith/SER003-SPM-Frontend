@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
-import Select from "react-select";
+import Select from "react-select"
 import {
     Badge,
     Card,
@@ -20,6 +20,7 @@ import {
 
 import moment from 'moment';
 import Swal from 'sweetalert2';
+import FileInput from "../../utils/FileInput";
 
 import { getAllProducts } from '../../services/ProductService';
 import { validateCreateProduct } from "../auth/productValidation";
@@ -32,102 +33,9 @@ import { getProductByID } from "../../services/ProductService";
 const ViewProducts = () => {
     const navigate = useNavigate();
 
-
     const [ProductDetails, setProductDetails] = useState({});
     const [loading, setLoading] = useState(false);
-    const [openModal, setopenModal] = useState(false);
-    const [category, setCategory] = useState("");
-    const [productName, setProductName] = useState("");
-    const [productPrice, setProductPrice] = useState("");
-    const [expireDate, setExpireDate] = useState("");
-    const [quantity, setQuantity] = useState("");
-    const [productImage, setProductImage] = useState({
-        image:""
-    });
-    const [searchTerm, setSearchTerm] = useState();
 
-
-    const handleCategory = (e) => {
-        e.preventDefault();
-        setCategory(e.target.value)
-    }
-
-
-    const handleProductName = (e) => {
-        e.preventDefault();
-        setProductName(e.target.value)
-    }
-
-    const handleProductPrice = (e) => {
-        e.preventDefault();
-        setProductPrice(e.target.value)
-    }
-
-    const handleExpireDate = (e) => {
-        e.preventDefault();
-        setExpireDate(e.target.value)
-    }
-    const handleQuantity = (e) => {
-        e.preventDefault();
-        setQuantity(e.target.value)
-    }
-    const handleProductImage = (e) => {
-        e.preventDefault();
-        console.log("image",e.target.files[0]);
-        setProductImage({...productImage,image:e.target.files[0]});
-    }
-
-    const addProduct = async (e) => {
-
-        e.preventDefault();
-
-        // const regdata = {
-        //     category: category,
-        //     productName: productName,
-        //     productPrice: productPrice,
-        //     expireDate: expireDate,
-        //     quantity: quantity,
-        //     productImage: productImage
-
-        // }
-
-        const formData = new FormData();
-        formData.append("category",category);
-        formData.append("productName",productName);
-        formData.append("productPrice",productPrice);
-        formData.append("expireDate",expireDate);
-        formData.append("quantity",quantity);
-        formData.append("productImage",productImage.image);
-
-
-
-        let validate = validateCreateProduct(formData);
-
-        if (validate.status == false) {
-            alert(validate.message);
-        }
-        else {
-            let data = await createNewProduct(formData);
-            console.log(" product data ", data);
-            if (data?.status == 201) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Successful!',
-                    text: 'New product added to the store!',
-                })
-                navigate("/products");
-
-            }
-            else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Failed!',
-                })
-            }
-        }
-
-    }
 
     //----------------------------Search-----------------------
 
@@ -175,7 +83,8 @@ const ViewProducts = () => {
             console.log("all Products", data);
             let newData = data?.data?.data?.map((item) => {
                 return {
-
+                    
+                    //createdAt:item?.createdAt,
                     category: item?.category,
                     productName: item?.productName,
                     productPrice: item?.productPrice,
@@ -203,48 +112,34 @@ const ViewProducts = () => {
     //Delete product
 
     const removeProduct = async (id) => {
-        let data = await deleteProduct(id);
-        console.log("Delete ", data);
-        if (data?.status == 201) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Successful!',
-                text: 'Product Deleted!',
-            })
 
-
-        }
-        else {
-            Swal.fire({
-                icon: 'success',
-                title: 'Successful!',
-                text: 'Product Deleted!',
-                // icon: 'error',
-                // title: 'Oops...',
-                // text: 'Failed!',
-            })
-            //alert(data?.data?.message);
-            window.location.reload();
-            //navigate("");
-        }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                let data =  deleteProduct(id);
+                console.log("Delete ", data);
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+              GetProducts();
+            }
+          })
     }
 
 
 
-    const [openUpdateModal, setopenUpdateModal] = useState(false);
-    const [ProductImageURL, setProductImageURL] = useState("");
-
-    const setUpdateData = (e, data) => {
+    const routeToAddPage = (e) => {
         e.preventDefault();
-
-        setCategory(data?.category);
-        setProductName(data?.productName);
-        setProductPrice(data?.productPrice);
-        setExpireDate(data?.expireDate);
-        setQuantity(data?.quantity);
-        setProductImageURL(data?.productImage);
-
-        setopenUpdateModal(true);
+        navigate("/add-new-product");
     }
 
 
@@ -280,10 +175,10 @@ const ViewProducts = () => {
         {
             name: (<Badge color="dark" style={{ fontSize: "18px" }} >Expire date</Badge>),
             selector: "expireDate",
-            cell: (date) => (
+            cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
 
-                    <Label style={{ fontSize: "18px" }} ><b> {moment(date).format(" YYYY-MM-DD ")}</b><br /></Label>
+                    <Label style={{ fontSize: "18px" }} ><b> {moment(data?.expireDate).format(" YYYY-MM-DD ")}</b><br /></Label>
                 </div>
             ),
         },
@@ -312,7 +207,7 @@ const ViewProducts = () => {
                 <div style={{ display: "flex", flexDirection: "column" }}>
                     {/* <Link to={`/updateSub/${data?._id}`}> */}
                     <Button
-                        className="btn btn-secondary" style={{ fontSize: "16px" }} onClick={(e) => setUpdateData(e, data)} >Update <i class="fa-solid fa-pen-to-square"></i></Button>
+                        className="btn btn-secondary" style={{ fontSize: "16px" }}  >Update <i class="fa-solid fa-pen-to-square"></i></Button>
                     {/* </Link> */}
                 </div>
 
@@ -354,136 +249,17 @@ const ViewProducts = () => {
                         <center>
                             <CardTitle style={{ color: "black", fontSize: "40px" }}><b>Fitness Hub Shopping Store Items</b></CardTitle>
                             {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
-                            <Button className="btn btn-dark" style={{ fontSize: "15px", marginLeft: "83%" }} onClick={() => setopenModal(true)}><i class="fa-solid fa-circle-plus"></i><b>   Add New Product</b></Button>
+                            <Button className="btn btn-dark" style={{ fontSize: "15px", marginLeft: "83%" }} onClick={(e) =>routeToAddPage(e)}><i class="fa-solid fa-circle-plus"></i><b>   Add New Product</b></Button>
                         </center>
                     </CardHeader>
                     <CardBody >
                         <DataTable
                             data={ProductDetails}
                             columns={columns}
-
                             progressPending={loading}
-
                         />
                     </CardBody>
                 </Card>
-                <div>
-                    <Modal
-                        isOpen={openModal}
-                        className="modal-dialog-centered"
-                        fade={true}
-                        backdrop={true}
-                        style={{ color: 'black' }}>
-                        <ModalHeader
-                            style={{ backgroundColor: '#DCDCDC' }}
-                            toggle={() => {
-                                setopenModal(false);
-                            }}>
-                            <Label>Add New Prduct</Label>
-                        </ModalHeader >
-                        <ModalBody style={{ backgroundColor: '#DCDCDC' }}>
-                            <div style={{ width: "400px", backgroundColor: '#DCDCDC' }}>
-                                <Form>
-                                    <Label>Category </Label>
-                                    <Input type="text" list="productslist" placeholder="Category" value={category} onChange={(e) => handleCategory(e)}
-                                    />
-                                    {/* <datalist id="productslist">
-                                        <option value="Suppliments"></option>
-                                        <option value="Snacks and protiens"></option>
-                                        <option value="Clothes"></option>
-                                    </datalist> */}
-                                    <br />
-
-                                    <Label>Product Name </Label>
-                                    <Input type="text" className="input" placeholder="Product Name" value={productName} onChange={(e) => handleProductName(e)} />
-                                    <br />
-
-                                    <Label>Procuct Price</Label>
-                                    <Input type="text" className="input" placeholder="Product Price" value={productPrice} onChange={(e) => handleProductPrice(e)} />
-                                    <br />
-
-                                    <Label>Expired Date</Label>
-                                    <Input type="date" className="input" placeholder="Expired date" value={expireDate} onChange={(e) => handleExpireDate(e)} />
-                                    <br />
-
-                                    <Label>Quantity</Label>
-                                    <Input type="text" className="input" placeholder="Quantity" value={quantity} onChange={(e) => handleQuantity(e)} />
-                                    <br />
-
-                                    <Label>Product Image</Label>
-                                    <Input 
-                                        type="file"
-                                        accept=".png, .jpg, .jpeg"
-                                        className="input"
-                                        placeholder="Product Image"
-                                        name="image"
-                                        onChange={(e)=>handleProductImage(e)} 
-                                    />
-                                    <br />
-
-                                    <Button className="btn btn-dark" onClick={(e) => addProduct(e)}>Add new product</Button>
-
-                                </Form>
-                            </div>
-                        </ModalBody>
-                    </Modal>
-                </div>
-
-                {/* update modal */}
-                <div>
-
-                    <Modal
-                        isOpen={openUpdateModal}
-                        className="modal-dialog-centered"
-                        fade={true}
-                        backdrop={true}
-                        style={{ color: 'black' }}>
-
-                        <ModalHeader
-                            style={{ backgroundColor: '#DCDCDC' }}
-                            toggle={() => {
-                                setopenUpdateModal(false);
-                            }}>
-                            <Label>Update Prduct</Label>
-                        </ModalHeader>
-                        <ModalBody style={{ backgroundColor: '#DCDCDC' }}>
-                            <div style={{ width: "400px", backgroundColor: '#DCDCDC' }}>
-                                <Form>
-                                    <Label>Category </Label>
-                                    <Input type="text" className="input" placeholder="Category" value={category} onChange={(e) => handleCategory(e)} />
-                                    <br />
-
-                                    <Label>Product Name </Label>
-                                    <Input type="text" className="input" placeholder="Product Name" value={productName} onChange={(e) => handleProductName(e)} />
-                                    <br />
-
-                                    <Label>Procuct Price</Label>
-                                    <Input type="text" className="input" placeholder="Product Price" value={productPrice} onChange={(e) => handleProductPrice(e)} />
-                                    <br />
-
-                                    <Label>Expired Date</Label>
-                                    <Input type="date" className="input" placeholder="Expired date" value={expireDate} onChange={(e) => handleExpireDate(e)} />
-                                    <br />
-
-                                    <Label>Quantity</Label>
-                                    <Input type="text" className="input" placeholder="Quantity" value={quantity} onChange={(e) => handleQuantity(e)} />
-                                    <br />
-
-                                    <Label>Image view</Label><br></br>
-                                    <img src={ProductImageURL} style={{ width: "50%", height: "30%" }} />
-                                    <br /><br></br>
-
-                                    <Label>Product Image</Label>
-                                    <Input type="file" className="input" placeholder="Product Image" value={productImage} onChange={(e) => handleProductImage(e)} />
-                                    <br />
-
-                                    <Button className="btn btn-dark" onClick={(e) => addProduct(e)} setUpdateData>Update product</Button>
-
-                                </Form>
-                            </div>
-                        </ModalBody>
-                    </Modal>
-                </div>
             </div>
 
         </div>
