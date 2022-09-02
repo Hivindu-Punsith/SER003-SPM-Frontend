@@ -7,11 +7,11 @@ export const validateCreateProduct=(formData) =>{
 
  
        const regdata = {
-            category:formData.get("category") ,
-            productName:formData.get("productName") ,
-            productPrice:formData.get("productPrice") ,
-            expireDate:formData.get("expireDate") ,
-            quantity:formData.get("quantity") 
+            category:formData.category ,
+            productName:formData.productName ,
+            productPrice:formData.productPrice ,
+            expireDate:formData.expireDate ,
+            quantity:formData.quantity 
 
         }
 
