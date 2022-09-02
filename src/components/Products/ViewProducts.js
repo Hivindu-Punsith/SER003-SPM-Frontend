@@ -203,30 +203,27 @@ const ViewProducts = () => {
     //Delete product
 
     const removeProduct = async (id) => {
-        let data = await deleteProduct(id);
-        console.log("Delete ", data);
-        if (data?.status == 201) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Successful!',
-                text: 'Product Deleted!',
-            })
 
-
-        }
-        else {
-            Swal.fire({
-                icon: 'success',
-                title: 'Successful!',
-                text: 'Product Deleted!',
-                // icon: 'error',
-                // title: 'Oops...',
-                // text: 'Failed!',
-            })
-            //alert(data?.data?.message);
-            window.location.reload();
-            //navigate("");
-        }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                let data =  deleteProduct(id);
+                console.log("Delete ", data);
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+              GetProducts();
+            }
+          })
     }
 
 
