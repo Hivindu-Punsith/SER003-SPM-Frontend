@@ -18,6 +18,11 @@ import ReqInstructor from "./components/user/ReqInstructor";
 import ViewProducts from "./components/Products/ViewProducts";
 import ClientViewProducts from "./components/Products/ClientViewProducts";
 
+//equipments
+import ViewAllEquipments from "./components/equipments/ViewAllEquipments";
+
+//memberships
+import ViewAllMemberships from "./components/memberships/ViewAllMemberships";
 
 const SiteRouter = () => {
 
@@ -40,7 +45,8 @@ const SiteRouter = () => {
                 <Route path="/client-products" element={<ClientViewProducts/>}/>          
                 <Route path="/users" element={<HandleUsers/>}/>
                 <Route path="/req-instructor" element={<ReqInstructor/>}/>
-
+                <Route path="/equipments" element={<ViewAllEquipments/>}/>
+                <Route path="/memberships" element={<ViewAllMemberships/>}/>
               </>
               )
               :
