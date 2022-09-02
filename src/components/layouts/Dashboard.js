@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import Logo from "../../assests/images/logo.jpg";
+import Logo from "../../assests/images/gym.png";
 
 
 
@@ -13,8 +13,8 @@ const Dashboard = () => {
 				<table>
 					<tr>
 						<td>
-							<center><h2 style={{marginTop: '200px',marginBottom: '20px',color:"purple"}}>Welcome to the system {localStorage.getItem("user")}</h2></center>
-							<center><h2 style={{marginTop: '20px',marginBottom: '20px',color:"red"}}>Your Role is : {localStorage.getItem("userRole")}</h2></center>
+							<center><h1 style={{marginTop: '200px',marginBottom: '20px',color:"black"}}>Welcome to the system {localStorage.getItem("user")}</h1></center>
+							<center><h2 style={{marginTop: '20px',marginBottom: '20px',color:"red"}}>Your Role : {localStorage.getItem("userRole")}</h2></center>
 						</td>
 					</tr>
 					<tr>

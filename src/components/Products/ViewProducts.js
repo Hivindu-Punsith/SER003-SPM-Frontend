@@ -42,7 +42,7 @@ const ViewProducts = () => {
     const [expireDate, setExpireDate] = useState("");
     const [quantity, setQuantity] = useState("");
     const [productImage, setProductImage] = useState({
-        image:""
+        image: ""
     });
     const [searchTerm, setSearchTerm] = useState();
 
@@ -73,8 +73,8 @@ const ViewProducts = () => {
     }
     const handleProductImage = (e) => {
         e.preventDefault();
-        console.log("image",e.target.files[0]);
-        setProductImage({...productImage,image:e.target.files[0]});
+        console.log("image", e.target.files[0]);
+        setProductImage({ ...productImage, image: e.target.files[0] });
     }
 
     const addProduct = async (e) => {
@@ -92,12 +92,12 @@ const ViewProducts = () => {
         // }
 
         const formData = new FormData();
-        formData.append("category",category);
-        formData.append("productName",productName);
-        formData.append("productPrice",productPrice);
-        formData.append("expireDate",expireDate);
-        formData.append("quantity",quantity);
-        formData.append("productImage",productImage.image);
+        formData.append("category", category);
+        formData.append("productName", productName);
+        formData.append("productPrice", productPrice);
+        formData.append("expireDate", expireDate);
+        formData.append("quantity", quantity);
+        formData.append("productImage", productImage.image);
 
 
 
@@ -341,18 +341,21 @@ const ViewProducts = () => {
             <div style={{ margin: "10px" }}>
                 <Card >
                     <CardHeader >
-                        {/* <div>
-                            <input
-                                className="form-control"
-                                style={{ width: "400px", marginLeft: "50px" }}
-                                type="search"
-                                placeholder="Search for student"
-                                name="searchQuery"
-                                onChange={this.handleSearchArea}
-                            ></input>
-                        </div> */}
+
                         <center>
                             <CardTitle style={{ color: "black", fontSize: "40px" }}><b>Fitness Hub Shopping Store Items</b></CardTitle>
+                            <br></br>
+                            <div>
+                                <input
+                                    className="form-control"
+                                    style={{ width: "500px",border:"solid",borderWidth:'2px'}}
+                                    type="search"
+                                    placeholder="Search for products"
+                                    name="searchQuery"
+                                    
+                                // onChange={this.handleSearchArea}
+                                ></input>
+                            </div>
                             {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
                             <Button className="btn btn-dark" style={{ fontSize: "15px", marginLeft: "83%" }} onClick={() => setopenModal(true)}><i class="fa-solid fa-circle-plus"></i><b>   Add New Product</b></Button>
                         </center>
@@ -411,13 +414,13 @@ const ViewProducts = () => {
                                     <br />
 
                                     <Label>Product Image</Label>
-                                    <Input 
+                                    <Input
                                         type="file"
                                         accept=".png, .jpg, .jpeg"
                                         className="input"
                                         placeholder="Product Image"
                                         name="image"
-                                        onChange={(e)=>handleProductImage(e)} 
+                                        onChange={(e) => handleProductImage(e)}
                                     />
                                     <br />
 
