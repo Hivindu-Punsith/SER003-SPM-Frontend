@@ -301,7 +301,7 @@ const ViewAllEquipments = () => {
                                     <Input type="text" className="input" placeholder="Category" value={category} onChange={(e) => handleCategory(e)} />
                                     <br />
 
-                                    <Button  className="btn btn-dark" onClick={(e) => addEquipment(e)}>Add New Equipment</Button>
+                                    <Button  className="btn btn-dark" onClick={(e) => addEquipment(e)}>Add Equipment</Button>
 
                                 </Form>
                             </div>
