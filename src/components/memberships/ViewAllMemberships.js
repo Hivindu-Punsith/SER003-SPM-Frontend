@@ -17,7 +17,7 @@ import {
 } from "reactstrap";
 import moment from 'moment';
 import Swal from 'sweetalert2';
-import { ValidateAddNewUser } from "./Validation";
+import { ValidateAddNewMembership } from "./Validation";
 import { createMembership , getAllMemberships } from "../../services/MembershipServices";
 
 const ViewAllMemberships = () => {
@@ -60,12 +60,21 @@ const ViewAllMemberships = () => {
             description: description
         }
 
-        //let validate = ValidateAddNewUser(eduipmentdata);
-
-        //if (validate.status == false) {
-       //     alert(validate.message);
-      //  }
-       // else {
+        let validate = ValidateAddNewMembership(membershiptdata);
+        let msg = validate.message;
+        if (validate.status == false) {
+            Swal.fire({
+                toast: true,
+                icon: 'warning',
+                html: `<span>${msg}</span>`,
+                animation: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: false,
+            });
+       }
+       else {
             let data = await createMembership(membershiptdata);
             if (data?.data?.status === 1) {
                 Swal.fire({
@@ -83,7 +92,7 @@ const ViewAllMemberships = () => {
                     text: 'Failed!',
                 })
             }
-       // }
+        }
 
     }
 
@@ -247,7 +256,7 @@ const ViewAllMemberships = () => {
                                     <br />
 
                                     <Label>Price(LKR)</Label>
-                                    <Input type="email" className="input" placeholder="Price" value={price} onChange={(e) => handlePrice(e)} />
+                                    <Input type="number" className="input" placeholder="Price" value={price} onChange={(e) => handlePrice(e)} />
                                     <br />
 
                                     <Label>Duration</Label>

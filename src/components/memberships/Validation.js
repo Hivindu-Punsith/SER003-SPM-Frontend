@@ -1,13 +1,11 @@
 
-export const ValidateAddNewUser=(formData) =>{
+export const ValidateAddNewMembership=(formData) =>{
 
     const messages ={
-       FULL_NAME :"The name should at least be 3 letters...",
-       QUANTITY : "Email must contain @ and atleast 3 letter before for the prefix...",
-       VALUE : " Enter valid Weight...",
-       COMPANY_NAME : " Enter valid height...",
-       DATE_OF_PURCHASE : "Enter a valid mobile number...",
-       CATEGORY:"Date of Birth is empty..."
+    name :"Name is Required..!",
+    price : "Price is Required..!",
+    duration : "Duration is Required..!",
+    description : "Description is Required..!",
 
     };
 
@@ -16,40 +14,28 @@ export const ValidateAddNewUser=(formData) =>{
             message : null
     };
 
-    if(formData.fullName.length <= 2 )
+    if(formData.name.length <= 0 )
     {
-        output.message = messages.FULL_NAME_EMPTY;
+        output.message = messages.name;
         output.status = false;
         return output;
     
     }
-    if(formData.email.length <= 2)
+    if(formData.price.length <= 0)
     {
-        output.message = messages.EMAIL_EMPTY;
+        output.message = messages.price;
         output.status = false;
         return output;
     } 
-    if((formData.mobileno.length < 10) || (formData.mobileno.length > 12))
+    if((formData.duration.length < 0))
     {
-        output.message = messages.MOBILE_NO_EMPTY;
+        output.message = messages.duration;
         output.status = false;
         return output;
     }
-    if(formData.weight.length <= 0)
+    if(formData.description.length <= 0)
     {
-        output.message = messages.WEIGHT_EMPTY;
-        output.status = false;
-        return output;
-    }
-    if(formData.height.length <= 0)
-    {
-        output.message = messages.HEIGHT_EMPTY;
-        output.status = false;
-        return output;
-    }
-    if(formData.dateOfBirth.length <= 0)
-    {
-        output.message = messages.DOB_EMPTY;
+        output.message = messages.description;
         output.status = false;
         return output;
     }
