@@ -26,8 +26,8 @@ const NavBar = ()=> {
           <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
                 <a  href="/">
-                  <img src={Logo} alt="" width="80" height="80" style={{borderRadius:"10px",float:"left"}}/>
-                  <Label style={{marginLeft:"30px", fontSize:"50px" , color:"white", fontFamily: "Lucida Sans"}}>Fitness Hub</Label>
+                  <img src={Logo} alt="" width="80" height="80" style={{borderRadius:"20px",float:"left"}}/>
+                  <Label style={{marginLeft:"30px", fontSize:"50px" , color:"white", fontFamily: "Verdana"}}>Fitness Hub</Label>
                 </a>
                 <table style={{float:"right"}}>
                   <row>
