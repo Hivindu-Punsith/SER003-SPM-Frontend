@@ -1,13 +1,13 @@
 
-export const ValidateAddNewUser=(formData) =>{
+export const ValidateAddNewEquipment=(formData) =>{
 
     const messages ={
-       FULL_NAME :"The name should at least be 3 letters...",
-       QUANTITY : "Email must contain @ and atleast 3 letter before for the prefix...",
-       VALUE : " Enter valid Weight...",
-       COMPANY_NAME : " Enter valid height...",
-       DATE_OF_PURCHASE : "Enter a valid mobile number...",
-       CATEGORY:"Date of Birth is empty..."
+       FULL_NAME :"Name is Required..!",
+       QUANTITY : "Quantity is Required..!",
+       VALUE : " Value is Required..!",
+       COMPANY_NAME : "Company name is Required..!",
+       DATE_OF_PURCHASE : "Date of purchaced is Required..!",
+       CATEGORY:"Category is Required..!"
 
     };
 
@@ -16,40 +16,40 @@ export const ValidateAddNewUser=(formData) =>{
             message : null
     };
 
-    if(formData.fullName.length <= 2 )
+    if(formData.name.length <= 0 )
     {
-        output.message = messages.FULL_NAME_EMPTY;
+        output.message = messages.FULL_NAME;
         output.status = false;
         return output;
     
     }
-    if(formData.email.length <= 2)
+    if(formData.quantity.length <= 0)
     {
-        output.message = messages.EMAIL_EMPTY;
+        output.message = messages.QUANTITY;
         output.status = false;
         return output;
     } 
-    if((formData.mobileno.length < 10) || (formData.mobileno.length > 12))
+    if((formData.value.length < 0))
     {
-        output.message = messages.MOBILE_NO_EMPTY;
+        output.message = messages.VALUE;
         output.status = false;
         return output;
     }
-    if(formData.weight.length <= 0)
+    if(formData.company_name.length <= 0)
     {
-        output.message = messages.WEIGHT_EMPTY;
+        output.message = messages.COMPANY_NAME;
         output.status = false;
         return output;
     }
-    if(formData.height.length <= 0)
+    if(formData.date_of_purchaced.length <= 0)
     {
-        output.message = messages.HEIGHT_EMPTY;
+        output.message = messages.DATE_OF_PURCHASE;
         output.status = false;
         return output;
     }
-    if(formData.dateOfBirth.length <= 0)
+    if(formData.category.value.length <= 0)
     {
-        output.message = messages.DOB_EMPTY;
+        output.message = messages.CATEGORY;
         output.status = false;
         return output;
     }

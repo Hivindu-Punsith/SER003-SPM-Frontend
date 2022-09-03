@@ -29,7 +29,6 @@ const AddNewProduct = () => {
         { value: "supplliments", label: "Supplliments", name: "category" },
         { value: "clothing", label: "Clothing", name: "category" },
         { value: "accessories", label: "Accessories", name: "category" },
-
       ];
 
         const  handelSelectorChange = (e)=>{

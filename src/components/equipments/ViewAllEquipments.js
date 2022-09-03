@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
+import Select from "react-select";
 import {
     Badge,
     Card,
@@ -17,10 +18,18 @@ import {
 } from "reactstrap";
 import moment from 'moment';
 import Swal from 'sweetalert2';
-import { ValidateAddNewUser } from "./Validation";
+import { ValidateAddNewEquipment } from "./Validation";
 import { getAllEquipments , createEquipment } from "../../services/EquipmentServices";
 
 const ViewAllEquipments = () => {
+
+    let catergoryList = [
+        { value: "liftings-equipments", label: "Liftings Equipments", name: "category" },
+        { value: "electric-machines", label: "Electric Machines", name: "category" },
+        { value: "lifting-machines", label: "Lifting Machines", name: "category" },
+        { value: "other", label: "other", name: "category" },
+      ];
+
     const navigate = useNavigate();
 
     const [EquipmentDetails, setEquipmentDetails] = useState({});
@@ -32,8 +41,10 @@ const ViewAllEquipments = () => {
     const [value, setvalue] = useState("");
     const [company_name, setcompanyname] = useState("");
     const [date_of_purchaced, setdate] = useState("");
-    const [category, setcategory] = useState("");
 
+    const [category, setcategory] = useState({
+        category: "",
+      });
 
     const handleName = (e) => {
         e.preventDefault();
@@ -55,10 +66,12 @@ const ViewAllEquipments = () => {
         e.preventDefault();
         setdate(e.target.value)
     }
-    const handleCategory = (e) => {
-        e.preventDefault();
-        setcategory(e.target.value)
+
+    const  handleCategory = (e)=>{
+        console.log(e);
+        setcategory({ ...category, [e.name] : e });
     }
+
 
 
 
@@ -72,15 +85,29 @@ const ViewAllEquipments = () => {
             value: value,
             company_name: company_name,
             date_of_purchaced: date_of_purchaced,
-            category: category
+            category: category.category
         }
 
-        //let validate = ValidateAddNewUser(eduipmentdata);
+        console.log("inpuit data ",eduipmentdata)
+        let validate = ValidateAddNewEquipment(eduipmentdata);
 
-        //if (validate.status == false) {
-       //     alert(validate.message);
-      //  }
-       // else {
+        let msg = validate.message;
+
+        console.log(msg);
+        if (validate.status == false) {
+            Swal.fire({
+                toast: true,
+                icon: 'warning',
+                html: `<span>${msg}</span>`,
+                animation: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: false,
+            });
+           //alert(validate.message);
+       }
+       else {
             let data = await createEquipment(eduipmentdata);
             if (data?.data?.status === 1) {
                 Swal.fire({
@@ -98,7 +125,7 @@ const ViewAllEquipments = () => {
                     text: 'Failed!',
                 })
             }
-       // }
+        }
 
     }
 
@@ -282,14 +309,24 @@ const ViewAllEquipments = () => {
                                     <br />
 
                                     <Label>Quantity</Label>
-                                    <Input type="email" className="input" placeholder="Quantitiy" value={quantity} onChange={(e) => handleQuantity(e)} />
+                                    <Input type="number" className="input" placeholder="Quantitiy" value={quantity} onChange={(e) => handleQuantity(e)} />
                                     <br />
 
                                     <Label>Value(LKR)</Label>
-                                    <Input type="text" className="input" placeholder="Value" value={value} onChange={(e) => handleValue(e)} />
+                                    <Input type="number" className="input" placeholder="Value" value={value} onChange={(e) => handleValue(e)} />
                                     <br />
 
-                                    <Label>Company Name</Label>
+                                    <label>Select Category</label>                               
+                                    <Select
+                                        className="React"
+                                        classNamePrefix="select"
+                                        options={catergoryList}
+                                        value={category.category}
+                                        onChange={(e) => handleCategory(e)}
+                                        name="category"
+                                    />
+
+                                    <Label style={{ marginTop: '10px' }}>Company Name</Label>
                                     <Input type="text" className="input" placeholder="Company" value={company_name} onChange={(e) => handleCompanyName(e)} />
                                     <br />                                  
 
@@ -297,11 +334,7 @@ const ViewAllEquipments = () => {
                                     <Input type="date" className="input" placeholder="Date of purchace" value={date_of_purchaced} onChange={(e) => handleDate(e)} />
                                     <br />
 
-                                    <Label>Category</Label>
-                                    <Input type="text" className="input" placeholder="Category" value={category} onChange={(e) => handleCategory(e)} />
-                                    <br />
-
-                                    <Button  className="btn btn-dark" onClick={(e) => addEquipment(e)}>Add New Equipment</Button>
+                                    <Button  className="btn btn-dark" onClick={(e) => addEquipment(e)} style={{marginTop:"20px"}}>Add Equipment</Button>
 
                                 </Form>
                             </div>
