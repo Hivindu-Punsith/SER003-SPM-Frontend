@@ -26,12 +26,12 @@ export async function createNewProduct(formData) {
         // quantity: data.quantity,
         // productImage: data.productImage
 
-        category:formData.get("category") ,
-        productName:formData.get("productName") ,
-        productPrice:formData.get("productPrice") ,
-        expireDate:formData.get("expireDate") ,
-        quantity:formData.get("quantity") ,
-        productImage:formData.get("productImage"),
+        category:formData.category.value ,
+        productName:formData.productName ,
+        productPrice:formData.productPrice ,
+        expireDate:formData.expireDate ,
+        quantity:formData.quantity ,
+        productImage:formData.productImage,
     }
 
     console.log("alldata",alldata)
