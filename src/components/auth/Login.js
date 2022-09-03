@@ -47,7 +47,7 @@ const Login = () => {
 
 
 	return (
-		<div>
+		<div style={{padding:"100px"}}>
 			<center>
 				<br></br>
 			<h1 className="heading">Sign In</h1>
