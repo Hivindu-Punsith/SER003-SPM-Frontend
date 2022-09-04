@@ -11,7 +11,7 @@ const Footer = () => {
 
 	return (
 		<div>
-			<div style={{marginTop:'100px'}}>
+			<div style={{marginTop:'50px'}}>
 
                     <footer class="text-center text-lg-start " style={{color:"white" , backgroundColor:"#1a1a1a"}}>
 
