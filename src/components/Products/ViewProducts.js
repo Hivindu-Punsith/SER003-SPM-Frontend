@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
-import Select from "react-select"
 import {
     Badge,
     Card,
@@ -78,11 +77,11 @@ const ViewProducts = () => {
         setProductImage({ ...productImage, image: e.target.files[0] });
     }
 
-    const addProduct = async (e) => {
+    // const addProduct = async (e) => {
 
-        e.preventDefault();
+    //     e.preventDefault();
 
-        // const regdata = {
+    //     // const regdata = {
         //     category: category,
         //     productName: productName,
         //     productPrice: productPrice,
@@ -92,53 +91,53 @@ const ViewProducts = () => {
 
         // }
 
-        const formData = new FormData();
-        formData.append("category", category);
-        formData.append("productName", productName);
-        formData.append("productPrice", productPrice);
-        formData.append("expireDate", expireDate);
-        formData.append("quantity", quantity);
-        formData.append("productImage", productImage.image);
+    //     const formData = new FormData();
+    //     formData.append("category", category);
+    //     formData.append("productName", productName);
+    //     formData.append("productPrice", productPrice);
+    //     formData.append("expireDate", expireDate);
+    //     formData.append("quantity", quantity);
+    //     formData.append("productImage", productImage.image);
 
 
 
 
 
-    //----------------------------Search-----------------------
+    // //----------------------------Search-----------------------
 
 
-    // const filterData = (ProductDetails, Searchkey) => {
-    //     const result = ProductDetails.filter(
-    //         (product) =>
-    //             product.category.toLowerCase().includes(Searchkey) ||
-    //             product.productName.toLowerCase().includes(Searchkey) ||
-    //             product.productPrice.toLowerCase().includes(Searchkey) ||
-    //             product.quantity.toLowerCase().includes(Searchkey) ||
-    //             product.expireDate.toLowerCase().includes(Searchkey)
-    //     );
+    // // const filterData = (ProductDetails, Searchkey) => {
+    // //     const result = ProductDetails.filter(
+    // //         (product) =>
+    // //             product.category.toLowerCase().includes(Searchkey) ||
+    // //             product.productName.toLowerCase().includes(Searchkey) ||
+    // //             product.productPrice.toLowerCase().includes(Searchkey) ||
+    // //             product.quantity.toLowerCase().includes(Searchkey) ||
+    // //             product.expireDate.toLowerCase().includes(Searchkey)
+    // //     );
 
-    //     category.setState({ ProductDetails: result });
-    //     productName.setState({ ProductDetails: result });
-    //     productPrice.setState({ ProductDetails: result });
-    //     quantity.setState({ ProductDetails: result });
-    //     expireDate.setState({ ProductDetails: result });
+    // //     category.setState({ ProductDetails: result });
+    // //     productName.setState({ ProductDetails: result });
+    // //     productPrice.setState({ ProductDetails: result });
+    // //     quantity.setState({ ProductDetails: result });
+    // //     expireDate.setState({ ProductDetails: result });
 
-    // }
+    // // }
 
-    // const handleSearchArea = (e) => {
-    //     const Searchkey = e.currentTarget.value;
-    //     axios.get("http://localhost:5000/product/getproducts").then((res) => {
-    //         if (res.data.success) {
-    //             category.filterData(res.data.existingProducts, Searchkey);
-    //             productName.filterData(res.data.existingProducts, Searchkey);
-    //             productPrice.filterData(res.data.existingProducts, Searchkey);
-    //             quantity.filterData(res.data.existingProducts, Searchkey);
-    //             expireDate.filterData(res.data.existingProducts, Searchkey);
-    //         }
-    //     });
-    // }
+    // // const handleSearchArea = (e) => {
+    // //     const Searchkey = e.currentTarget.value;
+    // //     axios.get("http://localhost:5000/product/getproducts").then((res) => {
+    // //         if (res.data.success) {
+    // //             category.filterData(res.data.existingProducts, Searchkey);
+    // //             productName.filterData(res.data.existingProducts, Searchkey);
+    // //             productPrice.filterData(res.data.existingProducts, Searchkey);
+    // //             quantity.filterData(res.data.existingProducts, Searchkey);
+    // //             expireDate.filterData(res.data.existingProducts, Searchkey);
+    // //         }
+    // //     });
+    // // }
 
-    //---------------------------------------------------------
+    // //---------------------------------------------------------
 
 
     const GetProducts = async () => {
@@ -194,7 +193,7 @@ const ViewProducts = () => {
                 console.log("Delete ", data);
               Swal.fire(
                 'Deleted!',
-                'Your file has been deleted.',
+                'Product has been deleted.',
                 'success'
               )
               GetProducts();
@@ -337,5 +336,5 @@ const ViewProducts = () => {
     );
 
 };
-}
+
 export default ViewProducts;

@@ -23,28 +23,29 @@ const AddNewProduct = () => {
         expireDate: "",
         quantity: "",
         productImage: "",
-      });
-    
-      let catergoryList = [
-        { value: "supplliments", label: "Supplliments", name: "category" },
+    });
+
+    let catergoryList = [
+        { value: "supplements", label: "Supplements", name: "category" },
         { value: "clothing", label: "Clothing", name: "category" },
         { value: "accessories", label: "Accessories", name: "category" },
-      ];
+        { value: "Protein Bars & Snacks", label: "Protein Bars & Snacks", name: "category" },
+    ];
 
-        const  handelSelectorChange = (e)=>{
-            console.log(e);
-            setData({ ...data, [e.name] : e });
-        }
+    const handelSelectorChange = (e) => {
+        console.log(e);
+        setData({ ...data, [e.name]: e });
+    }
 
 
-      const handleChange = ({ currentTarget: input }) => {
+    const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value });
-      };
-    
-      const handleInputState = (name, value) => {
+    };
+
+    const handleInputState = (name, value) => {
         setData((prev) => ({ ...prev, [name]: value }));
-      };
-    
+    };
+
 
     const addProduct = async (e) => {
 
@@ -81,73 +82,82 @@ const AddNewProduct = () => {
 
 
     return (
-        <div style={{ marginTop: "70px", marginBottom: "70px" }}>
+        
+        <div class ='card' style={{ marginTop: "70px", marginBottom: "70px" ,width:'1000px', marginLeft:'450px',backgroundColor:'#DCDCDC'}}>
             <div style={{ margin: "10px" }}>
+                
+            {/* <article class="card" style={{ borderWidth: '5px', marginBottom: '20px',width:'50%',marginLeft:'50px',marginRight:'150px' }}> */}
+                <center>
+                    <br></br>
+                    <CardTitle style={{ color: "black", fontSize: "40px" }}><b>Fitness Hub Shopping Store Items</b>
+                    <br></br>
+                    <h3><b>Add new Product</b></h3>
+                    </CardTitle>
 
-                        <center>
-                            <CardTitle style={{ color: "black", fontSize: "40px" }}><b>Fitness Hub Shopping Store Items</b></CardTitle>
+                </center>
 
-                        </center>
+                <div className="container" style={{ width: '50%', }}>
+                    <form className='form-group' onSubmit={addProduct} >
+                        <label style={{ marginTop: '15px' }}>Select Category</label>
+                        <Select
+                            className="React"
+                            classNamePrefix="select"
+                            options={catergoryList}
+                            value={data.category}
+                            onChange={(e) => handelSelectorChange(e)}
+                            name="category"
+                        />
 
-                        <div className="container" style={{ width: '30%', }}>
-                            <form className='form-group' onSubmit={addProduct} >
-                                <label style={{ marginTop: '15px' }}>Select Category</label>                               
-                                <Select
-                                    className="React"
-                                    classNamePrefix="select"
-                                    options={catergoryList}
-                                    value={data.category}
-                                    onChange={(e) => handelSelectorChange(e)}
-                                    name="category"
-                                />
+                        <label style={{ marginTop: '15px' }}>Enter Product Name</label>
+                        <input
+                            className='form-control'
+                            name="productName"
+                            onChange={handleChange}
+                            value={data.productName}
+                        />
 
-                                <label style={{ marginTop: '15px' }}>Enter Product Name</label>
-                                <input
-                                className='form-control'
-                                name="productName"
-                                onChange={handleChange}
-                                value={data.productName}
-                                />
+                        <label style={{ marginTop: '15px' }}>Enter Product Price</label>
+                        <input
+                            type="number"
+                            className='form-control'
+                            name="productPrice"
+                            onChange={handleChange}
+                            value={data.productPrice}
+                        />
 
-                                <label style={{ marginTop: '15px' }}>Enter Product Price</label>
-                                <input
-                                className='form-control'
-                                name="productPrice"
-                                onChange={handleChange}
-                                value={data.productPrice}
-                                />
+                        <label style={{ marginTop: '15px' }}>Enter Expire Date</label>
+                        <input
+                            className='form-control'
+                            name="expireDate"
+                            type="date"
+                            onChange={handleChange}
+                            value={data.expireDate}
+                        />
 
-                                <label style={{ marginTop: '15px' }}>Enter Expire Date</label>
-                                <input
-                                className='form-control'
-                                name="expireDate"
-                                type="date"
-                                onChange={handleChange}
-                                value={data.expireDate}
-                                />
+                        <label style={{ marginTop: '15px' }}>Enter Quantity</label>
+                        <input
+                            type="number"
+                            className='form-control'
+                            name="quantity"
+                            onChange={handleChange}
+                            value={data.quantity}
+                        />
 
-                                <label style={{ marginTop: '15px' }}>Enter Quantity</label>
-                                <input
-                                className='form-control'
-                                name="quantity"
-                                onChange={handleChange}
-                                value={data.quantity}
-                                />
+                        <label style={{ marginTop: '15px' }}>Product Image</label>
+                        <FileInput
+                            name="productImage"
+                            label="Choose Image"
+                            handleInputState={handleInputState}
+                            type="image"
+                            value={data.productImage}
+                        />
 
-                                <label style={{ marginTop: '15px' }}>Product Image</label>
-                                <FileInput
-                                name="productImage"
-                                label="Choose Image"
-                                handleInputState={handleInputState}
-                                type="image"
-                                value={data.productImage}
-                                />
-
-                                <center><button style={{ marginTop: '15px', marginBottom: '15px' }} type="submit" className="btn btn-success" >
-                                Upload Product
-                                </button></center>
-                            </form>
-                        </div>
+                        <center><button style={{ marginTop: '15px', marginBottom: '15px',width:'200px' }} type="submit" className="btn btn-dark" >
+                            Add Product
+                        </button></center>
+                    </form>
+                </div>
+                {/* </article> */}
             </div>
 
         </div>
