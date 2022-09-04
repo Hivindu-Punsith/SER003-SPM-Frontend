@@ -49,7 +49,7 @@ const SiteRouter = () => {
                 <Route path="/users" element={<HandleUsers/>}/>
                 <Route path="/req-instructor" element={<ReqInstructor/>}/>
                 <Route path="/equipments" element={<ViewAllEquipments/>}/>
-                {/* <Route path="/memberships" element={<ViewAllMemberships/>}/> */}
+                <Route path="/memberships" element={<ViewAllMemberships/>}/>
               </>
               )
               :

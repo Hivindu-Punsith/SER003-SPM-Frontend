@@ -16,7 +16,7 @@ export async function createEquipment(data) {
         value:data?.value,
         company_name:data?.company_name,
         date_of_purchaced:data?.date_of_purchaced,
-        category:data?.category,
+        category:data?.category.value,
     } 
     let result;
     await axios.post(CreateURL,alldata)
