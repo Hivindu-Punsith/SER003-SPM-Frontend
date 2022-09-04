@@ -27,31 +27,31 @@ const NavBar = ()=> {
             <div class="container-fluid">
                 <a  href="/">
                   <img src={Logo} alt="" width="80" height="80" style={{borderRadius:"20px",float:"left"}}/>
-                  <Label style={{marginLeft:"30px", fontSize:"50px" , color:"white", fontFamily: "Verdana"}}>Fitness Hub</Label>
+                  <Label style={{marginLeft:"30px", fontSize:"50px" , color:"white", fontWeight: "bold"}}>FitnessHub</Label>
                 </a>
                 <table style={{float:"right"}}>
                   <row>
                     <td>
                       <Link to="/register">
-                        <Button className="btn btn-warning" type="submit" style={{  display:Token == undefined ? "flex" : "none", textDecoration:"none"}}>
+                        {/* <Button className="btn btn-warning" type="submit" style={{  display:Token == undefined ? "flex" : "none", textDecoration:"none"}}>
                          {"Register"}
-                        </Button>
+                        </Button> */}
                       </Link>
                     </td>
                     <td>
                       <Link to="/login">
-                        <Button className="btn btn-secondary" type="submit" style={{  display:Token == undefined ? "flex" : "none", marginLeft:"20px" , textDecoration:"none"}}>
+                        {/* <Button className="btn btn-secondary" type="submit" style={{  display:Token == undefined ? "flex" : "none", marginLeft:"20px" , textDecoration:"none"}}>
                          {"Login"}
-                        </Button>
+                        </Button> */}
                       </Link>
                     </td>
                     <td>
-                      <Button onClick={handleSubmit} className="btn btn-secondary" type="submit" style={{  display:Token == undefined ? "none" : "flex" , textDecoration:"none"}}>
+                      <Button onClick={handleSubmit} className="btn btn-warning" type="submit" style={{  display:Token == undefined ? "none" : "flex" , textDecoration:"none"}}>
                         {"Logout"}
                       </Button>
                     </td>
                     <td>
-                      <Button  className="btn btn-secondary" type="submit" href="/profile" style={{ display: Token == undefined ? "none" : "flex" , marginLeft:"20px" , textDecoration:"none"}}>
+                      <Button  className="btn btn-success" type="submit" href="/profile" style={{ display: Token == undefined ? "none" : "flex" , marginLeft:"20px" , textDecoration:"none"}}>
                         Profile
                       </Button>
                     </td>
@@ -61,10 +61,10 @@ const NavBar = ()=> {
             </div>
           </nav>
         </div>
-			<nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{height:"50px"}}>
+			<nav className="navbar navbar-expand-lg navbar-dark bg-dark"  style={{ height:"50px", display: Token == undefined ? "none" : "flex" , textDecoration:"none"}}>
        
           <div className="container-fluid">
-            <a className="navbar-brand" href="/" style={{color:"red", marginLeft:"50px", fontFamily: "Monospace"}}>Home</a>
+            {/* <a className="navbar-brand" href="/" style={{color:"red", marginLeft:"50px", fontFamily: "Monospace"}}>Home</a> */}
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
@@ -74,9 +74,10 @@ const NavBar = ()=> {
                 {/* User pages */}
                 <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/admin-products">Store</a>
                 {/* <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/equipments">Equipment</a> */}
-                <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"20px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/memberships">Memberships</a>
+                <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/memberships">Memberships</a>
                 <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/workout-plans">Workout Plans</a>
                 <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/req-instructor">Request Instructor</a>
+                
 
                 {/* Instructor pages */}
                 <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/members">Members</a>
