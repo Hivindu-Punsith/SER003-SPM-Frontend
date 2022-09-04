@@ -41,7 +41,7 @@ const ClientViewProducts = () => {
     <div className='container'>
         <br></br>
         <center>
-        <h1><b>Fitness Hub Shopping Store</b></h1>
+        <h1><b>FitnessHub Shopping Store</b></h1>
         <Button 
                     className="btn btn-dark" style={{ fontSize: "16px",marginLeft:'110%' ,width: '10%' }} > <i class="fa-solid fa-cart-arrow-down"></i> </Button>
 

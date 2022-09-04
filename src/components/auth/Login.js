@@ -50,9 +50,9 @@ const Login = () => {
 		<div style={{padding:"100px"}}>
 			<center>
 				<br></br>
-			<h1 className="heading">Sign In</h1>
+			<h1 className="heading" style={{ fontWeight: "bold"}}>Sign In</h1>
 			<p className="lead">
-				<i className="fas fa-user"></i> Login To Your Account
+				Login To Your Account
 			</p>
 			<br />
 			<form className="form" onSubmit={(e) => onSubmit(e)} >
@@ -83,7 +83,7 @@ const Login = () => {
 				
 				<input 
                     type="submit" 
-                    className="btn btn-primary" 
+                    className="btn btn-dark" 
                    id='responsive'
 				    value="Login" 
                 />

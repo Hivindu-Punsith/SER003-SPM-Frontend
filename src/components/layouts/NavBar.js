@@ -27,22 +27,22 @@ const NavBar = ()=> {
             <div class="container-fluid">
                 <a  href="/">
                   <img src={Logo} alt="" width="80" height="80" style={{borderRadius:"20px",float:"left"}}/>
-                  <Label style={{marginLeft:"30px", fontSize:"50px" , color:"white", fontFamily: "Verdana"}}>Fitness Hub</Label>
+                  <Label style={{marginLeft:"30px", fontSize:"50px" , color:"white", fontWeight: "bold"}}>FitnessHub</Label>
                 </a>
                 <table style={{float:"right"}}>
                   <row>
                     <td>
                       <Link to="/register">
-                        <Button className="btn btn-warning" type="submit" style={{  display:Token == undefined ? "flex" : "none", textDecoration:"none"}}>
+                        {/* <Button className="btn btn-warning" type="submit" style={{  display:Token == undefined ? "flex" : "none", textDecoration:"none"}}>
                          {"Register"}
-                        </Button>
+                        </Button> */}
                       </Link>
                     </td>
                     <td>
                       <Link to="/login">
-                        <Button className="btn btn-secondary" type="submit" style={{  display:Token == undefined ? "flex" : "none", marginLeft:"20px" , textDecoration:"none"}}>
+                        {/* <Button className="btn btn-secondary" type="submit" style={{  display:Token == undefined ? "flex" : "none", marginLeft:"20px" , textDecoration:"none"}}>
                          {"Login"}
-                        </Button>
+                        </Button> */}
                       </Link>
                     </td>
                     <td>
@@ -61,10 +61,10 @@ const NavBar = ()=> {
             </div>
           </nav>
         </div>
-			<nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{height:"50px"}}>
+			<nav className="navbar navbar-expand-lg navbar-dark bg-dark"  style={{ height:"50px", display: Token == undefined ? "none" : "flex" , textDecoration:"none"}}>
        
           <div className="container-fluid">
-            <a className="navbar-brand" href="/" style={{color:"red", marginLeft:"50px", fontFamily: "Monospace"}}>Home</a>
+            {/* <a className="navbar-brand" href="/" style={{color:"red", marginLeft:"50px", fontFamily: "Monospace"}}>Home</a> */}
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
