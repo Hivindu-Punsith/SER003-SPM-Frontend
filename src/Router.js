@@ -25,6 +25,7 @@ import ViewAllEquipments from "./components/equipments/ViewAllEquipments";
 //memberships
 import ViewAllMemberships from "./components/memberships/ViewAllMemberships";
 import ViewAllClients from "./components/instructors/ViewAllClients";
+import HandleInstructors from "./components/admin/HandleInstructors";
 
 
 const SiteRouter = () => {
@@ -52,6 +53,7 @@ const SiteRouter = () => {
                 <Route path="/equipments" element={<ViewAllEquipments/>}/>
                 <Route path="/memberships" element={<ViewAllMemberships/>}/>
                 <Route path="/clients" element={<ViewAllClients/>}/>
+                <Route path="/instructors" element={<HandleInstructors/>}/>
               </>
               )
               :
