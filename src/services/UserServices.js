@@ -4,7 +4,7 @@ import StartUrl from "../configs/Url.json";
 
 const CreateNewUserURL = StartUrl?.StartUrl + "/gym/user/create-user";
 const GetAllUsersURL = StartUrl?.StartUrl + "/gym/user/all-users";
-
+const UpdateUserInstructorURL = StartUrl?.StartUrl + "/gym/user/update-instructor/";
 
 export async function AddNewUsers(data){
     const alldata = {
@@ -55,5 +55,27 @@ export async function GetAllUserDetails(){
          } 
      
        });
+  return result;
+}
+
+
+export async function UpdateUserInstructor (id,UserUpdatedData){
+  let result;
+  await  axios.put(UpdateUserInstructorURL+id,UserUpdatedData)
+  .then(function(data) {
+      //console.log("success data",data)
+      result = data;
+  })
+  .catch(function (error) {
+      if (error.response) {
+        //console.log(error.response.data);
+        result = error.response;
+        
+      } else if (error.request) {
+        //console.log(error.request);
+        result = error.request;
+      } 
+  
+    });
   return result;
 }
