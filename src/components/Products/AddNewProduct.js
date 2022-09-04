@@ -85,7 +85,7 @@ const AddNewProduct = () => {
             <div style={{ margin: "10px" }}>
 
                         <center>
-                            <CardTitle style={{ color: "black", fontSize: "40px" }}><b>Fitness Hub Shopping Store Items</b></CardTitle>
+                            <CardTitle style={{ color: "black", fontSize: "40px" }}><b>FitnessHub Shopping Store Items</b></CardTitle>
 
                         </center>
 

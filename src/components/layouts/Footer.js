@@ -11,9 +11,9 @@ const Footer = () => {
 
 	return (
 		<div>
-			<div style={{marginTop:'50px'}}>
+			<div>
 
-                    <footer class="text-center text-lg-start " style={{color:"white" , backgroundColor:"#1a1a1a"}}>
+                    <footer class="text-center text-lg-start " style={{color:"white" , backgroundColor:"black"}}>
 
                     <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
 
@@ -52,10 +52,10 @@ const Footer = () => {
                         <div class="col-md-6 col-lg-4 col-xl-4 mx-auto mb-md-0 mb-4" style={{float:"left"}}>
 
                         <h6 class="text-uppercase fw-bold mb-4">Contact Us</h6>
-                        <p><i class="fas fa-home me-3 text-grayish"></i> New York, NY 10012, US</p>
+                        <p><i class="fas fa-home me-3 text-grayish"></i> No 32, Bauddhaloka Mw, Colombo 07</p>
                         <p>
                             <i class="fas fa-envelope me-3 text-grayish"></i>
-                            info@example.com
+                            fitnesshub@gmail.com
                         </p>
                         <p><i class="fas fa-phone me-3 text-grayish"></i> + 01 234 567 88</p>
                         <p><i class="fas fa-print me-3 text-grayish"></i> + 01 234 567 89</p>
@@ -63,8 +63,8 @@ const Footer = () => {
 
 
                         <div class="col-md-6 col-lg-4 col-xl-4 mx-auto mb-8" style={{ marginTop:"60px"}}>
-                        Fitness Hub© 2021 Copyright:
-                                <a class="text-reset fw-bold" href="/">&nbsp;Fitness Hub</a>
+                        FitnessHub© 2021 Copyright:
+                                <a class="text-reset fw-bold" href="/">&nbsp;FitnessHub</a>
                         </div>
 
                             
@@ -81,7 +81,7 @@ const Footer = () => {
                             </tr>
                             <tr>
                                 <td>
-                                    <Label style={{marginLeft:"30px", fontSize:"30px" , color:"white" }}>Fitness Hub</Label>
+                                    <Label style={{marginLeft:"30px", fontSize:"30px" , color:"white" }}>FitnessHub</Label>
                                 </td>
                             </tr>
                         </table>
@@ -159,7 +159,7 @@ const Footer = () => {
                                 <td >
                                     <a  href="/">
                                         <img src={Logo} alt="" width="100" height="100" style={{borderRadius:"10px"}}/>
-                                        <Label style={{marginLeft:"30px", fontSize:"60px" , color:"white"}}>Fitness Hub</Label>
+                                        <Label style={{marginLeft:"30px", fontSize:"60px" , color:"white"}}>FitnessHub</Label>
                                     </a>
                                 </td>
                             </Row>

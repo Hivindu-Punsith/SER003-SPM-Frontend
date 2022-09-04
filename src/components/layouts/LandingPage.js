@@ -13,8 +13,23 @@ const LandingPage = () => {
   return (
     <div>
 
+    <center>
+      <div class="row  m-0" style={{padding:"50px"}}>
+      <div class="col">
+      <Link to="/register">
+              <button className="btn btn-dark" style={{width:"500px", height:"70px", fontSize:"20px"}}>JOIN WITH US</button>
+      </Link>
+      </div>
+      <div class="col">
+      <Link to="/login">
+                <button className="btn btn-dark" style={{width:"500px", height:"70px", fontSize:"20px"}}>LOGIN</button>
+      </Link>
+      </div>
+    </div>
+    </center>
+
       <div style={{height:"500px", padding:"80px"}}>
-      <div className="row">
+      <div className="row m-0">
         <div className="col">
         <div>
           <p style={{ fontSize: "25px", color: "black" }}>
@@ -22,7 +37,7 @@ const LandingPage = () => {
           </p>
 
           <p style={{ fontSize: "50px", color: "black", fontWeight: "bold" }}>
-            WELCOME TO FITNESS HUB
+            WELCOME TO FITNESSHUB
           </p>
 
           <p>
@@ -32,7 +47,7 @@ const LandingPage = () => {
 
           <p>
             WE BELIEVE THAT THE ENVIRONMENT YOU TRAIN IN IS AS IMPORTANT AS THE
-            TRAINING ITSELF. FITNESS HUB CHALLENGES THE MONOTONY OF STANDARD
+            TRAINING ITSELF. FITNESSHUB CHALLENGES THE MONOTONY OF STANDARD
             GYMS WITH UNIQUE FEATURES AND MATERIALS TO MAKE OUR MEMBERS FEEL
             COMFORTABLE AND INSPIRED.
           </p>
@@ -45,11 +60,9 @@ const LandingPage = () => {
         <img src={Logo} alt="" style={{borderRadius:"1000px",float:"right",padding:"20px", width:"60%"}}/>
         </div>
       </div>
-       
-    
-
-      
       </div>
+
+
 
     <div style={{ width: "100%", marginTop:"50px" }}>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -80,7 +93,7 @@ const LandingPage = () => {
       </div>
     </div>
 
-    <div style={{height:"400px", backgroundColor:"#a9a9a9", marginTop:"50px"}}>
+    <div style={{height:"400px", backgroundColor:"black"}}>
         <center>
 
           <div>
@@ -89,7 +102,7 @@ const LandingPage = () => {
 
           <p style={{color: "white", width:"800px"}}>
             WE BELIEVE THAT THE ENVIRONMENT YOU TRAIN IN IS AS IMPORTANT AS THE
-            TRAINING ITSELF. FITNESS HUB CHALLENGES THE MONOTONY OF STANDARD
+            TRAINING ITSELF. FITNESSHUB CHALLENGES THE MONOTONY OF STANDARD
             GYMS WITH UNIQUE FEATURES AND MATERIALS TO MAKE OUR MEMBERS FEEL
             COMFORTABLE AND INSPIRED.
           </p>
@@ -102,7 +115,7 @@ const LandingPage = () => {
 
       </div>
     
-      <div style={{height:"600px",backgroundImage:`url(${img1})`, marginTop:"50px", opacity:"80%"}}>
+      <div style={{height:"600px",backgroundImage:`url(${img1})`, opacity:"80%"}}>
         
       </div>
 

@@ -247,7 +247,7 @@ const ViewProducts = () => {
                             ></input>
                         </div> */}
                         <center>
-                            <CardTitle style={{ color: "black", fontSize: "40px" }}><b>Fitness Hub Shopping Store Items</b></CardTitle>
+                            <CardTitle style={{ color: "black", fontSize: "40px" }}><b>FitnessHub Shopping Store Items</b></CardTitle>
                             {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
                             <Button className="btn btn-dark" style={{ fontSize: "15px", marginLeft: "83%" }} onClick={(e) =>routeToAddPage(e)}><i class="fa-solid fa-circle-plus"></i><b>   Add New Product</b></Button>
                         </center>
