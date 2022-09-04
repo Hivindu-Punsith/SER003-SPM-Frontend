@@ -13,6 +13,21 @@ const LandingPage = () => {
   return (
     <div>
 
+    <center>
+      <div class="row" style={{padding:"50px"}}>
+      <div class="col">
+      <Link to="/register">
+              <button className="btn btn-dark" style={{width:"500px", height:"70px", fontSize:"20px"}}>JOIN WITH US</button>
+      </Link>
+      </div>
+      <div class="col">
+      <Link to="/login">
+                <button className="btn btn-dark" style={{width:"500px", height:"70px", fontSize:"20px"}}>LOGIN</button>
+      </Link>
+      </div>
+    </div>
+    </center>
+
       <div style={{height:"500px", padding:"80px"}}>
       <div className="row">
         <div className="col">
@@ -45,11 +60,9 @@ const LandingPage = () => {
         <img src={Logo} alt="" style={{borderRadius:"1000px",float:"right",padding:"20px", width:"60%"}}/>
         </div>
       </div>
-       
-    
-
-      
       </div>
+
+
 
     <div style={{ width: "100%", marginTop:"50px" }}>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

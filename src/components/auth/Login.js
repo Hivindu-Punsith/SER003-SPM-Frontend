@@ -83,7 +83,7 @@ const Login = () => {
 				
 				<input 
                     type="submit" 
-                    className="btn btn-primary" 
+                    className="btn btn-dark" 
                    id='responsive'
 				    value="Login" 
                 />
