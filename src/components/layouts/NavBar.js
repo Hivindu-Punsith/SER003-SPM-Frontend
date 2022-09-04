@@ -27,7 +27,7 @@ const NavBar = ()=> {
             <div class="container-fluid">
                 <a  href="/">
                   <img src={Logo} alt="" width="80" height="80" style={{borderRadius:"20px",float:"left"}}/>
-                  <Label style={{marginLeft:"30px", fontSize:"50px" , color:"white", fontFamily: "Verdana"}}>Fitness Hub</Label>
+                  <Label style={{marginLeft:"30px", fontSize:"50px" , color:"white", fontWeight: "bold"}}>FitnessHub</Label>
                 </a>
                 <table style={{float:"right"}}>
                   <row>

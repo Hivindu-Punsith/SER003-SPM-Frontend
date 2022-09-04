@@ -73,9 +73,9 @@ const Register = () => {
 		<div>
 			<center>
 				<br></br>
-			<h1 className="heading">Sign Up</h1>
+			<h1 className="heading" style={{ fontWeight: "bold"}}>Sign Up</h1>
 			<p className="lead">
-				<i className="fas fa-user"></i> Create Your Account
+				 Create Your Account
 			</p>
 			<br />
 			<form className="form" onSubmit={(e) => onSubmit(e)} >
