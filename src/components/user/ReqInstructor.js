@@ -23,7 +23,7 @@ import userImg from "../../assests/images/user.png";
 import Swal from "sweetalert2";
 import { getAllInstructors } from "../../services/InstructorServices";
 import { UpdateUserInstructor } from "../../services/UserServices";
-import { Auth } from "../../services/AuthServices";
+import moment from "moment/moment";
 
 const ReqInstructor = () => {
   const navigate = useNavigate();
@@ -58,11 +58,19 @@ const ReqInstructor = () => {
     GetInstructors();
   }, []);
 
+  const [openModal, setopenModal] = useState(false);
+  const [SelectedInstructor, setSelectedInstructor] = useState({});
 
-  const requestInstructor = async (e,Instructor)=>{
+  const OpenModalAndSetData = (e,instructor) => {
+    e.preventDefault();
+    setSelectedInstructor(instructor);
+    setopenModal(true);
+  }
+
+  const requestInstructor = async (e)=>{
     e.preventDefault();
     const UserUpdatedData = {
-      instructor : Instructor?._id,
+      instructor : SelectedInstructor?._id,
     }
     let data = await UpdateUserInstructor(localStorage.getItem("userID"),UserUpdatedData);
     console.log("data",data);
@@ -73,6 +81,7 @@ const ReqInstructor = () => {
           text: 'Instructor Updated success!',
       })
       GetInstructors();
+      setopenModal(false);
     }
     else {
         Swal.fire({
@@ -118,7 +127,7 @@ const ReqInstructor = () => {
                     <Button
                       style={{ marginRight: "20px" }}
                       className="btn btn-success"
-                      onClick={(e)=>requestInstructor(e,Instructor)}
+                      onClick={(e)=>OpenModalAndSetData(e,Instructor)}
                     >
                       Request
                     </Button>
@@ -129,6 +138,63 @@ const ReqInstructor = () => {
           })}
         </Row>
       </Container>
+
+
+      <div>
+                    <Modal
+                        isOpen={openModal}
+                        className="modal-dialog-centered"
+                        fade={true}
+                        backdrop={true}>
+                        <ModalHeader
+                            toggle={() => {
+                                setopenModal(false);
+                            }}>
+                            <Label>Add New User</Label>
+                        </ModalHeader>
+                        <ModalBody>
+                            <div style={{ width: "400px" }}>
+                                <div>
+                                  <CardText><b>Instructor Full Name -:{SelectedInstructor?.fullName}</b></CardText>
+                                  <CardText><b>Instructor Email -:{SelectedInstructor?.email}</b></CardText>
+                                  <CardText><b>Instructor Mobile No -:{SelectedInstructor?.mobileno}</b></CardText>
+                                  <CardText><b>Instructor Weight -:{SelectedInstructor?.weight}</b></CardText>
+                                  <CardText><b>Instructor Height -:{SelectedInstructor?.height}</b></CardText>
+                                  <CardText><b>Instructor Registered Date -:{moment(SelectedInstructor?.createdAt).format(" YYYY-MM-DD ")}</b></CardText>
+                                </div>
+                                <Form>
+                                    <br />                                  
+                                    <Label>Your Gym ID</Label>
+                                    <Input type="text" className="input"  value={localStorage.getItem("userID")} readOnly />
+                                    <br />
+
+                                    <Label>Your Name</Label>
+                                    <Input type="text" className="input"  value={localStorage.getItem("user")} readOnly />
+                                    <br />
+
+                                    <Button
+                                        style={{ marginRight: "20px" }}
+                                        className="btn btn-success"
+                                        onClick={(e)=>requestInstructor(e)}
+                                    >
+                                      Confirm Request
+                                    </Button>
+
+                                    <Button
+                                        style={{ float:"right"}}
+                                        className="btn btn-danger"
+                                        onClick={()=>setopenModal(false)}
+                                    >
+                                      Cancel Request
+                                    </Button>
+
+                                </Form>
+                            </div>
+                        </ModalBody>
+                    </Modal>
+                </div>
+
+
     </div>
   );
 };
