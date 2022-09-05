@@ -141,7 +141,7 @@ const HandleInstructors = () => {
             selector: "instructor_id",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Label style={{ fontSize: "18px" }}><b>{data?.instructor_id}</b><br /></Label>
+                    <Label style={{ fontSize: "18px" }}><b>{data?.id}</b><br /></Label>
                 </div>
             ),
         },
@@ -204,7 +204,7 @@ const HandleInstructors = () => {
             selector: "salary",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Label style={{ fontSize: "18px" }}><b>{data?.salary}</b><br /></Label>
+                    <Label style={{ fontSize: "18px" }}><b>{data?.salary !== null ? data?.salary : "No salary yet"}</b><br /></Label>
                 </div>
             ),
         },
