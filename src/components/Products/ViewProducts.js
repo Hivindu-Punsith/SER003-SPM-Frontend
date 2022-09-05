@@ -83,7 +83,6 @@ const ViewProducts = () => {
             console.log("all Products", data);
             let newData = data?.data?.data?.map((item) => {
                 return {
-                    
                     //createdAt:item?.createdAt,
                     category: item?.category,
                     productName: item?.productName,
