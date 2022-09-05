@@ -74,7 +74,7 @@ const NavBar = ()=> {
                 {/* User pages */}
                 <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/admin-products">Store</a>
                 {/* <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/equipments">Equipment</a> */}
-                <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/memberships">Memberships</a>
+                <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/client-memberships">Memberships</a>
                 <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/workout-plans">Workout Plans</a>
                 <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/req-instructor">Request Instructor</a>
                 
