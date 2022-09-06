@@ -25,6 +25,8 @@ import ViewAllEquipments from "./components/equipments/ViewAllEquipments";
 //memberships
 import ViewAllMemberships from "./components/memberships/ViewAllMemberships";
 import ViewAllClients from "./components/instructors/ViewAllClients";
+import HandleInstructors from "./components/admin/HandleInstructors";
+import ClientMemberships from "./components/memberships/ClientMemberships";
 
 
 const SiteRouter = () => {
@@ -51,7 +53,9 @@ const SiteRouter = () => {
                 <Route path="/req-instructor" element={<ReqInstructor/>}/>
                 <Route path="/equipments" element={<ViewAllEquipments/>}/>
                 <Route path="/memberships" element={<ViewAllMemberships/>}/>
+                <Route path="/client-memberships" element={<ClientMemberships/>}/>
                 <Route path="/clients" element={<ViewAllClients/>}/>
+                <Route path="/instructors" element={<HandleInstructors/>}/>
               </>
               )
               :
