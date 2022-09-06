@@ -30,15 +30,33 @@ const Register = () => {
 		e.preventDefault();
 
 		let validate = ValidateSignUp(formData);
-
+		let msg = validate?.message;
 		if(validate.status == false)
 		{
-			alert(validate.message);
+			Swal.fire({
+                toast: true,
+                icon: 'warning',
+                html: `<span>${msg}</span>`,
+                animation: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: false,
+            });
 		}
 
 		else{
 				if (password !== password2) {
-					alert("Password do not match...", "danger");
+					Swal.fire({
+						toast: true,
+						icon: 'warning',
+						html: `<span>Password do not match...</span>`,
+						animation: true,
+						position: 'top-right',
+						showConfirmButton: false,
+						timer: 2000,
+						timerProgressBar: false,
+					});
 				} else {
 					let data = await RegisterUsers(formData);
 					console.log("data",data)

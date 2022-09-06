@@ -76,10 +76,20 @@ const HandleInstructors = () => {
         }
 
         let validate = ValidateAddNewInstructor(regdata);
-
-        if (validate.status==false) {
-            alert(validate.message);
-        } else {
+		let msg = validate?.message;
+		if(validate.status == false)
+		{
+			Swal.fire({
+                toast: true,
+                icon: 'warning',
+                html: `<span>${msg}</span>`,
+                animation: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: false,
+            });
+		} else {
             console.log("sending data", regdata);
             let data = await createInstructor(regdata);
             console.log(" Instructor data ", data);
