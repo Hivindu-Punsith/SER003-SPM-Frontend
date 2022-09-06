@@ -83,7 +83,7 @@ const NavBar = ()=> {
                 <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/members">Members</a>
                 <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/instructor-requests">Instructor Requests</a>
                 <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/equipments">Equipments</a>
-                <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/admin-products">Store</a>
+                <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/client-products">Store</a>
 
 
                 {/* admin pages */}                
