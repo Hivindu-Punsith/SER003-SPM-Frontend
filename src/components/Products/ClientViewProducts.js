@@ -15,15 +15,92 @@ import {
     Input,
     Form
 } from "reactstrap";
+import { getAllProducts } from '../../services/ProductService';
 
 const ClientViewProducts = () => {
 
     
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState([]);
+    const [suppllimentsDetails, setsuppllimentsDetails] = useState([]);
+    const [clothingDetails, setclothingDetails] = useState([]);
+    const [accessoriesDetails, setaccessoriesDetails] = useState([]);
+    const [Protein_Bars_SnacksDetails, setProtein_Bars_SnacksDetails] = useState([]);
+
+//Protein_Bars_&_Snacks
+//clothing
+
+    const GetProtein_Bars_SnacksProducts = async () => {
+      try {
+        const { data } = await getAllProducts();
+        let array = [];
+        data?.data?.map((item) => {
+          if (item?.category == "Protein Bars & Snacks") {
+            array.push(item);
+          }
+        }); 
+        console.log("Protein_Bars_Snacks",array);
+        setProtein_Bars_SnacksDetails(array);
+        console.log(data.data);
+
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    const GetaccessoriesProducts = async () => {
+      try {
+        const { data } = await getAllProducts();
+        let array = [];
+        data?.data?.map((item) => {
+          if (item?.category == "accessories") {
+            array.push(item);
+          }
+        }); 
+        setaccessoriesDetails(array);
+        console.log(data.data);
+  
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    const GetclothingProducts = async () => {
+      try {
+        const { data } = await getAllProducts();
+        let array = [];
+        data?.data?.map((item) => {
+          if (item?.category == "clothing") {
+            array.push(item);
+          }
+        }); 
+        setclothingDetails(array);
+        console.log(data.data);
+  
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    const GetsuppllimentsProducts = async () => {
+      try {
+        const { data } = await getAllProducts();
+        let array = [];
+        data?.data?.map((item) => {
+          if (item?.category == "Supplements") {
+            array.push(item);
+          }
+        }); 
+        setsuppllimentsDetails(array);
+        console.log(data.data);
+  
+      } catch (error) {
+        console.log(error)
+      }
+    }
 
     const GetProducts = async () => {
         try {
-          const { data } = await axios.get("http://localhost:5000/product/getproducts")
+          const { data } = await getAllProducts();
           setProducts(data.data)
           console.log(data.data);
     
@@ -34,22 +111,129 @@ const ClientViewProducts = () => {
 
     useEffect(() => {
         GetProducts();
+        GetsuppllimentsProducts();
+        GetclothingProducts();
+        GetaccessoriesProducts();
+        GetProtein_Bars_SnacksProducts();
     }, [])
 
+     //----------------------------Search-----------------------
+
+
+     const filterData = (ProductDetails, Searchkey) => {
+      console.log(ProductDetails, Searchkey);
+      const result = ProductDetails.filter(
+          (product) =>
+             // console.log(product),
+              product.category.toString().toLowerCase().includes(Searchkey) ||
+              product.productName.toString().toLowerCase().includes(Searchkey) ||
+              product.productPrice.toString().toLowerCase().includes(Searchkey) ||
+              product.quantity.toString().toLowerCase().includes(Searchkey),
+      );
+      setProducts(result);
+  }
+
+  const handleSearchArea = (e) => {
+      const Searchkey = e.currentTarget.value;
+      axios.get("http://localhost:5000/product/getproducts").then((res) => {
+          if (res.data?.message == "Success") {
+              filterData(res.data.data, Searchkey);
+          }
+      });
+  }
+
+  //---------------------------------------------------------
+
+  const [supplliments, setsupplliments] = useState(true);
+  const [clothing, setclothing] = useState(false);
+  const [accessories, setaccessories] = useState(false);
+  const [Protein_Bars_Snacks, setProtein_Bars_Snacks] = useState(false);
+
+  const showaccessoriesbtn = (e) => {
+    e.preventDefault();
+    setsupplliments(false);
+    setclothing(false);
+    setaccessories(true);
+    setProtein_Bars_Snacks(false);
+  };
+
+  const showProtein_Bars_Snacksbtn = (e) => {
+    e.preventDefault();
+    setsupplliments(false);
+    setclothing(false);
+    setaccessories(false);
+    setProtein_Bars_Snacks(true);
+  };
+
+  const suppllimentsbtn = (e) => {
+    e.preventDefault();
+    setsupplliments(true);
+    setclothing(false);
+    setaccessories(false);
+    setProtein_Bars_Snacks(false);
+  };
+
+  const clothingbtn = (e) => {
+    e.preventDefault();
+    setsupplliments(false);
+    setclothing(true);
+    setaccessories(false);
+    setProtein_Bars_Snacks(false);
+  };
 
   return (
     <div className='container'>
         <br></br>
         <center>
         <h1><b>FitnessHub Shopping Store</b></h1>
-        <Button 
-                    className="btn btn-dark" style={{ fontSize: "16px",marginLeft:'110%' ,width: '10%' }} > <i class="fa-solid fa-cart-arrow-down"></i> </Button>
-
         </center>
-        
-      <section class="cards" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
+        <table>
+          <tr>
+            <td>
+              <Button 
+                className="btn btn-dark" style={{fontSize: "16px" }} > <i class="fa-solid fa-cart-arrow-down"></i> 
+              </Button>
+            </td>
+            <td>
+                <div>
+                    <input
+                        className="form-control"
+                        style={{ width: "400px", marginLeft: "50px" }}
+                        type="search"
+                        placeholder="Search for products"
+                        name="searchQuery"
+                        onChange={(e)=>handleSearchArea(e)}
+                    ></input>
+                </div>
+            </td>
+            <td>
+            </td>
+          </tr>
+        </table>
+        <br/><br/>
+        <div>
+              <Button color="primary" onClick={(e) => suppllimentsbtn(e)}>
+                Suppliments
+              </Button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Button color="success" onClick={(e) => clothingbtn(e)}>
+                Clothing
+              </Button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Button color="warning" onClick={(e) => showaccessoriesbtn(e)}>
+                Accessories
+              </Button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Button color="danger" onClick={(e) => showProtein_Bars_Snacksbtn(e)}>
+              Protein Bars & Snacks
+              </Button>
+              <br />
+              <br />
+        </div>
 
-        {products.map((product) => (
+      <section class="cards" style={{ display:supplliments ?  'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
+
+        {suppllimentsDetails.map((product) => (
           <article class="card" style={{ flex: '0 1 24%', borderWidth: '5px', marginBottom: '20px' }}>
             <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
             <h4>{product.productName}</h4>
@@ -63,6 +247,59 @@ const ClientViewProducts = () => {
 
 
       </section>
+
+      <section class="cards" style={{ display:clothing ?  'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
+
+        {clothingDetails.map((product) => (
+          <article class="card" style={{ flex: '0 1 24%', borderWidth: '5px', marginBottom: '20px' }}>
+            <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
+            <h4>{product.productName}</h4>
+            <p><b>LKR. {product.productPrice}</b></p>
+            
+            <a className='btn btn-secondary'><b>Add to cart</b>
+            {/* <i className="fa-solid fa-cart-circle-plus"></i> */}
+            </a>
+          </article>
+        ))}
+
+
+      </section>
+
+
+      <section class="cards" style={{ display:accessories ?  'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
+
+        {accessoriesDetails.map((product) => (
+          <article class="card" style={{ flex: '0 1 24%', borderWidth: '5px', marginBottom: '20px' }}>
+            <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
+            <h4>{product.productName}</h4>
+            <p><b>LKR. {product.productPrice}</b></p>
+            
+            <a className='btn btn-secondary'><b>Add to cart</b>
+            {/* <i className="fa-solid fa-cart-circle-plus"></i> */}
+            </a>
+          </article>
+        ))}
+
+
+      </section>
+
+      <section class="cards" style={{ display:Protein_Bars_Snacks ?  'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
+
+      {Protein_Bars_SnacksDetails.map((product) => (
+        <article class="card" style={{ flex: '0 1 24%', borderWidth: '5px', marginBottom: '20px' }}>
+          <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
+          <h4>{product.productName}</h4>
+          <p><b>LKR. {product.productPrice}</b></p>
+          
+          <a className='btn btn-secondary'><b>Add to cart</b>
+          {/* <i className="fa-solid fa-cart-circle-plus"></i> */}
+          </a>
+        </article>
+      ))}
+
+
+      </section>
+
     </div>
   )
 }
@@ -132,7 +369,7 @@ export default ClientViewProducts;
 // import { getProductByID} from "../../services/ProductService";
 
 
-// const ViewProducts = () => {
+// const ClientViewProducts = () => {
 //     const navigate = useNavigate();
 
 
@@ -508,4 +745,4 @@ export default ClientViewProducts;
 //     );
 // };
 
-// export default ViewProducts;
+// export default ClientViewProducts;
