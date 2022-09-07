@@ -43,6 +43,7 @@ export async function createNewProduct(formData) {
 
 export async function updateProduct(id, data) {
     const alldata = {
+        category:data.category.value ,
         productName: data.productName,
         productPrice: data.productPrice,
         expireDate: data.expireDate,

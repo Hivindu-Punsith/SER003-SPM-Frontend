@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import Select from "react-select"
 import {
@@ -11,10 +11,12 @@ import Swal from 'sweetalert2';
 import FileInput from "../../utils/FileInput";
 
 import { validateCreateProduct } from "../auth/productValidation";
-import { createNewProduct } from "../../services/ProductService";
+import { updateProduct ,getProductByID } from "../../services/ProductService";
+import moment from "moment";
 
-const AddNewProduct = () => {
+const EditProduct = () => {
     const navigate = useNavigate();
+    const id = useParams();
 
     const [data, setData] = useState({
         category: "",
@@ -39,6 +41,7 @@ const AddNewProduct = () => {
 
 
       const handleChange = ({ currentTarget: input }) => {
+        console.log(input);
         setData({ ...data, [input.name]: input.value });
       };
     
@@ -46,8 +49,28 @@ const AddNewProduct = () => {
         setData((prev) => ({ ...prev, [name]: value }));
       };
     
+    const getById = async () => {
+        try {
+            let data = await getProductByID(id?.id);
+            console.log("data",data.data.data);
+            setData({
+                category:{ value: data.data.data.category, label: data.data.data.category, name: "category" },
+                productName:data.data.data.productName,
+                productPrice:data.data.data.productPrice,
+                expireDate:moment(data.data.data.expireDate).format("YYYY-MM-DD"),
+                quantity:data.data.data.quantity,
+                productImage:data.data.data.productImage,
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
-    const addProduct = async (e) => {
+    useEffect(() => {
+        getById();
+    }, [])
+
+    const updateSelectedProduct = async (e) => {
 
         e.preventDefault();
 
@@ -67,7 +90,7 @@ const AddNewProduct = () => {
             });
 		}
         else {
-            let newdata = await createNewProduct(data);
+            let newdata = await updateProduct(id?.id,data);
             console.log(" product data ", newdata);
             if (newdata?.status == 200) {
                 Swal.fire({
@@ -101,7 +124,7 @@ const AddNewProduct = () => {
                         </center>
 
                         <div className="container" style={{ width: '30%', }}>
-                            <form className='form-group' onSubmit={addProduct} >
+                            <form className='form-group' onSubmit={updateSelectedProduct} >
                                 <label style={{ marginTop: '15px' }}>Select Category</label>                               
                                 <Select
                                     className="React"
@@ -167,4 +190,4 @@ const AddNewProduct = () => {
 
 };
 
-export default AddNewProduct;
+export default EditProduct;

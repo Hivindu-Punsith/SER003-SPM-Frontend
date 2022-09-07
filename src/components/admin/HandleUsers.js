@@ -77,10 +77,20 @@ const HandleUsers = () => {
 
         }
         let validate = ValidateAddNewUser(regdata);
-
-        if (validate.status == false) {
-            alert(validate.message);
-        }
+		let msg = validate?.message;
+		if(validate.status == false)
+		{
+			Swal.fire({
+                toast: true,
+                icon: 'warning',
+                html: `<span>${msg}</span>`,
+                animation: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: false,
+            });
+		}
         else {
             console.log("sending data", regdata);
             let data = await AddNewUsers(regdata);
