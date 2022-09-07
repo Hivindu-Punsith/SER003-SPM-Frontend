@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Select from "react-select";
 import {
   Badge,
   Card,
@@ -40,7 +41,16 @@ const ViewAllClients = () => {
   const [weight, setweight] = useState("");
   const [height, setheight] = useState("");
 
-  const [workoutType, setworkoutType] = useState("");
+  let catergoryList = [
+    { value: "Cardio", label: "Cardio", name: "workout_type" },
+    { value: "Fat-loss", label: "Fat-loss", name: "workout_type" },
+    { value: "Hypertrophy", label: "Hypertrophy", name: "workout_type" },
+    { value: "Strength", label: "Strength", name: "workout_type" },
+  ];
+
+  const [workoutType, setworkoutType] = useState({
+    workout_type: "",
+  });
   const [workout1, setworkout1] = useState("");
   const [workout2, setworkout2] = useState("");
   const [workout3, setworkout3] = useState("");
@@ -55,9 +65,14 @@ const ViewAllClients = () => {
   const [meal6, setmeal6] = useState("");
 
   const handleWorkoutType = (e) => {
-    e.preventDefault();
-    setworkoutType(e.target.value);
+    console.log(e);
+    setworkoutType({ ...workoutType, [e.name]: e });
   };
+
+  // const handleWorkoutType = (e) => {
+  //   e.preventDefault();
+  //   setworkoutType(e.target.value);
+  // };
 
   const handleWorkout1 = (e) => {
     e.preventDefault();
@@ -123,7 +138,7 @@ const ViewAllClients = () => {
     e.preventDefault();
 
     const regdata = {
-      workout_type: workoutType,
+      workout_type: workoutType.workout_type.value,
       exercise1: workout1,
       exercise2: workout2,
       exercise3: workout3,
@@ -161,7 +176,7 @@ const ViewAllClients = () => {
     e.preventDefault();
 
     const regdata = {
-      workout_type: workoutType,
+      workout_type: workoutType.workout_type.value,
       meal1: meal1,
       meal2: meal2,
       meal3: meal3,
@@ -290,19 +305,14 @@ const ViewAllClients = () => {
             <div style={{ width: "400px" }}>
               <Form>
                 <Label>Workout Type</Label>
-                <Input
-                  type="select"
-                  name="select"
-                  id="exampleSelect"
-                  value={workoutType}
-                  placeholder="Workout Type"
+                <Select
+                  className="React"
+                  classNamePrefix="select"
+                  options={catergoryList}
+                  name="workoutType"
+                  value={workoutType.workout_type}
                   onChange={(e) => handleWorkoutType(e)}
-                >
-                  <option>...Workout Type...</option>
-                  <option>Cardio</option>
-                  <option>Strength</option>
-                  <option>Flexibility</option>
-                </Input>
+                />
                 <br />
 
                 <Label>Workout 1</Label>
@@ -380,19 +390,14 @@ const ViewAllClients = () => {
             <div style={{ width: "400px" }}>
               <Form>
                 <Label>Workout Type</Label>
-                <Input
-                  type="select"
-                  name="select"
-                  id="exampleSelect"
-                  value={workoutType}
-                  placeholder="Workout Type"
+                <Select
+                  className="React"
+                  classNamePrefix="select"
+                  options={catergoryList}
+                  name="workoutType"
+                  value={workoutType.workout_type}
                   onChange={(e) => handleWorkoutType(e)}
-                >
-                  <option>...Workout Type...</option>
-                  <option>Cardio</option>
-                  <option>Strength</option>
-                  <option>Flexibility</option>
-                </Input>
+                />
                 <br />
 
                 <Label>Meal 1</Label>
