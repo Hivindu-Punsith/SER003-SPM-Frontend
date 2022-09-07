@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import Select from "react-select";
+import editIcon from "../../assests/images/pencil.png"
+import binIcon from "../../assests/images/bin.png"
 import {
     Badge,
     Card,
@@ -432,7 +434,7 @@ const ViewAllEquipments = () => {
         //     ),
         // },
         {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >created At</Badge>),
+            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Created At</Badge>),
             selector: "createdAt",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
@@ -441,7 +443,7 @@ const ViewAllEquipments = () => {
             ),
         },
         {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >updated At</Badge>),
+            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Updated At</Badge>),
             selector: "updatedAt",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
@@ -449,36 +451,22 @@ const ViewAllEquipments = () => {
                 </div>
             ),
         },
-        // {
-        //     name: (<Badge color="dark" style={{ fontSize: "18px" }} >Equipment Update</Badge>),
+        {     
+            cell: (data) => (
+
+                <div className="row">
+                    <div className="col">
+                        <img src={editIcon} style={{height: "25px", width:"25px"}} />
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div className="col">
+                        <img src={binIcon} style={{height: "25px", width:"25px"}} />
+                    </div>
+                </div>
       
-        //     cell: (data) => (
-        //       <div style={{ display: "flex", flexDirection: "column" }}>
-        //         {/* <Link to={`/updateSub/${data?._id}`}> */}
-        //         <Button 
-        //             className="btn btn-warning" style={{ fontSize: "16px" }}  ><i class="fa-solid fa-pen-to-square"></i>&nbsp;Update</Button>
-        //         {/* </Link> */}
-        //       </div>
-      
-        //     ),
-        //   },
-      
-        //   {
-        //     name: (<Badge color="dark" style={{ fontSize: "18px" }} >Equipment Delete</Badge>),
-      
-        //     cell: (data) => (
-        //       <div style={{ display: "flex", flexDirection: "column" }}>
-        //         <Button className="btn btn-danger" style={{ fontSize: "16px" }} ><i class="fa-solid fa-trash-can"></i>&nbsp;<b>Delete</b></Button>
-        //       </div>
-      
-        //     ),
-        //   },
-
-
-
-
-
-
+            ),
+          },
+    
     ];
 
 
