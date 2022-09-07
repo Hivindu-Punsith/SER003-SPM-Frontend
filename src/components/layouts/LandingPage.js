@@ -1,29 +1,33 @@
 import React from "react";
+import { useContext } from "react";
+import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
-import { Label } from "reactstrap";
+import AuthContext from "../context/Auth.context";
 import img1 from "../../assests/images/1.jpg"
-import img2 from "../../assests/images/2.jpg"
-import img3 from "../../assests/images/3.jpg"
 import img4 from "../../assests/images/1.1.jpg"
 import img5 from "../../assests/images/1.2.jpg"
 import img6 from "../../assests/images/1.3.jpg"
 import Logo from "../../assests/images/logo.jpg";
 
+
 const LandingPage = () => {
+
+  const { Token, userRole } = useContext(AuthContext);
+
   return (
     <div>
 
     <center>
-      <div class="row  m-0" style={{padding:"50px"}}>
+      <div class="row  m-0" style={{padding:"50px", display:Token == undefined ? "flex" : "none"}}>
       <div class="col">
-      <Link to="/register">
-              <button className="btn btn-dark" style={{width:"500px", height:"70px", fontSize:"20px"}}>JOIN WITH US</button>
-      </Link>
-      </div>
-      <div class="col">
-      <Link to="/login">
-                <button className="btn btn-dark" style={{width:"500px", height:"70px", fontSize:"20px"}}>LOGIN</button>
-      </Link>
+        <Link to="/register" >
+                <button className="btn btn-dark" style={{ width:"500px", height:"70px", fontSize:"20px"}}>JOIN WITH US</button>
+        </Link>
+        </div>
+        <div class="col">
+        <Link to="/login">
+                  <button className="btn btn-dark" style={{ width:"500px", height:"70px", fontSize:"20px"}}>LOGIN</button>
+        </Link>
       </div>
     </div>
     </center>
@@ -107,7 +111,7 @@ const LandingPage = () => {
             COMFORTABLE AND INSPIRED.
           </p>
 
-          <button className="btn btn-danger" style={{height:"45px",width:"150px", borderRadius:"50px", fontWeight:"bold"}}>SHOP NOW</button>
+          <Button className="btn btn-danger" style={{height:"45px",width:"150px", borderRadius:"50px", fontWeight:"bold"}} href={Token == undefined ? '/login' : userRole == "admin" ? '/admin-products' :'/client-products'}>SHOP NOW</Button>
 
           </div>
         </center>

@@ -44,7 +44,7 @@ const SiteRouter = () => {
               {userLogged ? 
               (
               <>
-                <Route path="/" element={<Dashboard/>}/>
+                <Route path="/" element={<LandingPage/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/admin-products" element={<ViewProducts/>}/>

@@ -486,7 +486,9 @@ const ViewAllEquipments = () => {
         <div style={{ marginTop: "70px", marginBottom: "70px" }}>
             <div style={{ margin: "10px" }}>
                 <Card>
-                <center>
+                    <CardHeader>
+
+                    <center>
                 <div style={{paddingTop:"10px"}}>
                 <Button color="dark" onClick={(e) => AllBtn(e)}>
                     <b>All Equipments</b>
@@ -511,7 +513,6 @@ const ViewAllEquipments = () => {
                     </Button>
                 </div>
                 </center>
-                    <CardHeader>
                         <center>
                         <CardTitle style={{display: all ? "flex" : "none", color: "black", fontSize: "30px", float:"left" }}><b>All Equipments</b></CardTitle>
                         <CardTitle style={{display: liftingEq ? "flex" : "none", color: "black", fontSize: "30px", float:"left" }}><b>Liftings Equipments</b></CardTitle>
@@ -519,7 +520,8 @@ const ViewAllEquipments = () => {
                         <CardTitle style={{display: liftingMachine ? "flex" : "none", color: "black", fontSize: "30px", float:"left" }}><b>Lifting Machines</b></CardTitle>
                         <CardTitle style={{display: other ? "flex" : "none", color: "black", fontSize: "30px", float:"left" }}><b>Other Equipments</b></CardTitle>
                         {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
-                        <Button className="btn btn-dark" style={{ fontSize: "15px", marginLeft: "83%" }}  onClick={() => setopenModal(true)}><i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Add New Equipment</b></Button>
+                        <Button className="btn btn-dark" style={{ fontSize: "15px", float:"right"}}  onClick={() => setopenModal(true)}><i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Add New Equipment</b></Button>
+                        <br/>
                         </center>
                     </CardHeader>
                     <CardBody>
