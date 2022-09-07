@@ -46,13 +46,13 @@ const NavBar = ()=> {
                       </Link>
                     </td>
                     <td>
-                      <Button onClick={handleSubmit} className="btn btn-warning" type="submit" style={{  display:Token == undefined ? "none" : "flex" , textDecoration:"none"}}>
-                        {"Logout"}
+                      <Button onClick={handleSubmit} className="btn btn-outline-danger" type="submit" style={{  display:Token == undefined ? "none" : "flex" , textDecoration:"none",backgroundColor:'black'}}>
+                       <b> {"Logout"}</b>
                       </Button>
                     </td>
                     <td>
-                      <Button  className="btn btn-success" type="submit" href="/profile" style={{ display: Token == undefined ? "none" : "flex" , marginLeft:"20px" , textDecoration:"none"}}>
-                        Profile
+                      <Button  className="btn btn-outline-danger" type="submit" href="/profile" style={{ display: Token == undefined ? "none" : "flex" , marginLeft:"20px" , textDecoration:"none",backgroundColor:'black'}}>
+                        <b>Profile</b>
                       </Button>
                     </td>
                   </row>

@@ -127,6 +127,7 @@ const AddNewProduct = () => {
                             name="productPrice"
                             onChange={handleChange}
                             value={data.productPrice}
+                            type='number'
                         />
 
                         <label style={{ marginTop: '15px' }}>Enter Expire Date</label>
@@ -144,6 +145,7 @@ const AddNewProduct = () => {
                             name="quantity"
                             onChange={handleChange}
                             value={data.quantity}
+                            type='number'
                         />
 
                         <label style={{ marginTop: '15px' }}>Product Image</label>

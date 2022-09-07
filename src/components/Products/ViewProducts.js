@@ -45,7 +45,7 @@ const ViewProducts = () => {
         const result = ProductDetails.filter(
             (product) =>
                // console.log(product),
-                product.category.toString().toLowerCase().includes(Searchkey) ||
+                // product.category.toString().toLowerCase().includes(Searchkey) ||
                 product.productName.toString().toLowerCase().includes(Searchkey) ||
                 product.productPrice.toString().toLowerCase().includes(Searchkey) ||
                 product.quantity.toString().toLowerCase().includes(Searchkey),
@@ -163,7 +163,7 @@ const ViewProducts = () => {
             ),
         },
         {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Expire date</Badge>),
+            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Stock - Expire date</Badge>),
             selector: "expireDate",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
@@ -227,7 +227,7 @@ const ViewProducts = () => {
                 <Card >
                     <CardHeader >
                         <center>
-                            <CardTitle style={{ color: "black", fontSize: "40px" }}><b>FitnessHub Shopping Store Items</b></CardTitle>
+                            <CardTitle style={{ color: "black", fontSize: "40px" }}><b>Fitness Hub Shopping Store </b></CardTitle>
                             {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
                             <br></br>
                         </center>

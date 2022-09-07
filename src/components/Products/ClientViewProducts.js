@@ -16,6 +16,12 @@ import {
     Form
 } from "reactstrap";
 import { getAllProducts } from '../../services/ProductService';
+import '../Products/style.css'
+import'../Products/style'
+
+
+
+
 
 const ClientViewProducts = () => {
 
@@ -144,9 +150,9 @@ const ClientViewProducts = () => {
 
   //---------------------------------------------------------
 
-  const [supplliments, setsupplliments] = useState(true);
+  const [supplliments, setsupplliments] = useState(false);
   const [clothing, setclothing] = useState(false);
-  const [accessories, setaccessories] = useState(false);
+  const [accessories, setaccessories] = useState(true);
   const [Protein_Bars_Snacks, setProtein_Bars_Snacks] = useState(false);
 
   const showaccessoriesbtn = (e) => {
@@ -184,11 +190,23 @@ const ClientViewProducts = () => {
   return (
     <div className='container'>
         <br></br>
+        <br></br>
         <center>
-
+        <div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3 class="animate-charcter"><b>Fitness Hub Shopping Store</b></h3>
+    </div>
+    <div>
+    <Button 
+                className="btn btn-dark" style={{fontSize: "16px", marginLeft:'1400px',width:'100px'}} > <i class="fa-solid fa-cart-arrow-down"></i> 
+              </Button>
+    </div>
+  </div>
+</div>
         
-        <h1><b>Fitness Hub Shopping Store</b></h1>
-   
+        {/* <h1 ><b>Fitness Hub Shopping Store</b></h1>
+    */}
         <br></br>
         </center>
         <br></br>
@@ -201,7 +219,7 @@ const ClientViewProducts = () => {
                   <center>
                     <input
                         className="form-control"
-                        style={{ width: "400px", marginLeft: "50px" }}
+                        style={{ width: "600px",height:'45px', marginLeft: "50px" }}
                         type="search"
                         placeholder="Search for products"
                         name="searchQuery"
@@ -210,19 +228,20 @@ const ClientViewProducts = () => {
                     </center>
                 </div>
             </td>
-            <td>
+            {/* <td>
               
               <Button 
                 className="btn btn-dark" style={{fontSize: "16px", marginLeft:'10px'}} > <i class="fa-solid fa-cart-arrow-down"></i> 
               </Button>
-            </td>
+            </td> */}
             <td>
             </td>
           </tr>
         </table>
         </center>
         <br/><br/>
-        <br></br>
+        
+
         <div>
         <Button color="dark" onClick={(e) => clothingbtn(e)}>
               <b>Clothing</b>
@@ -230,7 +249,7 @@ const ClientViewProducts = () => {
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
               <Button color="dark" onClick={(e) => suppllimentsbtn(e)}>
-                <b>Suppliments</b>
+                <b>Supplements</b>
               </Button>
 
              
@@ -250,12 +269,12 @@ const ClientViewProducts = () => {
       <section class="cards" style={{ display:supplliments ?  'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
 
         {suppllimentsDetails.map((product) => (
-          <article class="card" style={{ flex: '0 1 24%', borderWidth: '2px',borderColor:'black', marginBottom: '20px' }}>
+          <article class="card" style={{ flex: '0 1 24%', borderWidth: '1px',borderColor:'white', marginBottom: '20px' }}>
             <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
-            <h4>{product.productName}</h4>
+            <h6>{product.productName}</h6>
             <p><b>LKR. {product.productPrice}</b></p>
             
-            <button className='btn btn-dark' style={{color:'red'}}><b>Add to cart</b>
+            <button className='btn btn-dark' style={{color:'red'}}>Add to cart
             {/* <i className="fa-solid fa-cart-circle-plus"></i> */}
             </button>
           </article>
@@ -267,12 +286,12 @@ const ClientViewProducts = () => {
       <section class="cards" style={{ display:clothing ?  'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
 
         {clothingDetails.map((product) => (
-          <article class="card" style={{ flex: '0 1 24%', borderWidth: '2px',borderColor:'black', marginBottom: '20px' }}>
+          <article class="card" style={{ flex: '0 1 24%', borderWidth: '2px',borderColor:'white', marginBottom: '20px' }}>
             <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
-            <h4>{product.productName}</h4>
+            <h6>{product.productName}</h6>
             <p><b>LKR. {product.productPrice}</b></p>
             
-            <button className='btn btn-dark' style={{color:'red'}}><b>Add to cart</b>
+            <button className='btn btn-dark' style={{color:'red'}}>Add to cart
             {/* <i className="fa-solid fa-cart-circle-plus"></i> */}
             </button>
           </article>
@@ -285,12 +304,12 @@ const ClientViewProducts = () => {
       <section class="cards" style={{ display:accessories ?  'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
 
         {accessoriesDetails.map((product) => (
-          <article class="card" style={{ flex: '0 1 24%', borderWidth: '2px',borderColor:'black', marginBottom: '20px' }}>
+          <article class="card" style={{ flex: '0 1 24%', borderWidth: '2px',borderColor:'white', marginBottom: '20px' }}>
             <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
-            <h4>{product.productName}</h4>
+            <h6>{product.productName}</h6>
             <p><b>LKR. {product.productPrice}</b></p>
             
-            <button className='btn btn-dark' style={{color:'red'}}><b>Add to cart</b>
+            <button className='btn btn-dark' style={{color:'red'}}>Add to cart
             {/* <i className="fa-solid fa-cart-circle-plus"></i> */}
             </button>
           </article>
@@ -302,12 +321,12 @@ const ClientViewProducts = () => {
       <section class="cards" style={{ display:Protein_Bars_Snacks ?  'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
 
       {Protein_Bars_SnacksDetails.map((product) => (
-        <article class="card" style={{ flex: '0 1 24%', borderWidth: '2px',borderColor:'black', marginBottom: '20px' }}>
+        <article class="card" style={{ flex: '0 1 24%', borderWidth: '2px',borderColor:'white', marginBottom: '20px' }}>
           <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
-          <h4>{product.productName}</h4>
+          <h6>{product.productName}</h6>
           <p><b>LKR. {product.productPrice}</b></p>
           
-          <button className='btn btn-dark' style={{color:'red'}}><b>Add to cart</b>
+          <button className='btn btn-dark' style={{color:'red'}}>Add to cart
             {/* <i className="fa-solid fa-cart-circle-plus"></i> */}
             </button>
         </article>
@@ -648,7 +667,7 @@ export default ClientViewProducts;
 //                 <Card>
 //                     <CardHeader>
 //                         <center>
-//                         <CardTitle style={{ color: "black", fontSize: "40px" }}><b>Store Items</b></CardTitle>
+//                         <CardTitle style={{ color: "white", fontSize: "40px" }}><b>Store Items</b></CardTitle>
 //                         {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
 //                         {/* <Button className="btn btn-dark" style={{ fontSize: "15px", marginLeft: "83%" }}  onClick={() => setopenModal(true)}><i class="fa-solid fa-circle-plus"></i><b>   Add New Product</b></Button> */}
 //                         </center>
