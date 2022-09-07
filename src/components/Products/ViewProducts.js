@@ -45,7 +45,7 @@ const ViewProducts = () => {
         const result = ProductDetails.filter(
             (product) =>
                // console.log(product),
-                product.category.toString().toLowerCase().includes(Searchkey) ||
+                // product.category.toString().toLowerCase().includes(Searchkey) ||
                 product.productName.toString().toLowerCase().includes(Searchkey) ||
                 product.productPrice.toString().toLowerCase().includes(Searchkey) ||
                 product.quantity.toString().toLowerCase().includes(Searchkey),
@@ -163,7 +163,7 @@ const ViewProducts = () => {
             ),
         },
         {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Expire date</Badge>),
+            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Stock - Expire date</Badge>),
             selector: "expireDate",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
@@ -197,7 +197,7 @@ const ViewProducts = () => {
                 <div style={{ display: "flex", flexDirection: "column" }}>
                     {/* <Link to={`/updateSub/${data?._id}`}> */}
                     <Button
-                        className="btn btn-secondary" style={{ fontSize: "16px" }} href={`/edit-product/${data?._id}`} >Update <i class="fa-solid fa-pen-to-square"></i></Button>
+                        className="btn btn-dark" style={{ fontSize: "16px", color:"red" }} href={`/edit-product/${data?._id}`} >Update <i class="fa-solid fa-pen-to-square"></i></Button>
                     {/* </Link> */}
                 </div>
 
@@ -209,7 +209,7 @@ const ViewProducts = () => {
 
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Button className="btn btn-secondary" style={{ fontSize: "16px" }} onClick={() => removeProduct(data?._id)}><b>Delete <i class="fa-solid fa-trash-can"></i></b></Button>
+                    <Button className="btn btn-dark" style={{ fontSize: "16px" , color:"red"}} onClick={() => removeProduct(data?._id)}>Delete <i class="fa-solid fa-trash-can"></i></Button>
                 </div>
 
             ),
@@ -226,31 +226,26 @@ const ViewProducts = () => {
             <div style={{ margin: "10px" }}>
                 <Card >
                     <CardHeader >
-                        <center>
-                            <CardTitle style={{ color: "black", fontSize: "40px" }}><b>FitnessHub Shopping Store Items</b></CardTitle>
-                            {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
-                            
-                        </center>
-                        <table>
-                            <tr>
-                                <td >
-                                    <Button className="btn btn-dark" style={{ fontSize: "15px"}} onClick={(e) =>routeToAddPage(e)}><i class="fa-solid fa-circle-plus"></i><b>   Add New Product</b></Button>
-                                </td>
-                                <td>
-                                <div>
-                                    <input
-                                        className="form-control"
-                                        style={{ width: "400px", marginLeft: "50px" }}
-                                        type="search"
-                                        placeholder="Search for products"
-                                        name="searchQuery"
-                                        onChange={(e)=>handleSearchArea(e)}
-                                    ></input>
-                                </div>
-                                </td>
-                            </tr>
-                        </table>
+                      
 
+                            <CardTitle style={{ color: "black", fontSize: "30px", float: "left" }}><b>Fitness Hub Shopping Store </b></CardTitle>
+
+                   <br/> <br/><br/> <br/>
+                            <div style={{float:"left"}}>
+                                <input
+                                    className="form-control"
+                                    style={{ width: "400px" }}
+                                    type="search"
+                                    placeholder="Search for products"
+                                    name="searchQuery"
+                                    onChange={(e)=>handleSearchArea(e)}
+                                >   
+                                </input>
+                            </div>
+                            <Button className="btn btn-dark" style={{ fontSize: "15px",float:"right",width:'200px'}} onClick={(e) =>routeToAddPage(e)}><i class="fa-solid fa-circle-plus"></i><b>   Add New Product</b></Button>
+                              
+                      
+                       
                     </CardHeader>
                     <CardBody >
                         <DataTable
