@@ -40,36 +40,27 @@ const ViewProducts = () => {
     //----------------------------Search-----------------------
 
 
-    // const filterData = (ProductDetails, Searchkey) => {
-    //     const result = ProductDetails.filter(
-    //         (product) =>
-    //             product.category.toLowerCase().includes(Searchkey) ||
-    //             product.productName.toLowerCase().includes(Searchkey) ||
-    //             product.productPrice.toLowerCase().includes(Searchkey) ||
-    //             product.quantity.toLowerCase().includes(Searchkey) ||
-    //             product.expireDate.toLowerCase().includes(Searchkey)
-    //     );
+    const filterData = (ProductDetails, Searchkey) => {
+        console.log(ProductDetails, Searchkey);
+        const result = ProductDetails.filter(
+            (product) =>
+               // console.log(product),
+                // product.category.toString().toLowerCase().includes(Searchkey) ||
+                product.productName.toString().toLowerCase().includes(Searchkey) ||
+                product.productPrice.toString().toLowerCase().includes(Searchkey) ||
+                product.quantity.toString().toLowerCase().includes(Searchkey),
+        );
+        setProductDetails(result);
+    }
 
-    //     category.setState({ ProductDetails: result });
-    //     productName.setState({ ProductDetails: result });
-    //     productPrice.setState({ ProductDetails: result });
-    //     quantity.setState({ ProductDetails: result });
-    //     expireDate.setState({ ProductDetails: result });
-
-    // }
-
-    // const handleSearchArea = (e) => {
-    //     const Searchkey = e.currentTarget.value;
-    //     axios.get("http://localhost:5000/product/getproducts").then((res) => {
-    //         if (res.data.success) {
-    //             category.filterData(res.data.existingProducts, Searchkey);
-    //             productName.filterData(res.data.existingProducts, Searchkey);
-    //             productPrice.filterData(res.data.existingProducts, Searchkey);
-    //             quantity.filterData(res.data.existingProducts, Searchkey);
-    //             expireDate.filterData(res.data.existingProducts, Searchkey);
-    //         }
-    //     });
-    // }
+    const handleSearchArea = (e) => {
+        const Searchkey = e.currentTarget.value;
+        axios.get("http://localhost:5000/product/getproducts").then((res) => {
+            if (res.data?.message == "Success") {
+                filterData(res.data.data, Searchkey);
+            }
+        });
+    }
 
     //---------------------------------------------------------
 
@@ -83,7 +74,6 @@ const ViewProducts = () => {
             console.log("all Products", data);
             let newData = data?.data?.data?.map((item) => {
                 return {
-                    
                     //createdAt:item?.createdAt,
                     category: item?.category,
                     productName: item?.productName,
@@ -173,7 +163,7 @@ const ViewProducts = () => {
             ),
         },
         {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Expire date</Badge>),
+            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Stock - Expire date</Badge>),
             selector: "expireDate",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
@@ -207,7 +197,7 @@ const ViewProducts = () => {
                 <div style={{ display: "flex", flexDirection: "column" }}>
                     {/* <Link to={`/updateSub/${data?._id}`}> */}
                     <Button
-                        className="btn btn-secondary" style={{ fontSize: "16px" }}  >Update <i class="fa-solid fa-pen-to-square"></i></Button>
+                        className="btn btn-dark" style={{ fontSize: "16px", color:"red" }} href={`/edit-product/${data?._id}`} >Update <i class="fa-solid fa-pen-to-square"></i></Button>
                     {/* </Link> */}
                 </div>
 
@@ -219,7 +209,7 @@ const ViewProducts = () => {
 
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Button className="btn btn-secondary" style={{ fontSize: "16px" }} onClick={() => removeProduct(data?._id)}><b>Delete <i class="fa-solid fa-trash-can"></i></b></Button>
+                    <Button className="btn btn-dark" style={{ fontSize: "16px" , color:"red"}} onClick={() => removeProduct(data?._id)}>Delete <i class="fa-solid fa-trash-can"></i></Button>
                 </div>
 
             ),
@@ -236,21 +226,26 @@ const ViewProducts = () => {
             <div style={{ margin: "10px" }}>
                 <Card >
                     <CardHeader >
-                        {/* <div>
-                            <input
-                                className="form-control"
-                                style={{ width: "400px", marginLeft: "50px" }}
-                                type="search"
-                                placeholder="Search for student"
-                                name="searchQuery"
-                                onChange={this.handleSearchArea}
-                            ></input>
-                        </div> */}
-                        <center>
-                            <CardTitle style={{ color: "black", fontSize: "40px" }}><b>FitnessHub Shopping Store Items</b></CardTitle>
-                            {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
-                            <Button className="btn btn-dark" style={{ fontSize: "15px", marginLeft: "83%" }} onClick={(e) =>routeToAddPage(e)}><i class="fa-solid fa-circle-plus"></i><b>   Add New Product</b></Button>
-                        </center>
+
+                            <CardTitle style={{ color: "black", fontSize: "30px", float: "left" }}><b>Fitness Hub Shopping Store </b></CardTitle>
+
+                   <br/> <br/><br/> <br/>
+                            <div style={{float:"left"}}>
+                                <input
+                                    className="form-control"
+                                    style={{ width: "400px" }}
+                                    type="search"
+                                    placeholder="Search for products"
+                                    name="searchQuery"
+                                    onChange={(e)=>handleSearchArea(e)}
+                                >   
+                                </input>
+                            </div>
+                            <Button className="btn btn-dark" style={{ fontSize: "15px",float:"right",width:'200px'}} onClick={(e) =>routeToAddPage(e)}><i class="fa-solid fa-circle-plus"></i><b>   Add New Product</b></Button>
+                              
+                      
+                       
+
                     </CardHeader>
                     <CardBody >
                         <DataTable

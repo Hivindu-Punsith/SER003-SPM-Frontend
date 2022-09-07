@@ -77,10 +77,20 @@ const HandleUsers = () => {
 
         }
         let validate = ValidateAddNewUser(regdata);
-
-        if (validate.status == false) {
-            alert(validate.message);
-        }
+		let msg = validate?.message;
+		if(validate.status == false)
+		{
+			Swal.fire({
+                toast: true,
+                icon: 'warning',
+                html: `<span>${msg}</span>`,
+                animation: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: false,
+            });
+		}
         else {
             console.log("sending data", regdata);
             let data = await AddNewUsers(regdata);
@@ -273,7 +283,7 @@ const HandleUsers = () => {
                 <Card>
                     <CardHeader>
                         <center>
-                        <CardTitle style={{ color: "black", fontSize: "40px" }}><b>All Users</b></CardTitle>
+                        <CardTitle style={{ color: "black", fontSize: "30px", float:"left" }}><b>All Users</b></CardTitle>
                         {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
                         <Button className="btn btn-dark" style={{ fontSize: "15px", marginLeft: "83%" }}  onClick={() => setopenModal(true)}><i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Add New User</b></Button>
                         </center>

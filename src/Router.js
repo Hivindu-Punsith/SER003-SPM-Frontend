@@ -26,6 +26,8 @@ import ViewAllEquipments from "./components/equipments/ViewAllEquipments";
 import ViewAllMemberships from "./components/memberships/ViewAllMemberships";
 import ViewAllClients from "./components/instructors/ViewAllClients";
 import HandleInstructors from "./components/admin/HandleInstructors";
+import ClientMemberships from "./components/memberships/ClientMemberships";
+import EditProduct from "./components/Products/EditProduct";
 
 
 const SiteRouter = () => {
@@ -42,16 +44,18 @@ const SiteRouter = () => {
               {userLogged ? 
               (
               <>
-                <Route path="/" element={<Dashboard/>}/>
+                <Route path="/" element={<LandingPage/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/admin-products" element={<ViewProducts/>}/>
                 <Route path="/client-products" element={<ClientViewProducts/>}/>
-                <Route path="/add-new-product" element={<AddNewProduct/>}/>          
+                <Route path="/add-new-product" element={<AddNewProduct/>}/>         
+                <Route path="/edit-product/:id" element={<EditProduct/>}/>      
                 <Route path="/users" element={<HandleUsers/>}/>
                 <Route path="/req-instructor" element={<ReqInstructor/>}/>
                 <Route path="/equipments" element={<ViewAllEquipments/>}/>
                 <Route path="/memberships" element={<ViewAllMemberships/>}/>
+                <Route path="/client-memberships" element={<ClientMemberships/>}/>
                 <Route path="/clients" element={<ViewAllClients/>}/>
                 <Route path="/instructors" element={<HandleInstructors/>}/>
               </>

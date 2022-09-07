@@ -46,13 +46,13 @@ const NavBar = ()=> {
                       </Link>
                     </td>
                     <td>
-                      <Button onClick={handleSubmit} className="btn btn-warning" type="submit" style={{  display:Token == undefined ? "none" : "flex" , textDecoration:"none"}}>
-                        {"Logout"}
+                      <Button onClick={handleSubmit} className="btn btn-dark" type="submit" style={{  display:Token == undefined ? "none" : "flex" , textDecoration:"none",backgroundColor:'black'}}>
+                       <b> {"Logout"}</b>
                       </Button>
                     </td>
                     <td>
-                      <Button  className="btn btn-success" type="submit" href="/profile" style={{ display: Token == undefined ? "none" : "flex" , marginLeft:"20px" , textDecoration:"none"}}>
-                        Profile
+                      <Button  className="btn btn-dark" type="submit" href="/profile" style={{ display: Token == undefined ? "none" : "flex" , marginLeft:"20px" , textDecoration:"none",backgroundColor:'black'}}>
+                        <b>Profile</b>
                       </Button>
                     </td>
                   </row>
@@ -72,18 +72,17 @@ const NavBar = ()=> {
               <div className="navbar-nav">
 
                 {/* User pages */}
-                <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/admin-products">Store</a>
+                <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/client-products">Store</a>
                 {/* <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/equipments">Equipment</a> */}
-                <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/memberships">Memberships</a>
+                <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/client-memberships">Memberships</a>
                 <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/workout-plans">Workout Plans</a>
                 <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/req-instructor">Request Instructor</a>
                 
 
                 {/* Instructor pages */}
-                <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/members">Members</a>
+                <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/clients">Members</a>
                 <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/instructor-requests">Instructor Requests</a>
-                <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/equipments">Equipments</a>
-                <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/admin-products">Store</a>
+                <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/client-products">Store</a>
 
 
                 {/* admin pages */}                
