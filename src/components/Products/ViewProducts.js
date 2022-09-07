@@ -197,7 +197,7 @@ const ViewProducts = () => {
                 <div style={{ display: "flex", flexDirection: "column" }}>
                     {/* <Link to={`/updateSub/${data?._id}`}> */}
                     <Button
-                        className="btn btn-outline-danger" style={{ fontSize: "16px",backgroundColor:"black" }} href={`/edit-product/${data?._id}`} >Update <i class="fa-solid fa-pen-to-square"></i></Button>
+                        className="btn btn-dark" style={{ fontSize: "16px", color:"red" }} href={`/edit-product/${data?._id}`} >Update <i class="fa-solid fa-pen-to-square"></i></Button>
                     {/* </Link> */}
                 </div>
 
@@ -209,7 +209,7 @@ const ViewProducts = () => {
 
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Button className="btn btn-outline-danger" style={{ fontSize: "16px",backgroundColor:"black" }} onClick={() => removeProduct(data?._id)}><b>Delete <i class="fa-solid fa-trash-can"></i></b></Button>
+                    <Button className="btn btn-dark" style={{ fontSize: "16px" , color:"red"}} onClick={() => removeProduct(data?._id)}>Delete <i class="fa-solid fa-trash-can"></i></Button>
                 </div>
 
             ),
@@ -226,37 +226,25 @@ const ViewProducts = () => {
             <div style={{ margin: "10px" }}>
                 <Card >
                     <CardHeader >
-                        <center>
-                            <CardTitle style={{ color: "black", fontSize: "40px" }}><b>Fitness Hub Shopping Store </b></CardTitle>
-                            {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
-                            <br></br>
-                        </center>
-                        {/* <center> */}
-                        {/* <table>
-                            <tr>
-                                
-                                <td> */}
-                                <center>
-                                <div>
-                                    <input
-                                        className="form-control"
-                                        style={{ width: "600px",height:'45px', marginLeft: "50px" }}
-                                        type="search"
-                                        placeholder="Search for products"
-                                        name="searchQuery"
-                                        onChange={(e)=>handleSearchArea(e)}
-                                    ></input>
-                                </div>
-                                </center>
-                                {/* </td>
-                                
-                                <td > */}
-                                    <Button className="btn btn-dark" style={{ fontSize: "15px",marginLeft:'1650px',width:'200px'}} onClick={(e) =>routeToAddPage(e)}><i class="fa-solid fa-circle-plus"></i><b>   Add New Product</b></Button>
-                                {/* </td>
-                            </tr>
-                        </table>
-                        </center> */}
-                         <br></br>
+
+                            <CardTitle style={{ color: "black", fontSize: "30px", float: "left" }}><b>Fitness Hub Shopping Store </b></CardTitle>
+
+                   <br/> <br/><br/> <br/>
+                            <div style={{float:"left"}}>
+                                <input
+                                    className="form-control"
+                                    style={{ width: "400px" }}
+                                    type="search"
+                                    placeholder="Search for products"
+                                    name="searchQuery"
+                                    onChange={(e)=>handleSearchArea(e)}
+                                >   
+                                </input>
+                            </div>
+                            <Button className="btn btn-dark" style={{ fontSize: "15px",float:"right",width:'200px'}} onClick={(e) =>routeToAddPage(e)}><i class="fa-solid fa-circle-plus"></i><b>   Add New Product</b></Button>
+                              
+                      
+                       
 
                     </CardHeader>
                     <CardBody >

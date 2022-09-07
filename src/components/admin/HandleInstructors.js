@@ -251,9 +251,10 @@ const HandleInstructors = () => {
                 <Card>
                     <CardHeader>
                         <center>
-                        <CardTitle style={{ color: "black", fontSize: "40px" }}><b>All Instructors</b></CardTitle>
+                        <CardTitle style={{ color: "black", fontSize: "30px", float:"left" }}><b>All Instructors</b></CardTitle>
                         {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
-                        <Button className="btn btn-dark" style={{ fontSize: "15px", marginLeft: "83%" }}  onClick={() => setOpenModal(true)}><i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Add New Instructor</b></Button>
+                        <br/>
+                        <Button className="btn btn-dark" style={{ fontSize: "15px", float:"right" }}  onClick={() => setOpenModal(true)}><i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Add New Instructor</b></Button>
                         </center>
                     </CardHeader>
                     <CardBody>

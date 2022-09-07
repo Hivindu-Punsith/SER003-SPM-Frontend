@@ -223,7 +223,8 @@ const ViewAllMemberships = () => {
                         <center>
                         <CardTitle style={{ color: "black", fontSize: "30px", float:"left" }}><b>All Memberships</b></CardTitle>
                         {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
-                        <Button className="btn btn-dark" style={{ fontSize: "15px", marginLeft: "83%" }}  onClick={() => setopenModal(true)}><i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Add New Membership</b></Button>
+                        <br/>
+                        <Button className="btn btn-dark" style={{ fontSize: "15px", float:"right"}}  onClick={() => setopenModal(true)}><i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Add New Membership</b></Button>
                         </center>
                     </CardHeader>
                     <CardBody>
