@@ -147,9 +147,9 @@ const ClientMemberships = () => {
                                     </CardHeader>
                                     <CardBody>
                                         <CardText><b>Membership Type -:</b> {item.name}</CardText>
-                                        <CardText><b>Membership Price -:</b> {item.price}</CardText>
-                                        <CardText><b>Membership Duration -:</b> {item.duration}kg</CardText>
-                                        <CardText><b>Membership Description -:</b> {item.description}feet</CardText>
+                                        <CardText><b>Membership Price -:</b> Rs.{item.price}.00</CardText>
+                                        <CardText><b>Membership Duration -:</b> {item.duration}</CardText>
+                                        <CardText><b>Membership Description -:</b> {item.description}</CardText>
                                         <Button
                                         className="btn btn-warning"
                                         style={{ marginRight: "20px" }}

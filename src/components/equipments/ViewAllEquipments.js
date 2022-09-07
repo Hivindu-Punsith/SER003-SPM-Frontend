@@ -32,7 +32,13 @@ const ViewAllEquipments = () => {
 
     const navigate = useNavigate();
 
-    const [EquipmentDetails, setEquipmentDetails] = useState({});
+    const [allDetails, setAllDetails] = useState([]);
+    const [liftingEqDetails, setLiftingEquipmentsDetails] = useState([]);
+    const [electricEqDetails, setElectricDetails] = useState([]);
+    const [liftingMachineDetails, setLiftingMachinesDetails] = useState([]);
+    const [otherDetails, setotherDetails] = useState([]);
+
+   // const [EquipmentDetails, setEquipmentDetails] = useState({});
     const [loading, setLoading] = useState(false);
     const [openModal, setopenModal] = useState(false);
 
@@ -117,6 +123,11 @@ const ViewAllEquipments = () => {
                 })
                 setopenModal(false);
                 GetEquipments();
+                GetLiftingsEquipments();
+                GetElectictMachineEquipments();
+                GetLiftingMachines();
+                GetOtherEquipments();
+
             }
             else {
                 Swal.fire({
@@ -148,7 +159,7 @@ const ViewAllEquipments = () => {
                 }
             })
 
-            setEquipmentDetails(newData);
+            setAllDetails(newData);
             setLoading(false);
 
         } catch (error) {
@@ -157,9 +168,212 @@ const ViewAllEquipments = () => {
         }
     }
 
+    const GetLiftingsEquipments = async () => {
+        try {
+            setLoading(true);
+
+            let data = await getAllEquipments();
+
+            console.log("Equipments Data",data);
+
+            let array = [];
+            data?.data?.data?.equipments?.map((item) => {
+              if (item?.category == "liftings-equipments") {
+                array.push(item);
+              }
+            });
+
+            let newData = array.map((item) => {
+                return {
+                    name:item?.name,
+                    quantity: item?.quantity,
+                    value: item?.value,
+                    company_name: item?.company_name,
+                    date_of_purchaced: item?.date_of_purchaced,
+                    category: item?.category,
+                }
+            })
+
+            setLiftingEquipmentsDetails(newData);
+            setLoading(false);
+
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+        }
+    }
+
+
+    const GetElectictMachineEquipments = async () => {
+        try {
+            setLoading(true);
+
+            let data = await getAllEquipments();
+
+            console.log("Equipments Data",data);
+
+            let array = [];
+            data?.data?.data?.equipments?.map((item) => {
+              if (item?.category == "electric-machines") {
+                array.push(item);
+              }
+            });
+
+            let newData = array.map((item) => {
+                return {
+                    name:item?.name,
+                    quantity: item?.quantity,
+                    value: item?.value,
+                    company_name: item?.company_name,
+                    date_of_purchaced: item?.date_of_purchaced,
+                    category: item?.category,
+                }
+            })
+
+            setElectricDetails(newData);
+            setLoading(false);
+
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+        }
+    }
+
+    const GetLiftingMachines = async () => {
+        try {
+            setLoading(true);
+
+            let data = await getAllEquipments();
+
+            console.log("Equipments Data",data);
+
+            let array = [];
+            data?.data?.data?.equipments?.map((item) => {
+              if (item?.category == "lifting-machines") {
+                array.push(item);
+              }
+            });
+
+            let newData = array.map((item) => {
+                return {
+                    name:item?.name,
+                    quantity: item?.quantity,
+                    value: item?.value,
+                    company_name: item?.company_name,
+                    date_of_purchaced: item?.date_of_purchaced,
+                    category: item?.category,
+                }
+            })
+
+            setLiftingMachinesDetails(newData);
+            setLoading(false);
+
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+        }
+    }
+
+    const GetOtherEquipments = async () => {
+        try {
+            setLoading(true);
+
+            let data = await getAllEquipments();
+
+            console.log("Equipments Data",data);
+
+            let array = [];
+            data?.data?.data?.equipments?.map((item) => {
+              if (item?.category == "other") {
+                array.push(item);
+              }
+            });
+
+            let newData = array.map((item) => {
+                return {
+                    name:item?.name,
+                    quantity: item?.quantity,
+                    value: item?.value,
+                    company_name: item?.company_name,
+                    date_of_purchaced: item?.date_of_purchaced,
+                    category: item?.category,
+                }
+            })
+
+            setotherDetails(newData);
+            setLoading(false);
+
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+        }
+    }
+
+
+
+
+
+
     useEffect(() => {
         GetEquipments();
+        GetLiftingsEquipments();
+        GetElectictMachineEquipments();
+        GetLiftingMachines();
+        GetOtherEquipments();
     }, [])
+
+
+    const [all, setAll] = useState(true);
+    const [liftingEq, setLiftingEquipments] = useState(false);
+    const [electricEq, setElectric] = useState(false);
+    const [liftingMachine, setLiftingMachines] = useState(false);
+    const [other, setother] = useState(false);
+  
+    const AllBtn = (e) => {
+        e.preventDefault();
+        setAll(true);
+        setLiftingEquipments(false);
+        setElectric(false);
+        setLiftingMachines(false);
+        setother(false);
+    };
+
+    const LiftingEqBtn = (e) => {
+        e.preventDefault();
+        setAll(false);
+        setLiftingEquipments(true);
+        setElectric(false);
+        setLiftingMachines(false);
+        setother(false);
+    };
+    
+    const ElectricBtn = (e) => {
+        e.preventDefault();
+        setAll(false);
+        setLiftingEquipments(false);
+        setElectric(true);
+        setLiftingMachines(false);
+        setother(false);
+    };
+
+    const LiftingMachinesBtn = (e) => {
+        e.preventDefault();
+        setAll(false);
+        setLiftingEquipments(false);
+        setElectric(false);
+        setLiftingMachines(true);
+        setother(false);
+    };
+
+    const OtherBtn = (e) => {
+        e.preventDefault();
+        setAll(false);
+        setLiftingEquipments(false);
+        setElectric(false);
+        setLiftingMachines(false);
+        setother(true);
+    };
+
 
     
     const columns = [
@@ -195,7 +409,7 @@ const ViewAllEquipments = () => {
             selector: "company_name",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Label style={{ fontSize: "18px" }}><b>{moment(data?.company_name).format(" YYYY-MM-DD ")}</b><br /></Label>
+                    <Label style={{ fontSize: "18px" }}><b>{data?.company_name}</b><br /></Label>
                 </div>
             ),
         },
@@ -208,15 +422,15 @@ const ViewAllEquipments = () => {
                 </div>
             ),
         },
-        {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Category</Badge>),
-            selector: "category",
-            cell: (data) => (
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Label style={{ fontSize: "18px" }}><b>{data?.category}</b><br /></Label>
-                </div>
-            ),
-        },
+        // {
+        //     name: (<Badge color="dark" style={{ fontSize: "18px" }} >Category</Badge>),
+        //     selector: "category",
+        //     cell: (data) => (
+        //         <div style={{ display: "flex", flexDirection: "column" }}>
+        //             <Label style={{ fontSize: "18px" }}><b>{data?.category}</b><br /></Label>
+        //         </div>
+        //     ),
+        // },
         {
             name: (<Badge color="dark" style={{ fontSize: "18px" }} >created At</Badge>),
             selector: "createdAt",
@@ -272,21 +486,88 @@ const ViewAllEquipments = () => {
         <div style={{ marginTop: "70px", marginBottom: "70px" }}>
             <div style={{ margin: "10px" }}>
                 <Card>
+                <center>
+                <div style={{paddingTop:"10px"}}>
+                <Button color="dark" onClick={(e) => AllBtn(e)}>
+                    <b>All Equipments</b>
+                    </Button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button color="dark" onClick={(e) => LiftingEqBtn(e)}>
+                    <b>Liftings Equipments</b>
+                    </Button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button color="dark" onClick={(e) => ElectricBtn(e)}>
+                        <b>Electric Machines</b>
+                    </Button>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button color="dark" onClick={(e) => LiftingMachinesBtn(e)}>
+                    <b>Lifting Machines</b>
+                    </Button>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button color="dark" onClick={(e) => OtherBtn(e)}>
+                    <b>Other</b>
+                    </Button>
+                </div>
+                </center>
                     <CardHeader>
                         <center>
-                        <CardTitle style={{ color: "black", fontSize: "30px", float:"left" }}><b>All Equipments</b></CardTitle>
+                        <CardTitle style={{display: all ? "flex" : "none", color: "black", fontSize: "30px", float:"left" }}><b>All Equipments</b></CardTitle>
+                        <CardTitle style={{display: liftingEq ? "flex" : "none", color: "black", fontSize: "30px", float:"left" }}><b>Liftings Equipments</b></CardTitle>
+                        <CardTitle style={{display: electricEq ? "flex" : "none", color: "black", fontSize: "30px", float:"left" }}><b>Electric Machines</b></CardTitle>
+                        <CardTitle style={{display: liftingMachine ? "flex" : "none", color: "black", fontSize: "30px", float:"left" }}><b>Lifting Machines</b></CardTitle>
+                        <CardTitle style={{display: other ? "flex" : "none", color: "black", fontSize: "30px", float:"left" }}><b>Other Equipments</b></CardTitle>
                         {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
                         <Button className="btn btn-dark" style={{ fontSize: "15px", marginLeft: "83%" }}  onClick={() => setopenModal(true)}><i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Add New Equipment</b></Button>
                         </center>
                     </CardHeader>
                     <CardBody>
+                        <div style={{ display: all ? "flex" : "none" }}>
                         <DataTable
-                            data={EquipmentDetails}
+                            data={allDetails}
                             columns={columns}
-
                             progressPending={loading}
 
                         />
+                        </div>
+
+                        <div style={{ display: liftingEq ? "flex" : "none" }}>
+                        <DataTable
+                            data={liftingEqDetails}
+                            columns={columns}
+                            progressPending={loading}
+
+                        />
+                        </div>
+
+                        <div style={{ display: electricEq ? "flex" : "none" }}>
+                        <DataTable
+                            data={electricEqDetails}
+                            columns={columns}
+                            progressPending={loading}
+
+                        />
+                        </div>
+
+                        <div style={{ display: liftingMachine ? "flex" : "none" }}>
+                        <DataTable
+                            data={liftingMachineDetails}
+                            columns={columns}
+                            progressPending={loading}
+
+                        />
+                        </div>
+
+                        <div style={{ display: other ? "flex" : "none" }}>
+                        <DataTable
+                            data={otherDetails}
+                            columns={columns}
+                            progressPending={loading}
+
+                        />
+                        </div>
+
                     </CardBody>
                 </Card>
                 <div>
@@ -300,6 +581,7 @@ const ViewAllEquipments = () => {
                                 setopenModal(false);
                             }}>
                             <Label>Add Equipment</Label>
+                            <p></p>
                         </ModalHeader>
                         <ModalBody>
                             <div style={{ width: "400px" }}>
