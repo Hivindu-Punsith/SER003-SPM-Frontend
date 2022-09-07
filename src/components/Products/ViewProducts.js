@@ -229,14 +229,14 @@ const ViewProducts = () => {
                         <center>
                             <CardTitle style={{ color: "black", fontSize: "40px" }}><b>FitnessHub Shopping Store Items</b></CardTitle>
                             {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
-                            
+                            <br></br>
                         </center>
-                        <table>
+                        {/* <center> */}
+                        {/* <table>
                             <tr>
-                                <td >
-                                    <Button className="btn btn-dark" style={{ fontSize: "15px"}} onClick={(e) =>routeToAddPage(e)}><i class="fa-solid fa-circle-plus"></i><b>   Add New Product</b></Button>
-                                </td>
-                                <td>
+                                
+                                <td> */}
+                                <center>
                                 <div>
                                     <input
                                         className="form-control"
@@ -247,9 +247,16 @@ const ViewProducts = () => {
                                         onChange={(e)=>handleSearchArea(e)}
                                     ></input>
                                 </div>
-                                </td>
+                                </center>
+                                {/* </td>
+                                
+                                <td > */}
+                                    <Button className="btn btn-dark" style={{ fontSize: "15px",marginLeft:'1650px',width:'200px'}} onClick={(e) =>routeToAddPage(e)}><i class="fa-solid fa-circle-plus"></i><b>   Add New Product</b></Button>
+                                {/* </td>
                             </tr>
                         </table>
+                        </center> */}
+                         <br></br>
 
                     </CardHeader>
                     <CardBody >

@@ -74,7 +74,7 @@ const FileInput = ({ name, label, value, type, handleInputState, ...rest }) => {
 			)}
 			{value !== null && !progressShow && typeof value !== "string" && (
 				<center><button style={{marginTop:'30px', marginBottom:'30px'}} onClick={handleUpload} className='btn btn-primary'>
-					Upload
+					Upload Image
 				</button></center>
 			)}
 			{progressShow && progress < 100 && (

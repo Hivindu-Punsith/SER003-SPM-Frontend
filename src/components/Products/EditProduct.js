@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 import FileInput from "../../utils/FileInput";
 
 import { validateCreateProduct } from "../auth/productValidation";
-import { updateProduct ,getProductByID } from "../../services/ProductService";
+import { updateProduct, getProductByID } from "../../services/ProductService";
 import moment from "moment";
 
 const EditProduct = () => {
@@ -25,41 +25,41 @@ const EditProduct = () => {
         expireDate: "",
         quantity: "",
         productImage: "",
-      });
-    
-      let catergoryList = [
-        { value: "supplliments", label: "Supplliments", name: "category" },
+    });
+
+    let catergoryList = [
+        { value: "Supplements", label: "Supplements", name: "category" },
         { value: "clothing", label: "Clothing", name: "category" },
         { value: "accessories", label: "Accessories", name: "category" },
-        { value: "Protein_Bars_&_Snacks", label: "Protein Bars & Snacks", name: "category" },
-      ];
+        { value: "Protein Bars & Snacks", label: "Protein Bars & Snacks", name: "category" },
+    ];
 
-        const  handelSelectorChange = (e)=>{
-            console.log(e);
-            setData({ ...data, [e.name] : e });
-        }
+    const handelSelectorChange = (e) => {
+        console.log(e);
+        setData({ ...data, [e.name]: e });
+    }
 
 
-      const handleChange = ({ currentTarget: input }) => {
+    const handleChange = ({ currentTarget: input }) => {
         console.log(input);
         setData({ ...data, [input.name]: input.value });
-      };
-    
-      const handleInputState = (name, value) => {
+    };
+
+    const handleInputState = (name, value) => {
         setData((prev) => ({ ...prev, [name]: value }));
-      };
-    
+    };
+
     const getById = async () => {
         try {
             let data = await getProductByID(id?.id);
-            console.log("data",data.data.data);
+            console.log("data", data.data.data);
             setData({
-                category:{ value: data.data.data.category, label: data.data.data.category, name: "category" },
-                productName:data.data.data.productName,
-                productPrice:data.data.data.productPrice,
-                expireDate:moment(data.data.data.expireDate).format("YYYY-MM-DD"),
-                quantity:data.data.data.quantity,
-                productImage:data.data.data.productImage,
+                category: { value: data.data.data.category, label: data.data.data.category, name: "category" },
+                productName: data.data.data.productName,
+                productPrice: data.data.data.productPrice,
+                expireDate: moment(data.data.data.expireDate).format("YYYY-MM-DD"),
+                quantity: data.data.data.quantity,
+                productImage: data.data.data.productImage,
             })
         } catch (error) {
             console.log(error);
@@ -75,10 +75,9 @@ const EditProduct = () => {
         e.preventDefault();
 
         let validate = validateCreateProduct(data);
-		let msg = validate?.message;
-		if(validate.status == false)
-		{
-			Swal.fire({
+        let msg = validate?.message;
+        if (validate.status == false) {
+            Swal.fire({
                 toast: true,
                 icon: 'warning',
                 html: `<span>${msg}</span>`,
@@ -88,9 +87,9 @@ const EditProduct = () => {
                 timer: 2000,
                 timerProgressBar: false,
             });
-		}
+        }
         else {
-            let newdata = await updateProduct(id?.id,data);
+            let newdata = await updateProduct(id?.id, data);
             console.log(" product data ", newdata);
             if (newdata?.status == 200) {
                 Swal.fire({
@@ -115,73 +114,73 @@ const EditProduct = () => {
 
 
     return (
-        <div style={{ marginTop: "70px", marginBottom: "70px" }}>
+        <div class='card' style={{ marginTop: "70px", marginBottom: "70px", width: '1000px', marginLeft: '450px', backgroundColor: '#DCDCDC' }}>
             <div style={{ margin: "10px" }}>
 
-                        <center>
-                            <CardTitle style={{ color: "black", fontSize: "40px" }}><b>FitnessHub Shopping Store Items</b></CardTitle>
+                <center>
+                    <CardTitle style={{ color: "black", fontSize: "40px" }}><h1><b>FitnessHub Shopping Store </b></h1></CardTitle>
+                   <br></br> <h3><b>Update Product</b></h3>
+                </center>
 
-                        </center>
+                <div className="container" style={{ width: '50%', }}>
+                    <form className='form-group' onSubmit={updateSelectedProduct} >
+                        <label style={{ marginTop: '15px' }}>Select Category</label>
+                        <Select
+                            className="React"
+                            classNamePrefix="select"
+                            options={catergoryList}
+                            value={data.category}
+                            onChange={(e) => handelSelectorChange(e)}
+                            name="category"
+                        />
 
-                        <div className="container" style={{ width: '30%', }}>
-                            <form className='form-group' onSubmit={updateSelectedProduct} >
-                                <label style={{ marginTop: '15px' }}>Select Category</label>                               
-                                <Select
-                                    className="React"
-                                    classNamePrefix="select"
-                                    options={catergoryList}
-                                    value={data.category}
-                                    onChange={(e) => handelSelectorChange(e)}
-                                    name="category"
-                                />
+                        <label style={{ marginTop: '15px' }}>Enter Product Name</label>
+                        <input
+                            className='form-control'
+                            name="productName"
+                            onChange={handleChange}
+                            value={data.productName}
+                        />
 
-                                <label style={{ marginTop: '15px' }}>Enter Product Name</label>
-                                <input
-                                className='form-control'
-                                name="productName"
-                                onChange={handleChange}
-                                value={data.productName}
-                                />
+                        <label style={{ marginTop: '15px' }}>Enter Product Price</label>
+                        <input
+                            className='form-control'
+                            name="productPrice"
+                            onChange={handleChange}
+                            value={data.productPrice}
+                        />
 
-                                <label style={{ marginTop: '15px' }}>Enter Product Price</label>
-                                <input
-                                className='form-control'
-                                name="productPrice"
-                                onChange={handleChange}
-                                value={data.productPrice}
-                                />
+                        <label style={{ marginTop: '15px' }}>Enter Expire Date</label>
+                        <input
+                            className='form-control'
+                            name="expireDate"
+                            type="date"
+                            onChange={handleChange}
+                            value={data.expireDate}
+                        />
 
-                                <label style={{ marginTop: '15px' }}>Enter Expire Date</label>
-                                <input
-                                className='form-control'
-                                name="expireDate"
-                                type="date"
-                                onChange={handleChange}
-                                value={data.expireDate}
-                                />
+                        <label style={{ marginTop: '15px' }}>Enter Quantity</label>
+                        <input
+                            className='form-control'
+                            name="quantity"
+                            onChange={handleChange}
+                            value={data.quantity}
+                        />
 
-                                <label style={{ marginTop: '15px' }}>Enter Quantity</label>
-                                <input
-                                className='form-control'
-                                name="quantity"
-                                onChange={handleChange}
-                                value={data.quantity}
-                                />
+                        <label style={{ marginTop: '15px' }}>Product Image</label>
+                        <FileInput
+                            name="productImage"
+                            label="Choose Image"
+                            handleInputState={handleInputState}
+                            type="image"
+                            value={data.productImage}
+                        />
 
-                                <label style={{ marginTop: '15px' }}>Product Image</label>
-                                <FileInput
-                                name="productImage"
-                                label="Choose Image"
-                                handleInputState={handleInputState}
-                                type="image"
-                                value={data.productImage}
-                                />
-
-                                <center><button style={{ marginTop: '15px', marginBottom: '15px' }} type="submit" className="btn btn-success" >
-                                Upload Product
-                                </button></center>
-                            </form>
-                        </div>
+                        <center><button style={{ marginTop: '15px', marginBottom: '15px' , width: '200px'}} type="submit" className="btn btn-dark" >
+                            Update Product
+                        </button></center>
+                    </form>
+                </div>
             </div>
 
         </div>
