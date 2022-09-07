@@ -19,6 +19,8 @@ import moment from 'moment';
 import Swal from 'sweetalert2';
 import { ValidateAddNewMembership } from "./Validation";
 import { createMembership , getAllMemberships } from "../../services/MembershipServices";
+import editIcon from "../../assests/images/pencil.png"
+import binIcon from "../../assests/images/bin.png"
 
 const ViewAllMemberships = () => {
     const navigate = useNavigate();
@@ -165,7 +167,7 @@ const ViewAllMemberships = () => {
             ),
         },
         {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >created At</Badge>),
+            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Created At</Badge>),
             selector: "createdAt",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
@@ -174,7 +176,7 @@ const ViewAllMemberships = () => {
             ),
         },
         {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >updated At</Badge>),
+            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Updated At</Badge>),
             selector: "updatedAt",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
@@ -182,30 +184,19 @@ const ViewAllMemberships = () => {
                 </div>
             ),
         },
-        // {
-        //     name: (<Badge color="dark" style={{ fontSize: "18px" }} >Membership Update</Badge>),
-      
-        //     cell: (data) => (
-        //       <div style={{ display: "flex", flexDirection: "column" }}>
-        //         {/* <Link to={`/updateSub/${data?._id}`}> */}
-        //         <Button 
-        //             className="btn btn-warning" style={{ fontSize: "16px" }}  ><i class="fa-solid fa-pen-to-square"></i>&nbsp;Update</Button>
-        //         {/* </Link> */}
-        //       </div>
-      
-        //     ),
-        //   },
-      
-        //   {
-        //     name: (<Badge color="dark" style={{ fontSize: "18px" }} >Membership Delete</Badge>),
-      
-        //     cell: (data) => (
-        //       <div style={{ display: "flex", flexDirection: "column" }}>
-        //         <Button className="btn btn-danger" style={{ fontSize: "16px" }} ><i class="fa-solid fa-trash-can"></i>&nbsp;<b>Delete</b></Button>
-        //       </div>
-      
-        //     ),
-        //   },
+        {     
+            cell: (data) => (
+                <div className="row">
+                    <div className="col">
+                        <img src={editIcon} style={{height: "25px", width:"25px"}} />
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div className="col">
+                        <img src={binIcon} style={{height: "25px", width:"25px"}} />
+                    </div>
+                </div>
+            ),
+          },
 
 
 
