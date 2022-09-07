@@ -227,7 +227,9 @@ const ViewProducts = () => {
                 <Card >
                     <CardHeader >
                         <center>
+
                             <CardTitle style={{ color: "black", fontSize: "40px" }}><b>Fitness Hub Shopping Store </b></CardTitle>
+
                             {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
                             <br></br>
                         </center>
