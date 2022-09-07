@@ -197,7 +197,7 @@ const ViewProducts = () => {
                 <div style={{ display: "flex", flexDirection: "column" }}>
                     {/* <Link to={`/updateSub/${data?._id}`}> */}
                     <Button
-                        className="btn btn-secondary" style={{ fontSize: "16px" }} href={`/edit-product/${data?._id}`} >Update <i class="fa-solid fa-pen-to-square"></i></Button>
+                        className="btn btn-outline-danger" style={{ fontSize: "16px",backgroundColor:"black" }} href={`/edit-product/${data?._id}`} >Update <i class="fa-solid fa-pen-to-square"></i></Button>
                     {/* </Link> */}
                 </div>
 
@@ -209,7 +209,7 @@ const ViewProducts = () => {
 
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Button className="btn btn-secondary" style={{ fontSize: "16px" }} onClick={() => removeProduct(data?._id)}><b>Delete <i class="fa-solid fa-trash-can"></i></b></Button>
+                    <Button className="btn btn-outline-danger" style={{ fontSize: "16px",backgroundColor:"black" }} onClick={() => removeProduct(data?._id)}><b>Delete <i class="fa-solid fa-trash-can"></i></b></Button>
                 </div>
 
             ),
@@ -240,7 +240,7 @@ const ViewProducts = () => {
                                 <div>
                                     <input
                                         className="form-control"
-                                        style={{ width: "400px", marginLeft: "50px" }}
+                                        style={{ width: "600px",height:'45px', marginLeft: "50px" }}
                                         type="search"
                                         placeholder="Search for products"
                                         name="searchQuery"
