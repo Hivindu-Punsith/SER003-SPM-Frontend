@@ -95,7 +95,7 @@ const EditProduct = () => {
                 Swal.fire({
                     icon: 'success',
                     title: 'Successful!',
-                    text: 'New product added to the store!',
+                    text: 'Product Updated!',
                 })
                 navigate("/admin-products");
 
