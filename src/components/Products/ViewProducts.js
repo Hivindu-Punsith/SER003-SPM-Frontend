@@ -226,7 +226,6 @@ const ViewProducts = () => {
             <div style={{ margin: "10px" }}>
                 <Card >
                     <CardHeader >
-                      
 
                             <CardTitle style={{ color: "black", fontSize: "30px", float: "left" }}><b>Fitness Hub Shopping Store </b></CardTitle>
 
@@ -246,6 +245,7 @@ const ViewProducts = () => {
                               
                       
                        
+
                     </CardHeader>
                     <CardBody >
                         <DataTable
