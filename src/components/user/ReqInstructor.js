@@ -94,28 +94,31 @@ const ReqInstructor = () => {
 
   return (
     <div style={{ marginTop: "70px", marginBottom: "70px" }}>
-      <div>
-           <h2 style={{ color: "black", fontSize: "30px" }}><b>Request an Instructor</b></h2>
-      </div>
+      <center>
+          <div>
+           <h2 style={{ color: "black", fontSize: "30px" }} class="animate-charcter"><b>Request an Instructor</b></h2>
+        </div>
+      </center>
+
       <br/>
       <Container>
-        <Row xs={3}>
+        <Row xs={4}>
           {InstructorDetails?.map((Instructor) => {
             return (
               <Col style={{ padding: "10px" }}>
                 <Card>
                   <CardHeader>
-                    <CardTitle style={{ color: "black", fontSize: "40px" }}>
+                    <CardTitle style={{ color: "black", fontSize: "25px" }}>
                       <center>
                         <b>{Instructor.fullName}</b>
                       </center>
                     </CardTitle>
                     <center>
                       <CardImg
-                        width="100%"
+                        //width="50%"
                         src={userImg}
                         alt="User Img"
-                        style={{ width: "250px" }}
+                        style={{ width: "50%" }}
                       />
                     </center>
                   </CardHeader>
@@ -125,8 +128,8 @@ const ReqInstructor = () => {
                     <CardText>Instructor Weight -: {Instructor.weight}kg</CardText>
                     <CardText>Instructor Height -: {Instructor.height}feet</CardText>
                     <Button
-                      style={{ marginRight: "20px" }}
-                      className="btn btn-success"
+                      style={{ marginRight: "20px" , color:'red' , width:"100%" }}
+                      className="btn btn-dark"
                       onClick={(e)=>OpenModalAndSetData(e,Instructor)}
                     >
                       Request
@@ -150,7 +153,7 @@ const ReqInstructor = () => {
                             toggle={() => {
                                 setopenModal(false);
                             }}>
-                            <Label>Add New User</Label>
+                            <Label>Request Instructor</Label>
                         </ModalHeader>
                         <ModalBody>
                             <div style={{ width: "400px" }}>
