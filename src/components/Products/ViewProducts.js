@@ -3,6 +3,8 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import Select from "react-select"
+import editIcon from "../../assests/images/pencil.png"
+import binIcon from "../../assests/images/bin.png"
 import {
     Badge,
     Card,
@@ -190,27 +192,44 @@ const ViewProducts = () => {
                 </div>
             ),
         },
-        {
-            name: (<Badge color="dark" ></Badge>),
+        // {
+        //     name: (<Badge color="dark" ></Badge>),
 
-            cell: (data) => (
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                    {/* <Link to={`/updateSub/${data?._id}`}> */}
-                    <Button
-                        className="btn btn-dark" style={{ fontSize: "16px", color:"red" }} href={`/edit-product/${data?._id}`} >Update <i class="fa-solid fa-pen-to-square"></i></Button>
-                    {/* </Link> */}
-                </div>
+        //     cell: (data) => (
+        //         <div style={{ display: "flex", flexDirection: "column" }}>
+        //             {/* <Link to={`/updateSub/${data?._id}`}> */}
+        //             <Button
+        //                 className="btn btn-dark" style={{ fontSize: "16px", color:"red" }} href={`/edit-product/${data?._id}`} >Update <i class="fa-solid fa-pen-to-square"></i></Button>
+        //             {/* </Link> */}
+        //         </div>
 
-            ),
-        },
+        //     ),
+        // },
+
+        // {
+        //     name: (<Badge color="secondary"  ></Badge>),
+
+        //     cell: (data) => (
+        //         <div style={{ display: "flex", flexDirection: "column" }}>
+        //             <Button className="btn btn-dark" style={{ fontSize: "16px" , color:"red"}} onClick={() => removeProduct(data?._id)}>Delete <i class="fa-solid fa-trash-can"></i></Button>
+        //         </div>
+
+        //     ),
+        // },
 
         {
             name: (<Badge color="secondary"  ></Badge>),
 
             cell: (data) => (
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Button className="btn btn-dark" style={{ fontSize: "16px" , color:"red"}} onClick={() => removeProduct(data?._id)}>Delete <i class="fa-solid fa-trash-can"></i></Button>
+                <div className="row">
+                <div className="col">
+                   <a href={`/edit-product/${data?._id}`}> <img src={editIcon} style={{height: "25px", width:"25px"}} /></a> 
                 </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div className="col">
+                   <a onClick={() => removeProduct(data?._id)} ><img src={binIcon} style={{height: "25px", width:"25px", cursor:"pointer"}} /></a> 
+                </div>
+            </div>
 
             ),
         },
