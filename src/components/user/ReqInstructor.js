@@ -177,7 +177,7 @@ const ReqInstructor = () => {
 
                                     <Button
                                         style={{ marginRight: "20px" }}
-                                        className="btn btn-success"
+                                        className="btn btn-dark"
                                         onClick={(e)=>requestInstructor(e)}
                                     >
                                       Confirm Request
