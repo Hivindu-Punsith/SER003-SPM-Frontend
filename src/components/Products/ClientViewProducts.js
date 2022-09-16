@@ -199,7 +199,7 @@ const ClientViewProducts = () => {
     </div>
     <div>
     <Button 
-                className="btn btn-dark" style={{fontSize: "16px", marginLeft:'1400px',width:'100px'}} > <i class="fa-solid fa-cart-arrow-down"></i> 
+                className="btn btn-dark" style={{fontSize: "16px", float:'right',width:'100px'}} > <i class="fa-solid fa-cart-arrow-down"></i> 
               </Button>
     </div>
   </div>

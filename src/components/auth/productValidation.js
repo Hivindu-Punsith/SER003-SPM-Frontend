@@ -1,7 +1,7 @@
 export const validateCreateProduct=(formData) =>{
 
     const messages ={
-       PRODUCT_NAME :"Invalid product details. Try Again...",
+       PRODUCT_NAME :"Invalid Product Name! Try Again",
      
     };
 
