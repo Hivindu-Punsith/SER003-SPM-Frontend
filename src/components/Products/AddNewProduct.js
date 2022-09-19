@@ -27,8 +27,8 @@ const AddNewProduct = () => {
 
     let catergoryList = [
         { value: "Supplements", label: "Supplements", name: "category" },
-        { value: "Clothing", label: "Clothing", name: "category" },
-        { value: "Accessories", label: "Accessories", name: "category" },
+        { value: "clothing", label: "Clothing", name: "category" },
+        { value: "accessories", label: "Accessories", name: "category" },
         { value: "Protein Bars & Snacks", label: "Protein Bars & Snacks", name: "category" },
     ];
 
@@ -91,13 +91,13 @@ const AddNewProduct = () => {
 
 
     return (
-        <div class ='card' style={{ marginTop: "70px", marginBottom: "70px" ,width:'800px', marginLeft:'350px',backgroundColor:'#F5FFFA'}}>
+        <div class ='card' style={{ marginTop: "70px", marginBottom: "70px" ,width:'1000px', marginLeft:'450px',backgroundColor:'#DCDCDC'}}>
             <div style={{ margin: "10px" }}>
 
                 <center>
-                    <CardTitle style={{ color: "black", fontSize: "40px" }}><h2><b>Fitness Hub Shopping Store </b></h2></CardTitle>
-                   
-                    <h4><b>Add Product</b></h4>
+                    <CardTitle style={{ color: "black", fontSize: "40px" }}><h1><b>Fitness Hub Shopping Store </b></h1></CardTitle>
+                    <br></br>
+                    <h3><b>Add new Product</b></h3>
 
                 </center>
 
@@ -119,27 +119,24 @@ const AddNewProduct = () => {
                             name="productName"
                             onChange={handleChange}
                             value={data.productName}
-                            placeholder='Product Name'
                         />
 
-                        <label style={{ marginTop: '15px' }}>Enter Product Price (LKR)</label>
+                        <label style={{ marginTop: '15px' }}>Enter Product Price</label>
                         <input
                             className='form-control'
                             name="productPrice"
                             onChange={handleChange}
                             value={data.productPrice}
                             type='number'
-                            placeholder='Product Price'
                         />
 
-                        <label style={{ marginTop: '15px' }}>Enter Stock - Expire Date</label>
+                        <label style={{ marginTop: '15px' }}>Enter Expire Date</label>
                         <input
                             className='form-control'
                             name="expireDate"
                             type="date"
                             onChange={handleChange}
                             value={data.expireDate}
-                            placeholder='Stock - Expire Date'
                         />
 
                         <label style={{ marginTop: '15px' }}>Enter Quantity</label>
@@ -149,7 +146,6 @@ const AddNewProduct = () => {
                             onChange={handleChange}
                             value={data.quantity}
                             type='number'
-                            placeholder='Product Quantity'
                         />
 
                         <label style={{ marginTop: '15px' }}>Product Image</label>
