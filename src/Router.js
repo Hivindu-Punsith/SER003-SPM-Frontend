@@ -13,6 +13,7 @@ import Register from "./components/auth/Register";
 import Dashboard from "./components/layouts/Dashboard";
 import HandleUsers from "./components/admin/HandleUsers";
 import ReqInstructor from "./components/user/ReqInstructor";
+import Profile from "./components/auth/Profile";
 
 //store management
 import ViewProducts from "./components/Products/ViewProducts";
@@ -30,6 +31,7 @@ import ViewAllClients from "./components/instructors/ViewAllClients";
 import HandleInstructors from "./components/admin/HandleInstructors";
 import ClientMemberships from "./components/memberships/ClientMemberships";
 import EditProduct from "./components/Products/EditProduct";
+
 
 
 const SiteRouter = () => {
@@ -60,8 +62,12 @@ const SiteRouter = () => {
                 <Route path="/client-memberships" element={<ClientMemberships/>}/>
                 <Route path="/clients" element={<ViewAllClients/>}/>
                 <Route path="/instructors" element={<HandleInstructors/>}/>
+
+                <Route path="/profile" element={<Profile/>}/>
+
                 <Route path="/payment" element={<Payment/>}/>
                 <Route path="/thankyou" element={<ThankPage/>}/>
+
               </>
               )
               :
