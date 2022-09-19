@@ -19,6 +19,8 @@ import Profile from "./components/auth/Profile";
 import ViewProducts from "./components/Products/ViewProducts";
 import ClientViewProducts from "./components/Products/ClientViewProducts";
 import AddNewProduct from "./components/Products/AddNewProduct";
+import Payment from "./components/Products/Payment";
+import ThankPage from "./components/Products/ThankPage";
 
 //equipments
 import ViewAllEquipments from "./components/equipments/ViewAllEquipments";
@@ -60,7 +62,12 @@ const SiteRouter = () => {
                 <Route path="/client-memberships" element={<ClientMemberships/>}/>
                 <Route path="/clients" element={<ViewAllClients/>}/>
                 <Route path="/instructors" element={<HandleInstructors/>}/>
+
                 <Route path="/profile" element={<Profile/>}/>
+
+                <Route path="/payment" element={<Payment/>}/>
+                <Route path="/thankyou" element={<ThankPage/>}/>
+
               </>
               )
               :

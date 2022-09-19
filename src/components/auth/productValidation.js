@@ -1,7 +1,7 @@
 export const validateCreateProduct=(formData) =>{
 
     const messages ={
-       PRODUCT_NAME :"Invalid product details. Try Again...",
+       PRODUCT_NAME :"Invalid Product Name! Try Again",
      
     };
 
@@ -20,7 +20,7 @@ export const validateCreateProduct=(formData) =>{
             message : null
     };
 
-    if(regdata.productName.length <= 3 )
+    if(regdata.productName.length <= 2 )
     {
         output.message = messages.PRODUCT_NAME;
         output.status = false;
