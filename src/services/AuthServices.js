@@ -5,6 +5,7 @@ import StartUrl from "../configs/Url.json";
 const LoginURL = StartUrl?.StartUrl + "/gym/signin";
 const RegisterURL = StartUrl?.StartUrl + "/gym/signup";
 const AuthURL = StartUrl?.StartUrl + "/gym/auth";
+const UpdateAdminURL = StartUrl?.StartUrl + "/gym/update-admin/";
 
 export async function LoginUsers(data){
     const alldata = {
@@ -88,4 +89,15 @@ export async function Auth(token){
      
        });
   return result;
+}
+
+export async function updateAdmin(id,data) {
+  const alldata = {
+      fullName: data?.fullName,
+      mobileno: data?.mobileno,
+      email: data?.email,
+  };
+
+  return await axios.put(UpdateAdminURL + id, alldata);
+
 }
