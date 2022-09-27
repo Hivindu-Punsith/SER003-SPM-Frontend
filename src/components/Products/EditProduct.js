@@ -95,7 +95,7 @@ const EditProduct = () => {
                 Swal.fire({
                     icon: 'success',
                     title: 'Successful!',
-                    text: 'New product added to the store!',
+                    text: 'Product Updated!',
                 })
                 navigate("/admin-products");
 
@@ -114,12 +114,13 @@ const EditProduct = () => {
 
 
     return (
-        <div class='card' style={{ marginTop: "70px", marginBottom: "70px", width: '1000px', marginLeft: '450px', backgroundColor: '#DCDCDC' }}>
+        <div class='card' style={{ marginTop: "70px", marginBottom: "70px", width: '800px', marginLeft: '350px', backgroundColor: '#F8F8FF' }}>
             <div style={{ margin: "10px" }}>
 
                 <center>
-                    <CardTitle style={{ color: "black", fontSize: "40px" }}><h1><b>FitnessHub Shopping Store </b></h1></CardTitle>
-                   <br></br> <h3><b>Update Product</b></h3>
+                    <CardTitle style={{ color: "black", fontSize: "40px" }}><h3><b>FitnessHub Shopping Store </b></h3></CardTitle>
+                    <br></br>
+                    <h4><b>Update Product</b></h4>
                 </center>
 
                 <div className="container" style={{ width: '50%', }}>
@@ -150,7 +151,7 @@ const EditProduct = () => {
                             value={data.productPrice}
                         />
 
-                        <label style={{ marginTop: '15px' }}>Enter Expire Date</label>
+                        <label style={{ marginTop: '15px' }}>Enter Stock - Expire Date</label>
                         <input
                             className='form-control'
                             name="expireDate"
@@ -176,7 +177,7 @@ const EditProduct = () => {
                             value={data.productImage}
                         />
 
-                        <center><button style={{ marginTop: '15px', marginBottom: '15px' , width: '200px'}} type="submit" className="btn btn-dark" >
+                        <center><button style={{ marginTop: '15px', marginBottom: '15px', width: '200px' }} type="submit" className="btn btn-dark" >
                             Update Product
                         </button></center>
                     </form>
