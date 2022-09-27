@@ -1,7 +1,7 @@
 import React from 'react'
 import '../Products/bouncing.css'
 import purchase from "../../assests/images/purchase.png";
-
+import { Link, useNavigate } from "react-router-dom";
 
 function ThankPage() {
     return (
@@ -9,7 +9,7 @@ function ThankPage() {
             <br></br>
             <br></br>
             <br></br>
-           
+
             <center>
                 <h1>
                     <span>THANK YOU FOR</span>
@@ -23,9 +23,10 @@ function ThankPage() {
                 <br></br>
                 <img src={purchase} style={{ width: 350, marginBottom: '30px', marginLeft: '40px', marginRight: '10px' }}></img>
                 <br></br>
-                <button style={{ marginBottom: '60px', width: '200px',marginLeft: '40px', marginRight: '10px' }} type="submit" className="btn btn-dark">
-                
-Back To Shopping Store
+                <button style={{ marginBottom: '60px', width: '200px', marginLeft: '40px', marginRight: '10px' }} type="submit" className="btn btn-dark">
+
+                    
+                    <Link to="/client-products" style={{ color: "white", textDecoration: "none" }}>Back To Shopping Store</Link>
                 </button>
             </center>
 

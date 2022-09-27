@@ -194,7 +194,7 @@ const Payment = () => {
     }
 
     return (
-        <div class='card' style={{ width: '700px', marginLeft: '450px', backgroundColor: '#F5FFFA', display: 'flex', marginBottom: '30px', marginTop: '30px' }}>
+        <div class='card' style={{ width: '700px', marginLeft: '400px', backgroundColor: '#F5FFFA', display: 'flex', marginBottom: '30px', marginTop: '30px' }}>
             <div style={{ margin: "10px" }}>
 
                 <center>
