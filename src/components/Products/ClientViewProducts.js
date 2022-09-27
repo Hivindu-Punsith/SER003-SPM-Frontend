@@ -18,9 +18,8 @@ import {
 import { getAllProducts } from '../../services/ProductService';
 import '../Products/style.css'
 import'../Products/style'
-
-
-
+import Swal from 'sweetalert2';
+import MyShoppingCart from './ShoppingCart';
 
 
 const ClientViewProducts = () => {
@@ -31,6 +30,7 @@ const ClientViewProducts = () => {
     const [clothingDetails, setclothingDetails] = useState([]);
     const [accessoriesDetails, setaccessoriesDetails] = useState([]);
     const [Protein_Bars_SnacksDetails, setProtein_Bars_SnacksDetails] = useState([]);
+  
 
 //Protein_Bars_&_Snacks
 //clothing
@@ -187,23 +187,80 @@ const ClientViewProducts = () => {
     setProtein_Bars_Snacks(false);
   };
 
+
+  //shopping cart
+  const [CartData, setCartData] = useState([]);
+  const [showCart, setshowCart] = useState(false);
+  const [total, settotal] = useState(0);
+
+  const addtoCart = (e,data)=>{
+    e.preventDefault();
+    console.log(data);
+    let array = CartData;
+    array.push(data);
+    setCartData(array);
+    console.log(CartData);
+    let itemtotal = total;
+    itemtotal = itemtotal + data.productPrice;
+    settotal(itemtotal);
+    console.log(itemtotal);
+    localStorage.setItem("totalPrice",itemtotal);
+    Swal.fire({
+      toast: true,
+      icon: 'success',
+      html: `<span>${data.productName} added to the Cart.</span>`,
+      animation: true,
+      position: 'top-right',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: false,
+  });
+  }
+
+  const showShoppingCart= (e)=>{
+    e.preventDefault();
+    setshowCart(true);
+  }
+
+  const hideShoppingCart= (e)=>{
+    e.preventDefault();
+    setshowCart(false);
+  }
+
   return (
     <div className='container'>
         <br></br>
         <br></br>
-        <center>
+        <Button 
+            className="btn btn-dark" style={{fontSize: "16px", float:'right',width:'250px'  , display: showCart ? "flex" : "none"}} 
+            onClick={(e)=>hideShoppingCart(e)}
+            > 
+            Close My Shopping Cart
+            &nbsp;&nbsp;
+            <i class="fa-solid fa-cart-arrow-down"></i> 
+        </Button>
+        <br></br>
+        <br></br>
+        <div style={{display : showCart ? "none" : "flex"}}>
+          <div>
+          <center>
         <div class="container">
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <h3 class="animate-charcter"><b>Fitness Hub Shopping Store</b></h3>
-    </div>
-    <div>
-    <Button 
-                className="btn btn-dark" style={{fontSize: "16px", float:'right',width:'100px'}} > <i class="fa-solid fa-cart-arrow-down"></i> 
-              </Button>
-    </div>
-  </div>
-</div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h3 class="animate-charcter"><b>Fitness Hub Shopping Store</b></h3>
+          </div>
+          <div>
+              <Button 
+                className="btn btn-dark" style={{fontSize: "16px", float:'right',width:'250px' , display: showCart ? "none" : "flex"}} 
+                onClick={(e)=>showShoppingCart(e)}
+                > 
+                My Shopping Cart
+                &nbsp;&nbsp;
+                <i class="fa-solid fa-cart-arrow-down"></i> 
+            </Button>
+          </div>
+        </div>
+      </div>
         
         {/* <h1 ><b>Fitness Hub Shopping Store</b></h1>
     */}
@@ -241,99 +298,111 @@ const ClientViewProducts = () => {
         </center>
         <br/><br/>
         
+      
+            <div>
+            <Button color="dark" onClick={(e) => clothingbtn(e)}>
+                  <b>Clothing</b>
+                  </Button>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-        <div>
-        <Button color="dark" onClick={(e) => clothingbtn(e)}>
-              <b>Clothing</b>
-              </Button>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <Button color="dark" onClick={(e) => suppllimentsbtn(e)}>
+                    <b>Supplements</b>
+                  </Button>
 
-              <Button color="dark" onClick={(e) => suppllimentsbtn(e)}>
-                <b>Supplements</b>
-              </Button>
+                
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <Button color="dark" onClick={(e) => showaccessoriesbtn(e)}>
+                  <b>Accessories</b>
+                  </Button>
 
-             
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <Button color="dark" onClick={(e) => showaccessoriesbtn(e)}>
-              <b>Accessories</b>
-              </Button>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <Button color="dark" onClick={(e) => showProtein_Bars_Snacksbtn(e)}>
+                  <b>Protein Bars & Snacks</b>
+                  </Button>
+                  <br />
+                  <br />
+            </div>
+          
+          <section class="cards" style={{ display:supplliments ?  'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
 
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <Button color="dark" onClick={(e) => showProtein_Bars_Snacksbtn(e)}>
-              <b>Protein Bars & Snacks</b>
-              </Button>
-              <br />
-              <br />
+            {suppllimentsDetails.map((product) => (
+              <article class="card" style={{ flex: '0 1 24%', borderWidth: '1px',borderColor:'white', marginBottom: '20px' }}>
+                <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
+                <h6>{product.productName}</h6>
+                <p><b>LKR. {product.productPrice}</b></p>
+                
+                <button className='btn btn-dark' style={{color:'red'}} onClick={(e)=>addtoCart(e,product)}>Add to cart
+                {/* <i className="fa-solid fa-cart-circle-plus"></i> */}
+                </button>
+              </article>
+            ))}
+
+
+          </section>
+
+          <section class="cards" style={{ display:clothing ?  'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
+
+            {clothingDetails.map((product) => (
+              <article class="card" style={{ flex: '0 1 24%', borderWidth: '2px',borderColor:'white', marginBottom: '20px' }}>
+                <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
+                <h6>{product.productName}</h6>
+                <p><b>LKR. {product.productPrice}</b></p>
+                
+                <button className='btn btn-dark' style={{color:'red'}} onClick={(e)=>addtoCart(e,product)}>Add to cart
+                {/* <i className="fa-solid fa-cart-circle-plus"></i> */}
+                </button>
+              </article>
+            ))}
+
+
+          </section>
+
+
+          <section class="cards" style={{ display:accessories ?  'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
+
+            {accessoriesDetails.map((product) => (
+              <article class="card" style={{ flex: '0 1 24%', borderWidth: '2px',borderColor:'white', marginBottom: '20px' }}>
+                <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
+                <h6>{product.productName}</h6>
+                <p><b>LKR. {product.productPrice}</b></p>
+                
+                <button className='btn btn-dark' style={{color:'red'}} onClick={(e)=>addtoCart(e,product)}>Add to cart
+                {/* <i className="fa-solid fa-cart-circle-plus"></i> */}
+                </button>
+              </article>
+            ))}
+
+
+          </section>
+
+          <section class="cards" style={{ display:Protein_Bars_Snacks ?  'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
+
+          {Protein_Bars_SnacksDetails.map((product) => (
+            <article class="card" style={{ flex: '0 1 24%', borderWidth: '2px',borderColor:'white', marginBottom: '20px' }}>
+              <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
+              <h6>{product.productName}</h6>
+              <p><b>LKR. {product.productPrice}</b></p>
+              
+              <button className='btn btn-dark' style={{color:'red'}} onClick={(e)=>addtoCart(e,product)}>Add to cart
+                {/* <i className="fa-solid fa-cart-circle-plus"></i> */}
+                </button>
+            </article>
+          ))}
+
+
+          </section>
+
         </div>
 
-      <section class="cards" style={{ display:supplliments ?  'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
-
-        {suppllimentsDetails.map((product) => (
-          <article class="card" style={{ flex: '0 1 24%', borderWidth: '1px',borderColor:'white', marginBottom: '20px' }}>
-            <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
-            <h6>{product.productName}</h6>
-            <p><b>LKR. {product.productPrice}</b></p>
-            
-            <button className='btn btn-dark' style={{color:'red'}}>Add to cart
-            {/* <i className="fa-solid fa-cart-circle-plus"></i> */}
-            </button>
-          </article>
-        ))}
+          </div>
+        
+        
 
 
-      </section>
+        <div style={{display : showCart ? "flex" : "none"}}>
+            <MyShoppingCart data={CartData}/>
+        </div>
 
-      <section class="cards" style={{ display:clothing ?  'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
-
-        {clothingDetails.map((product) => (
-          <article class="card" style={{ flex: '0 1 24%', borderWidth: '2px',borderColor:'white', marginBottom: '20px' }}>
-            <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
-            <h6>{product.productName}</h6>
-            <p><b>LKR. {product.productPrice}</b></p>
-            
-            <button className='btn btn-dark' style={{color:'red'}}>Add to cart
-            {/* <i className="fa-solid fa-cart-circle-plus"></i> */}
-            </button>
-          </article>
-        ))}
-
-
-      </section>
-
-
-      <section class="cards" style={{ display:accessories ?  'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
-
-        {accessoriesDetails.map((product) => (
-          <article class="card" style={{ flex: '0 1 24%', borderWidth: '2px',borderColor:'white', marginBottom: '20px' }}>
-            <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
-            <h6>{product.productName}</h6>
-            <p><b>LKR. {product.productPrice}</b></p>
-            
-            <button className='btn btn-dark' style={{color:'red'}}>Add to cart
-            {/* <i className="fa-solid fa-cart-circle-plus"></i> */}
-            </button>
-          </article>
-        ))}
-
-
-      </section>
-
-      <section class="cards" style={{ display:Protein_Bars_Snacks ?  'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
-
-      {Protein_Bars_SnacksDetails.map((product) => (
-        <article class="card" style={{ flex: '0 1 24%', borderWidth: '2px',borderColor:'white', marginBottom: '20px' }}>
-          <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
-          <h6>{product.productName}</h6>
-          <p><b>LKR. {product.productPrice}</b></p>
-          
-          <button className='btn btn-dark' style={{color:'red'}}>Add to cart
-            {/* <i className="fa-solid fa-cart-circle-plus"></i> */}
-            </button>
-        </article>
-      ))}
-
-
-      </section>
 
     </div>
   )
