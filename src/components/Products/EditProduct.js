@@ -119,6 +119,7 @@ const EditProduct = () => {
 
                 <center>
                     <CardTitle style={{ color: "black", fontSize: "40px" }}><h3><b>FitnessHub Shopping Store </b></h3></CardTitle>
+                    <br></br>
                     <h4><b>Update Product</b></h4>
                 </center>
 
