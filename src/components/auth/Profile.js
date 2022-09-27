@@ -16,6 +16,9 @@ import Swal from 'sweetalert2';
 import { ValidateSignUp } from "./Validation";
 import "./responsive.css";
 import moment from "moment";
+import { updateInstructor } from "../../services/InstructorServices";
+import { updateUser } from "../../services/UserServices";
+import { updateAdmin } from "../../services/AuthServices";
 
 const Profile = () => {
 
@@ -24,6 +27,8 @@ const Profile = () => {
   const { Token, userRole } = useContext(AuthContext);
 
   const [user , setUser] = useState({});
+
+
 
   const getUser = async () => {
     const data = await Auth(Token);
@@ -69,20 +74,20 @@ const Profile = () => {
   };
 
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    password2: "",
-    weight:"",
-    dateOfBirth:"",
-    height:"",
-    mobileno:"+94"
-});
+        fullName: "",
+        email: "",
+        password: "",
+        weight:"",
+        dateOfBirth:"",
+        height:"",
+        mobileno:"+94"
+    });
 
-const { fullName, email, password, password2 , weight , dateOfBirth ,height , mobileno  } = formData;
+    const { fullName, email, weight , dateOfBirth ,height , mobileno  } = formData;
 
-const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const onChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
 
     const UpdateData = async (e) => {
 
@@ -105,30 +110,39 @@ const onChange = (e) =>
 		}
 
 		else{
-					// let data = await RegisterUsers(formData);
-					// console.log("data",data)
-					// if(data?.data?.status == 1)
-					// {
-					// localStorage.setItem("token",data?.data?.data?.token);
-					// localStorage.setItem("userRole",data?.data?.data?.userRole);
-					// localStorage.setItem("user",data?.data?.data?.user);
-                    // localStorage.setItem("userID",data?.data?.data?.userID);
-					Swal.fire({
-						icon: 'success',
-						title: 'Congrats!',
-						text: 'Update successfull...!',
-					 })
-					 navigate("/");
-					// window.location.reload();
-					// }
-					// else
-					// {
-					// 	Swal.fire({
-					// 		icon: 'error',
-                    //         title: 'Registration Failed..!',
-                    //         text: `${data?.data?.message}`,
-					// 	})
-					// }
+                var data;
+
+                if(userRole == "user")
+                {
+                    data = await updateUser(user._id,formData);
+                }
+                if(userRole == "admin")
+                {
+                    data = await updateAdmin(user._id,formData);
+                }
+                if(userRole == "instructor")
+                {
+                    data = await updateInstructor(user._id,formData);
+                }
+                console.log("data",data)
+                if(data?.data?.status == 1)
+                {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Congrats!',
+                    text: 'Update successfull...!',
+                    })
+                navigate("/profile");
+                window.location.reload();
+                }
+                else
+                {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Update Failed..!',
+                        text: `${data?.data?.message}`,
+                    })
+                }
 			}
 	};
 
@@ -195,6 +209,7 @@ const onChange = (e) =>
                         </div>
                         <div className="form-group">
                             <input
+                                style={{display: userRole == "admin" ? "none" : "inline"}}
                                 id='responsiveProfile'
                                 className="form-control"
                                 type="text"
@@ -207,6 +222,7 @@ const onChange = (e) =>
                         </div>
                         <div className="form-group">
                             <input
+                                style={{display: userRole == "admin" ? "none" : "inline"}}
                                 id='responsiveProfile'
                                 className="form-control"
                                 type="text"

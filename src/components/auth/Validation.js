@@ -35,13 +35,13 @@ export const ValidateSignUp=(formData) =>{
         output.status = false;
         return output;
     }
-    if(formData.weight.length <= 0)
+    if(formData?.weight?.length <= 0)
     {
         output.message = messages.WEIGHT_EMPTY;
         output.status = false;
         return output;
     }
-    if(formData.height.length <= 0)
+    if(formData?.height?.length <= 0)
     {
         output.message = messages.HEIGHT_EMPTY;
         output.status = false;
