@@ -7,6 +7,7 @@ const GetAllUsersURL = StartUrl?.StartUrl + "/gym/user/all-users";
 const UpdateUserInstructorURL = StartUrl?.StartUrl + "/gym/user/update-instructor/";
 const UpdateUsermemberShipURL = StartUrl?.StartUrl + "/gym/user/update-memberShip/";
 const UpdateUserURL = StartUrl?.StartUrl + "/gym/user/update-user/";
+const DeleteUserUrl = StartUrl?.StartUrl + "/gym/user/delete-user/";
 
 export async function AddNewUsers(data){
     const alldata = {
@@ -116,4 +117,8 @@ export async function updateUser(id,data) {
   
   return await axios.put(UpdateUserURL + id, alldata);
 
-}
+  }
+  
+  export async function DeleteUser(id){
+    return await axios.delete(DeleteUserUrl+id);
+  }
