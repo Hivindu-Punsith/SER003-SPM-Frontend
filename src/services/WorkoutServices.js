@@ -9,6 +9,7 @@ const DeleteURL = StartUrl?.StartUrl + '/gym/workout/deleteWorkout/';
 
 export async function createWorkout(data) {
   const alldata = {
+    user_id:data?.user_id,
     workout_type: data?.workout_type,
     exercise1: data?.exercise1,
     exercise2: data?.exercise2,
