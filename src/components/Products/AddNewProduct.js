@@ -91,7 +91,7 @@ const AddNewProduct = () => {
 
 
     return (
-        <div class ='card' style={{ marginTop: "70px", marginBottom: "70px" ,width:'800px', marginLeft: '350px', backgroundColor: '#F8F8FF' }}>
+        <div class ='card' style={{ marginTop: "70px", marginBottom: "70px" ,width:'800px', marginLeft: '350px', backgroundColor: 'white',borderWidth:'4px' }}>
             <div style={{ margin: "10px" }}>
 
                 <center>
