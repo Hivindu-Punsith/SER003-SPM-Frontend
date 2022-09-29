@@ -20,12 +20,12 @@ import Swal from 'sweetalert2';
 import { ValidateAddNewUser } from "./Validation";
 import { GetAllUserDetails , AddNewUsers, updateUser ,DeleteUser } from "../../services/UserServices";
 import { ValidateSignUp } from "../auth/Validation";
-
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 const HandleUsers = () => {
     const navigate = useNavigate();
 
-    const [UserDetails, setUserDetails] = useState({});
+    const [UserDetails, setUserDetails] = useState([]);
     const [loading, setLoading] = useState(false);
     const [openModal, setopenModal] = useState(false);
     const [fullName, setfullName] = useState("");
@@ -211,7 +211,7 @@ const HandleUsers = () => {
             ),
         },
         {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Member Ship</Badge>),
+            name: (<Badge color="dark" style={{ fontSize: "17px"  }} >Member Ship</Badge>),
             selector: "memberShip",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
@@ -418,19 +418,73 @@ const HandleUsers = () => {
                         <center>
                         <CardTitle style={{ color: "black", fontSize: "30px", float:"left" }}><b>All Users</b></CardTitle>
                         {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
-                        <Button className="btn btn-dark" style={{ fontSize: "15px", marginLeft: "83%" }}  onClick={() => setopenModal(true)}><i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Add New User</b></Button>
+                        <div style={{ fontSize: "15px", float: "right" , marginLeft:"10px"}}>                            
+                            <ReactHTMLTableToExcel                                
+                                id="test-table-xls-button"
+                                className="download-table-xls-button btn btn-dark"
+                                table="table-to-xls"
+                                filename="Full User Details"
+                                sheet="tablexls"
+                                buttonText={<i class="fa-solid fa-print"></i>}
+                            />
+                        </div>
+                        <Button className="btn btn-dark" style={{ fontSize: "15px", float: "right" }}  onClick={() => setopenModal(true)}><i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Add New User</b></Button>
                         </center>
                     </CardHeader>
                     <CardBody>
                         <DataTable
                             data={UserDetails}
                             columns={columns}
-
                             progressPending={loading}
-
                         />
                     </CardBody>
                 </Card>
+
+
+                <table id="table-to-xls" style={{display:"none"}}>
+                    <tr>
+                        <th>Gym ID</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Date Of Birth</th>
+                        <th>Weight</th>
+                        <th>Height</th>
+                        <th>MemberShip</th>
+                        <th>Status</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
+                    </tr>
+                    {UserDetails.map((user)=>{
+                        return (
+                            <tr>
+                                <td>{user?.gym_id}</td>
+                                <td>{user?.fullName}</td>
+                                <td>{user?.email}</td>
+                                <td>{user?.dateOfBirth}</td>
+                                <td>{user?.weight}</td>
+                                <td>{user?.height}</td>
+                                <td>{user?.memberShip == null ? "No MemberShip" : user?.memberShip}</td>
+                                <td>{user?.status == null ? "No Status" : user?.status}</td>
+                                <td>{moment(user?.updatedAt).format(" YYYY-MM-DD ")}</td>
+                                <td>{moment(user?.updatedAt).format(" YYYY-MM-DD ")}</td>
+                            </tr>
+                        )
+                    })}
+                    <tr></tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Total Members</th>
+                        <td>{UserDetails.length}</td>
+                    </tr>                                      
+                </table>
+
                 <div>
                     <Modal
                         isOpen={openModal}
