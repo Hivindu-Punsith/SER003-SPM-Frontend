@@ -48,7 +48,7 @@ const ViewProducts = () => {
         const result = ProductDetails.filter(
             (product) =>
                 // console.log(product),
-                // product.category.toString().toLowerCase().includes(Searchkey) ||
+                product.category.toString().toLowerCase().includes(Searchkey) ||
                 product.productName.toString().toLowerCase().includes(Searchkey) ||
                 product.productPrice.toString().toLowerCase().includes(Searchkey) ||
                 product.quantity.toString().toLowerCase().includes(Searchkey),

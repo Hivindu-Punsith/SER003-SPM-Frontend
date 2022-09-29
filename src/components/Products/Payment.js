@@ -45,7 +45,7 @@ const Payment = () => {
     // });
 
     const handleType = ({ currentTarget: input }) => {
-        setType({ ...data, [input.type]: input.value });
+        setType({ ...ctype, [input.type]: input.value });
     };
 
     //    const handleType = (e) => {
@@ -78,7 +78,7 @@ const Payment = () => {
         e.preventDefault();
 
         const carddata = {
-            ctype: ctype,
+            ctype: ctype?.radio,
             holder: holder,
             cardNum: cardNum,
             year: year,
@@ -147,6 +147,7 @@ const Payment = () => {
 
 
     const handleChange = ({ currentTarget: input }) => {
+        console.log(input);
         setData({ ...data, [input.name]: input.value });
     };
 
@@ -194,7 +195,7 @@ const Payment = () => {
     }
 
     return (
-        <div class='card' style={{ width: '700px', marginLeft: '450px', backgroundColor: '#F5FFFA', display: 'flex', marginBottom: '30px', marginTop: '30px' }}>
+        <div class='card' style={{ width: '700px', marginLeft: '400px', backgroundColor: '#F5FFFA', display: 'flex', marginBottom: '30px', marginTop: '30px' }}>
             <div style={{ margin: "10px" }}>
 
                 <center>

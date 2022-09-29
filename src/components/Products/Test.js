@@ -54,6 +54,7 @@ const Test = () => {
                     <thead className="table-danger">
                         <tr>
                             <th></th>
+                            <th>Category</th>
                             <th>Product Name</th>
                             <th>Product Price</th>
                             <th>In stock</th>
@@ -64,6 +65,7 @@ const Test = () => {
                         {products.map((product, index) => (
                             <tr >
                                 <th scope="row">{index + 1}</th>
+                                <td><b>{product.category}</b></td>
                                 <td><b>{product.productName}</b></td>
                                 <td><b>LKR. {product.productPrice}</b></td>
                                 <td><b>{product.quantity}</b></td>

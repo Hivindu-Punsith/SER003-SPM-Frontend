@@ -18,7 +18,9 @@ import {
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import { ValidateAddNewUser } from "./Validation";
-import { GetAllUserDetails , AddNewUsers } from "../../services/UserServices";
+import { GetAllUserDetails , AddNewUsers, updateUser ,DeleteUser } from "../../services/UserServices";
+import { ValidateSignUp } from "../auth/Validation";
+
 
 const HandleUsers = () => {
     const navigate = useNavigate();
@@ -244,30 +246,30 @@ const HandleUsers = () => {
                 </div>
             ),
         },
-        // {
-        //     name: (<Badge color="dark" style={{ fontSize: "18px" }} >User Update</Badge>),
+        {
+            name: (<Badge color="dark" style={{ fontSize: "18px" }} >User Update</Badge>),
       
-        //     cell: (data) => (
-        //       <div style={{ display: "flex", flexDirection: "column" }}>
-        //         {/* <Link to={`/updateSub/${data?._id}`}> */}
-        //         <Button 
-        //             className="btn btn-warning" style={{ fontSize: "16px" }}  ><i class="fa-solid fa-pen-to-square"></i>&nbsp;Update</Button>
-        //         {/* </Link> */}
-        //       </div>
+            cell: (data) => (
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                {/* <Link to={`/updateSub/${data?._id}`}> */}
+                <Button 
+                    className="btn btn-warning" style={{ fontSize: "16px" }} onClick={(e)=>getSelectedUser(e,data)} ><i class="fa-solid fa-pen-to-square"></i>&nbsp;Update</Button>
+                {/* </Link> */}
+              </div>
       
-        //     ),
-        //   },
+            ),
+          },
       
-        //   {
-        //     name: (<Badge color="dark" style={{ fontSize: "18px" }} >User Delete</Badge>),
+          {
+            name: (<Badge color="dark" style={{ fontSize: "18px" }} >User Delete</Badge>),
       
-        //     cell: (data) => (
-        //       <div style={{ display: "flex", flexDirection: "column" }}>
-        //         <Button className="btn btn-danger" style={{ fontSize: "16px" }} ><i class="fa-solid fa-trash-can"></i>&nbsp;<b>Delete</b></Button>
-        //       </div>
+            cell: (data) => (
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <Button className="btn btn-danger" style={{ fontSize: "16px" }} onClick={(e)=>DeleteSelectedUser(e,data)} ><i class="fa-solid fa-trash-can"></i>&nbsp;<b>Delete</b></Button>
+              </div>
       
-        //     ),
-        //   },
+            ),
+          },
 
 
 
@@ -275,6 +277,137 @@ const HandleUsers = () => {
 
 
     ];
+
+
+    const [user , setUser] = useState({});
+    const [updateFullName, setupdateFullName] = useState("");
+    const [updateEmail, setupdateEmail] = useState("");
+    const [updateMobileno, setupdateMobileno] = useState("+94");
+    const [updateDateOfBirth, setupdateDateOfBirth] = useState("");
+    const [updateWeight, setupdateWeight] = useState("");
+    const [updateHeight, setupdateHeight] = useState("");
+
+
+    const handleupdatefullName = (e) => {
+        e.preventDefault();
+        setupdateFullName(e.target.value)
+    }
+
+    const handleupdateemail = (e) => {
+        e.preventDefault();
+        setupdateEmail(e.target.value)
+    }
+
+    const handleupdatemobileno = (e) => {
+        e.preventDefault();
+        setupdateMobileno(e.target.value)
+    }
+    const handleupdatedateOfBirth = (e) => {
+        e.preventDefault();
+        setupdateDateOfBirth(e.target.value)
+    }
+    const handleupdateweight = (e) => {
+        e.preventDefault();
+        setupdateWeight(e.target.value)
+    }
+    const handleupdateheight = (e) => {
+        e.preventDefault();
+        setupdateHeight(e.target.value)
+    }
+
+    const [openUpdateModal, setopenUpdateModal] = useState(false);
+
+    const getSelectedUser = (e,user) => {
+        e.preventDefault();
+        setUser(user);
+        setupdateFullName(user.fullName);
+        setupdateEmail(user.email);
+        setupdateMobileno(user.mobileno);
+        setupdateDateOfBirth(moment(user.dateOfBirth).format("YYYY-MM-DD"));
+        setupdateWeight(user.weight);
+        setupdateHeight(user.height);
+        setopenUpdateModal(true);
+        console.log(user);
+    }
+
+    //update user 
+    const UpdateData = async (e) => {
+
+		e.preventDefault();
+
+        var formData = {
+            fullName: updateFullName,
+            email: updateEmail,
+            weight:updateWeight,
+            dateOfBirth:updateDateOfBirth,
+            height:updateHeight,
+            mobileno:updateMobileno,
+        }
+
+		let validate = ValidateSignUp(formData);
+		let msg = validate?.message;
+		if(validate.status == false)
+		{
+			Swal.fire({
+                toast: true,
+                icon: 'warning',
+                html: `<span>${msg}</span>`,
+                animation: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: false,
+            });
+		}
+
+		else{
+                var data = await updateUser(user._id,formData);
+                console.log("data",data)
+                if(data?.data?.status == 1)
+                {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Congrats!',
+                    text: 'Update successfull...!',
+                    })
+                navigate("/users");
+                window.location.reload();
+                }
+                else
+                {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Update Failed..!',
+                        text: `${data?.data?.message}`,
+                    });
+                }
+			}
+	};
+
+
+    const DeleteSelectedUser = async (e,user) => {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                let data = await DeleteUser(user._id);
+                console.log("Delete ", data);
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+                GetUsers();
+            }
+        })  
+    }
 
 
     return (
@@ -344,6 +477,55 @@ const HandleUsers = () => {
                         </ModalBody>
                     </Modal>
                 </div>
+
+                {/* Update modal */}
+                <div>
+                    <Modal
+                        isOpen={openUpdateModal}
+                        className="modal-dialog-centered"
+                        fade={true}
+                        backdrop={true}>
+                        <ModalHeader
+                            toggle={() => {
+                                setopenUpdateModal(false);
+                            }}>
+                            <Label>Update User</Label>
+                        </ModalHeader>
+                        <ModalBody>
+                            <div style={{ width: "400px" }}>
+                                <Form>
+                                    <Label>Full Name </Label>
+                                    <Input type="text" className="input" placeholder="Full Name" value={updateFullName} onChange={(e) => handleupdatefullName(e)} />
+                                    <br />
+
+                                    <Label>Email</Label>
+                                    <Input type="email" className="input" placeholder="Email" value={updateEmail} onChange={(e) => handleupdateemail(e)} />
+                                    <br />
+
+                                    <Label>Contact Number</Label>
+                                    <Input type="text" className="input" placeholder="Contact Number" value={updateMobileno} onChange={(e) => handleupdatemobileno(e)} />
+                                    <br />
+
+                                    <Label>Date of Birth</Label>
+                                    <Input type="date" className="input" placeholder="dateOfBirth" value={updateDateOfBirth} onChange={(e) => handleupdatedateOfBirth(e)} />
+                                    <br />                                  
+
+                                    <Label>Weight</Label>
+                                    <Input type="text" className="input" placeholder="Weight example : 65 " value={updateWeight} onChange={(e) => handleupdateweight(e)} />
+                                    <br />
+
+                                    <Label>Height</Label>
+                                    <Input type="text" className="input" placeholder="Height example : 5' 5''" value={updateHeight} onChange={(e) => handleupdateheight(e)} />
+                                    <br />
+
+                                    <Button  className="btn btn-dark" onClick={(e) => UpdateData(e)}>Update User</Button>
+
+                                </Form>
+                            </div>
+                        </ModalBody>
+                    </Modal>
+                </div>
+
             </div>
 
         </div>

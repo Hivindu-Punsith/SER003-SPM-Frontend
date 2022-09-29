@@ -208,7 +208,7 @@ const ClientViewProducts = () => {
     Swal.fire({
       toast: true,
       icon: 'success',
-      html: `<span>${data.productName} added to the Cart.</span>`,
+      html: `<span><b>${data.productName}</b> successfully added to the cart</span>`,
       animation: true,
       position: 'top-right',
       showConfirmButton: false,
@@ -232,12 +232,14 @@ const ClientViewProducts = () => {
         <br></br>
         <br></br>
         <Button 
-            className="btn btn-dark" style={{fontSize: "16px", float:'right',width:'250px'  , display: showCart ? "flex" : "none"}} 
+            className="btn btn-danger" style={{color:'black',fontSize: "14px", float:'right',width:'220px' ,height:'40px' , display: showCart ? "flex" : "none"}} 
             onClick={(e)=>hideShoppingCart(e)}
             > 
-            Close My Shopping Cart
-            &nbsp;&nbsp;
+            <b>Close My Shopping Cart</b>
+            &nbsp;&nbsp;&nbsp;
+            <center>
             <i class="fa-solid fa-cart-arrow-down"></i> 
+            </center>
         </Button>
         <br></br>
         <br></br>
@@ -251,12 +253,14 @@ const ClientViewProducts = () => {
           </div>
           <div>
               <Button 
-                className="btn btn-dark" style={{fontSize: "16px", float:'right',width:'250px' , display: showCart ? "none" : "flex"}} 
+                className="btn btn-danger" style={{color:'black',fontSize: "14px", float:'right',width:'180px' , height:'40px',display: showCart ? "none" : "flex"}} 
                 onClick={(e)=>showShoppingCart(e)}
                 > 
-                My Shopping Cart
-                &nbsp;&nbsp;
-                <i class="fa-solid fa-cart-arrow-down"></i> 
+               <b>My Shopping Cart</b>
+                &nbsp;&nbsp;&nbsp;
+                <center>
+                <i class="fa-solid fa-cart-shopping"></i> 
+                </center>
             </Button>
           </div>
         </div>

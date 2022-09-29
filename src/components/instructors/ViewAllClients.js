@@ -138,6 +138,7 @@ const ViewAllClients = () => {
     e.preventDefault();
 
     const regdata = {
+      user_id:selectedUserID,
       workout_type: workoutType.workout_type.value,
       exercise1: workout1,
       exercise2: workout2,
@@ -176,6 +177,7 @@ const ViewAllClients = () => {
     e.preventDefault();
 
     const regdata = {
+      user_id:selectedUserID,
       workout_type: workoutType.workout_type.value,
       meal1: meal1,
       meal2: meal2,
@@ -247,6 +249,20 @@ const ViewAllClients = () => {
     GetUsers();
   }, []);
 
+  const [selectedUserID, setselectedUserID] = useState("");
+
+  const openDietModal = (e,user) => {
+    e.preventDefault();
+    setopenModalD(true);
+    setselectedUserID(user._id)
+  }
+
+  const openWorkModal = (e,user) => {
+    e.preventDefault();
+    setopenModalW(true);
+    setselectedUserID(user._id);
+  }
+
   return (
     <div style={{ marginTop: "70px", marginBottom: "70px" }}>
       <Container>
@@ -277,11 +293,11 @@ const ViewAllClients = () => {
                     <CardText>User Height -: {user.height}feet</CardText>
                     <Button
                       style={{ marginRight: "20px" }}
-                      onClick={() => setopenModalW(true)}
+                      onClick={(e) => openWorkModal(e,user)}
                     >
                       Add Workout
                     </Button>
-                    <Button onClick={() => setopenModalD(true)}>
+                    <Button onClick={(e) => openDietModal(e,user)}>
                       Add Diet Plan
                     </Button>
                   </CardBody>
