@@ -18,12 +18,14 @@ import {
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import { ValidateAddNewUser } from "./Validation";
-import { GetAllUserDetails , AddNewUsers } from "../../services/UserServices";
+import { GetAllUserDetails , AddNewUsers, updateUser ,DeleteUser } from "../../services/UserServices";
+import { ValidateSignUp } from "../auth/Validation";
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 const HandleUsers = () => {
     const navigate = useNavigate();
 
-    const [UserDetails, setUserDetails] = useState({});
+    const [UserDetails, setUserDetails] = useState([]);
     const [loading, setLoading] = useState(false);
     const [openModal, setopenModal] = useState(false);
     const [fullName, setfullName] = useState("");
@@ -209,7 +211,7 @@ const HandleUsers = () => {
             ),
         },
         {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Member Ship</Badge>),
+            name: (<Badge color="dark" style={{ fontSize: "17px"  }} >Member Ship</Badge>),
             selector: "memberShip",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
@@ -244,30 +246,30 @@ const HandleUsers = () => {
                 </div>
             ),
         },
-        // {
-        //     name: (<Badge color="dark" style={{ fontSize: "18px" }} >User Update</Badge>),
+        {
+            name: (<Badge color="dark" style={{ fontSize: "18px" }} >User Update</Badge>),
       
-        //     cell: (data) => (
-        //       <div style={{ display: "flex", flexDirection: "column" }}>
-        //         {/* <Link to={`/updateSub/${data?._id}`}> */}
-        //         <Button 
-        //             className="btn btn-warning" style={{ fontSize: "16px" }}  ><i class="fa-solid fa-pen-to-square"></i>&nbsp;Update</Button>
-        //         {/* </Link> */}
-        //       </div>
+            cell: (data) => (
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                {/* <Link to={`/updateSub/${data?._id}`}> */}
+                <Button 
+                    className="btn btn-warning" style={{ fontSize: "16px" }} onClick={(e)=>getSelectedUser(e,data)} ><i class="fa-solid fa-pen-to-square"></i>&nbsp;Update</Button>
+                {/* </Link> */}
+              </div>
       
-        //     ),
-        //   },
+            ),
+          },
       
-        //   {
-        //     name: (<Badge color="dark" style={{ fontSize: "18px" }} >User Delete</Badge>),
+          {
+            name: (<Badge color="dark" style={{ fontSize: "18px" }} >User Delete</Badge>),
       
-        //     cell: (data) => (
-        //       <div style={{ display: "flex", flexDirection: "column" }}>
-        //         <Button className="btn btn-danger" style={{ fontSize: "16px" }} ><i class="fa-solid fa-trash-can"></i>&nbsp;<b>Delete</b></Button>
-        //       </div>
+            cell: (data) => (
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <Button className="btn btn-danger" style={{ fontSize: "16px" }} onClick={(e)=>DeleteSelectedUser(e,data)} ><i class="fa-solid fa-trash-can"></i>&nbsp;<b>Delete</b></Button>
+              </div>
       
-        //     ),
-        //   },
+            ),
+          },
 
 
 
@@ -275,6 +277,137 @@ const HandleUsers = () => {
 
 
     ];
+
+
+    const [user , setUser] = useState({});
+    const [updateFullName, setupdateFullName] = useState("");
+    const [updateEmail, setupdateEmail] = useState("");
+    const [updateMobileno, setupdateMobileno] = useState("+94");
+    const [updateDateOfBirth, setupdateDateOfBirth] = useState("");
+    const [updateWeight, setupdateWeight] = useState("");
+    const [updateHeight, setupdateHeight] = useState("");
+
+
+    const handleupdatefullName = (e) => {
+        e.preventDefault();
+        setupdateFullName(e.target.value)
+    }
+
+    const handleupdateemail = (e) => {
+        e.preventDefault();
+        setupdateEmail(e.target.value)
+    }
+
+    const handleupdatemobileno = (e) => {
+        e.preventDefault();
+        setupdateMobileno(e.target.value)
+    }
+    const handleupdatedateOfBirth = (e) => {
+        e.preventDefault();
+        setupdateDateOfBirth(e.target.value)
+    }
+    const handleupdateweight = (e) => {
+        e.preventDefault();
+        setupdateWeight(e.target.value)
+    }
+    const handleupdateheight = (e) => {
+        e.preventDefault();
+        setupdateHeight(e.target.value)
+    }
+
+    const [openUpdateModal, setopenUpdateModal] = useState(false);
+
+    const getSelectedUser = (e,user) => {
+        e.preventDefault();
+        setUser(user);
+        setupdateFullName(user.fullName);
+        setupdateEmail(user.email);
+        setupdateMobileno(user.mobileno);
+        setupdateDateOfBirth(moment(user.dateOfBirth).format("YYYY-MM-DD"));
+        setupdateWeight(user.weight);
+        setupdateHeight(user.height);
+        setopenUpdateModal(true);
+        console.log(user);
+    }
+
+    //update user 
+    const UpdateData = async (e) => {
+
+		e.preventDefault();
+
+        var formData = {
+            fullName: updateFullName,
+            email: updateEmail,
+            weight:updateWeight,
+            dateOfBirth:updateDateOfBirth,
+            height:updateHeight,
+            mobileno:updateMobileno,
+        }
+
+		let validate = ValidateSignUp(formData);
+		let msg = validate?.message;
+		if(validate.status == false)
+		{
+			Swal.fire({
+                toast: true,
+                icon: 'warning',
+                html: `<span>${msg}</span>`,
+                animation: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: false,
+            });
+		}
+
+		else{
+                var data = await updateUser(user._id,formData);
+                console.log("data",data)
+                if(data?.data?.status == 1)
+                {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Congrats!',
+                    text: 'Update successfull...!',
+                    })
+                navigate("/users");
+                window.location.reload();
+                }
+                else
+                {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Update Failed..!',
+                        text: `${data?.data?.message}`,
+                    });
+                }
+			}
+	};
+
+
+    const DeleteSelectedUser = async (e,user) => {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                let data = await DeleteUser(user._id);
+                console.log("Delete ", data);
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+                GetUsers();
+            }
+        })  
+    }
 
 
     return (
@@ -285,19 +418,73 @@ const HandleUsers = () => {
                         <center>
                         <CardTitle style={{ color: "black", fontSize: "30px", float:"left" }}><b>All Users</b></CardTitle>
                         {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
-                        <Button className="btn btn-dark" style={{ fontSize: "15px", marginLeft: "83%" }}  onClick={() => setopenModal(true)}><i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Add New User</b></Button>
+                        <div style={{ fontSize: "15px", float: "right" , marginLeft:"10px"}}>                            
+                            <ReactHTMLTableToExcel                                
+                                id="test-table-xls-button"
+                                className="download-table-xls-button btn btn-dark"
+                                table="table-to-xls"
+                                filename="Full User Details"
+                                sheet="tablexls"
+                                buttonText={<i class="fa-solid fa-print"></i>}
+                            />
+                        </div>
+                        <Button className="btn btn-dark" style={{ fontSize: "15px", float: "right" }}  onClick={() => setopenModal(true)}><i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Add New User</b></Button>
                         </center>
                     </CardHeader>
                     <CardBody>
                         <DataTable
                             data={UserDetails}
                             columns={columns}
-
                             progressPending={loading}
-
                         />
                     </CardBody>
                 </Card>
+
+
+                <table id="table-to-xls" style={{display:"none"}}>
+                    <tr>
+                        <th>Gym ID</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Date Of Birth</th>
+                        <th>Weight</th>
+                        <th>Height</th>
+                        <th>MemberShip</th>
+                        <th>Status</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
+                    </tr>
+                    {UserDetails.map((user)=>{
+                        return (
+                            <tr>
+                                <td>{user?.gym_id}</td>
+                                <td>{user?.fullName}</td>
+                                <td>{user?.email}</td>
+                                <td>{user?.dateOfBirth}</td>
+                                <td>{user?.weight}</td>
+                                <td>{user?.height}</td>
+                                <td>{user?.memberShip == null ? "No MemberShip" : user?.memberShip}</td>
+                                <td>{user?.status == null ? "No Status" : user?.status}</td>
+                                <td>{moment(user?.updatedAt).format(" YYYY-MM-DD ")}</td>
+                                <td>{moment(user?.updatedAt).format(" YYYY-MM-DD ")}</td>
+                            </tr>
+                        )
+                    })}
+                    <tr></tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Total Members</th>
+                        <td>{UserDetails.length}</td>
+                    </tr>                                      
+                </table>
+
                 <div>
                     <Modal
                         isOpen={openModal}
@@ -344,6 +531,55 @@ const HandleUsers = () => {
                         </ModalBody>
                     </Modal>
                 </div>
+
+                {/* Update modal */}
+                <div>
+                    <Modal
+                        isOpen={openUpdateModal}
+                        className="modal-dialog-centered"
+                        fade={true}
+                        backdrop={true}>
+                        <ModalHeader
+                            toggle={() => {
+                                setopenUpdateModal(false);
+                            }}>
+                            <Label>Update User</Label>
+                        </ModalHeader>
+                        <ModalBody>
+                            <div style={{ width: "400px" }}>
+                                <Form>
+                                    <Label>Full Name </Label>
+                                    <Input type="text" className="input" placeholder="Full Name" value={updateFullName} onChange={(e) => handleupdatefullName(e)} />
+                                    <br />
+
+                                    <Label>Email</Label>
+                                    <Input type="email" className="input" placeholder="Email" value={updateEmail} onChange={(e) => handleupdateemail(e)} />
+                                    <br />
+
+                                    <Label>Contact Number</Label>
+                                    <Input type="text" className="input" placeholder="Contact Number" value={updateMobileno} onChange={(e) => handleupdatemobileno(e)} />
+                                    <br />
+
+                                    <Label>Date of Birth</Label>
+                                    <Input type="date" className="input" placeholder="dateOfBirth" value={updateDateOfBirth} onChange={(e) => handleupdatedateOfBirth(e)} />
+                                    <br />                                  
+
+                                    <Label>Weight</Label>
+                                    <Input type="text" className="input" placeholder="Weight example : 65 " value={updateWeight} onChange={(e) => handleupdateweight(e)} />
+                                    <br />
+
+                                    <Label>Height</Label>
+                                    <Input type="text" className="input" placeholder="Height example : 5' 5''" value={updateHeight} onChange={(e) => handleupdateheight(e)} />
+                                    <br />
+
+                                    <Button  className="btn btn-dark" onClick={(e) => UpdateData(e)}>Update User</Button>
+
+                                </Form>
+                            </div>
+                        </ModalBody>
+                    </Modal>
+                </div>
+
             </div>
 
         </div>
