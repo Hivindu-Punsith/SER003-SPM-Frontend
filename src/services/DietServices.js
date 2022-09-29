@@ -9,6 +9,7 @@ const DeleteURL = StartUrl?.StartUrl + '/gym/diet/deleteDiet/';
 
 export async function createDiet(data) {
   const alldata = {
+    user_id:data?.user_id,
     workout_type: data?.workout_type,
     meal1: data?.meal1,
     meal2: data?.meal2,
