@@ -91,13 +91,13 @@ const AddNewProduct = () => {
 
 
     return (
-        <div class ='card' style={{ marginTop: "70px", marginBottom: "70px" ,width:'1000px', marginLeft:'450px',backgroundColor:'#DCDCDC'}}>
+        <div class ='card' style={{ marginTop: "70px", marginBottom: "70px" ,width:'800px', marginLeft: '350px', backgroundColor: '#F8F8FF' }}>
             <div style={{ margin: "10px" }}>
 
                 <center>
-                    <CardTitle style={{ color: "black", fontSize: "40px" }}><h1><b>Fitness Hub Shopping Store </b></h1></CardTitle>
+                    <CardTitle style={{ color: "black", fontSize: "40px" }}><h3><b>Fitness Hub Shopping Store </b></h3></CardTitle>
                     <br></br>
-                    <h3><b>Add new Product</b></h3>
+                    <h4><b>Add new Product</b></h4>
 
                 </center>
 

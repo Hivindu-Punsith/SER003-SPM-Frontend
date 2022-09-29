@@ -23,6 +23,7 @@ import {
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import FileInput from "../../utils/FileInput";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 import { getAllProducts } from '../../services/ProductService';
 import { validateCreateProduct } from "../auth/productValidation";
@@ -46,8 +47,8 @@ const ViewProducts = () => {
         console.log(ProductDetails, Searchkey);
         const result = ProductDetails.filter(
             (product) =>
-               // console.log(product),
-                // product.category.toString().toLowerCase().includes(Searchkey) ||
+                // console.log(product),
+                product.category.toString().toLowerCase().includes(Searchkey) ||
                 product.productName.toString().toLowerCase().includes(Searchkey) ||
                 product.productPrice.toString().toLowerCase().includes(Searchkey) ||
                 product.quantity.toString().toLowerCase().includes(Searchkey),
@@ -113,18 +114,18 @@ const ViewProducts = () => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-                let data =  deleteProduct(id);
+                let data = deleteProduct(id);
                 console.log("Delete ", data);
-              Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-              )
-              GetProducts();
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+                GetProducts();
             }
-          })
+        })
     }
 
 
@@ -134,57 +135,61 @@ const ViewProducts = () => {
         navigate("/add-new-product");
     }
 
+    const routeToReportGenerate = (e) => {
+        e.preventDefault();
+        navigate("/report-test");
+    }
 
     const columns = [
 
         {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Category</Badge>),
+            name: (<Badge color="dark" style={{ fontSize: "16px" }} >Category</Badge>),
             selector: "category",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Label style={{ fontSize: "18px" }}><b>{data?.category}</b><br /></Label>
+                    <Label style={{ fontSize: "16px" }}><b>{data?.category}</b><br /></Label>
                 </div>
             ),
         },
         {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Product Name</Badge>),
+            name: (<Badge color="dark" style={{ fontSize: "16px" }} >Product Name</Badge>),
             selector: "productName",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Label style={{ fontSize: "18px" }}><b>{data?.productName}</b><br /></Label>
+                    <Label style={{ fontSize: "16px" }}><b>{data?.productName}</b><br /></Label>
                 </div>
             ),
         },
         {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Price  (LKR)</Badge>),
+            name: (<Badge color="dark" style={{ fontSize: "16px" }} >Price  (LKR)</Badge>),
             selector: "productPrice",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Label style={{ fontSize: "18px" }}><b>{data.productPrice}.00</b><br /></Label>
+                    <Label style={{ fontSize: "16px" }}><b>{data.productPrice}.00</b><br /></Label>
                 </div>
             ),
         },
         {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Stock - Expire date</Badge>),
+            name: (<Badge color="dark" style={{ fontSize: "16px" }} >Stock - Expire date</Badge>),
             selector: "expireDate",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
 
-                    <Label style={{ fontSize: "18px" }} ><b> {moment(data?.expireDate).format(" YYYY-MM-DD ")}</b><br /></Label>
+                    <Label style={{ fontSize: "16px" }} ><b> {moment(data?.expireDate).format(" YYYY-MM-DD ")}</b><br /></Label>
                 </div>
             ),
         },
         {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Quantity</Badge>),
+            name: (<Badge color="dark" style={{ fontSize: "16px" }} >Quantity</Badge>),
             selector: "quantity",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Label style={{ fontSize: "18px" }}><b>{data.quantity}</b><br /></Label>
+                    <Label style={{ fontSize: "16px" }}><b>{data.quantity}</b><br /></Label>
                 </div>
             ),
         },
         {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >Image</Badge>),
+            name: (<Badge color="dark" style={{ fontSize: "16px" }} >Image</Badge>),
             selector: "productImage",
             cell: (data) => (
                 <div style={{ display: "flex", flexDirection: "column" }}>
@@ -222,17 +227,18 @@ const ViewProducts = () => {
 
             cell: (data) => (
                 <div className="row">
-                <div className="col">
-                   <a href={`/edit-product/${data?._id}`}> <img src={editIcon} style={{height: "25px", width:"25px"}} /></a> 
+                    <div className="col">
+                        <a href={`/edit-product/${data?._id}`}> <img src={editIcon} style={{ height: "25px", width: "25px" }} /></a>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div className="col">
+                        <a onClick={() => removeProduct(data?._id)} ><img src={binIcon} style={{ height: "25px", width: "25px", cursor: "pointer" }} /></a>
+                    </div>
                 </div>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <div className="col">
-                   <a onClick={() => removeProduct(data?._id)} ><img src={binIcon} style={{height: "25px", width:"25px", cursor:"pointer"}} /></a> 
-                </div>
-            </div>
 
             ),
         },
+
 
 
 
@@ -246,28 +252,44 @@ const ViewProducts = () => {
                 <Card >
                     <CardHeader >
 
-                            <CardTitle style={{ color: "black", fontSize: "30px", float: "left" }}><b>Fitness Hub Shopping Store </b></CardTitle>
+                        <CardTitle style={{ color: "black", fontSize: "30px", float: "left" }}><b>Fitness Hub Shopping Store </b></CardTitle>
 
-                   <br/> <br/><br/> <br/>
-                            <div style={{float:"left"}}>
-                                <input
-                                    className="form-control"
-                                    style={{ width: "400px" }}
-                                    type="search"
-                                    placeholder="Search for products"
-                                    name="searchQuery"
-                                    onChange={(e)=>handleSearchArea(e)}
-                                >   
-                                </input>
-                            </div>
-                            <Button className="btn btn-dark" style={{ fontSize: "15px",float:"right",width:'200px'}} onClick={(e) =>routeToAddPage(e)}><i class="fa-solid fa-circle-plus"></i><b>   Add New Product</b></Button>
-                              
-                      
-                       
+                        <br /> <br /><br /> <br />
+                        <div style={{ float: "left" }}>
+                            <input
+                                className="form-control"
+                                style={{ width: "400px" }}
+                                type="search"
+                                placeholder="Search for products"
+                                name="searchQuery"
+                                onChange={(e) => handleSearchArea(e)}
+                            >
+                            </input>
+                        </div>
+
+                        <Button className="btn btn-dark" style={{ fontSize: "15px", float: "right", width: '200px' }} onClick={(e) => routeToAddPage(e)}><i class="fa-solid fa-circle-plus"></i><b>  Add New Product</b></Button>
+
+                        <Button
+                            className="btn btn-dark"
+                            style={{ fontSize: "15px", float: "right", width: '50px', marginRight: '20px' }}
+                            onClick={(e) => routeToReportGenerate(e)}>
+                            <i class="fa-solid fa-print"></i><b></b>
+                        </Button>
+
+
 
                     </CardHeader>
                     <CardBody >
+                        {/* <ReactHTMLTableToExcel
+                            id="test-table-xls-button"
+                            className="download-table-xls-button"
+                            table="table-to-xls"
+                            filename="tablexls"
+                            sheet="tablexls"
+                            buttonText="Download as XLS" /> */}
+
                         <DataTable
+                            // id="table-to-xls"
                             data={ProductDetails}
                             columns={columns}
                             progressPending={loading}
