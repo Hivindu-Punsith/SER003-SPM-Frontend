@@ -1,6 +1,5 @@
 
 export const ValidateAddNewEquipment=(formData) =>{
-
     const messages ={
        FULL_NAME :"Name is Required..!",
        QUANTITY : "Quantity is Required..!",
