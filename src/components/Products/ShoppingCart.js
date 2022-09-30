@@ -14,6 +14,17 @@ const MyShoppingCart = (props) => {
     //shopping cart
     const [CartData, setCartData] = useState([]);
     const [totalPrice, settotalPrice] = useState(0);
+
+  
+    const [count, setCount] = useState(1);
+    const inc = () => {
+        setCount(count + 1);
+    }
+    const dec = () => {
+        if (count > 0)
+            setCount(count - 1);
+    }
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -24,10 +35,11 @@ const MyShoppingCart = (props) => {
 
 
     const Payment = (e) => {
-       
+
         e.preventDefault();
         navigate("/payment");
     }
+
 
     return (
         <div className='container' style={{ width: '960px' }}>
@@ -47,30 +59,12 @@ const MyShoppingCart = (props) => {
             <br /><br />
             <div>
                 <table className="table table-striped table-bordered">
-                    {/* <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Product Price</th>
-                        <th>Product Quantity</th>
-                        <th>Product Total</th>
-                    </tr>
-                </thead>
-                <tbody> 
-                    {CartData.map((item, index) => {
-                        return (    
-                            <tr key={index}>
-                                <td>{item.productName}</td>
-                                <td>{item.productPrice}</td>
-                                <td>{item.productQuantity}</td>
-                                <td>{item.productTotal}</td>
-                            </tr>
-                        )
-                    })}
-                </tbody> */}
+                    
                     <thead>
                         <tr>
                             <th>Product Name</th>
                             <th>Product Price (LKR)</th>
+                            <th>Quantity</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,13 +72,27 @@ const MyShoppingCart = (props) => {
                             return (
                                 <tr key={index}>
                                     <td>{item.productName}</td>
-                                    <td>{item.productPrice}.00</td>
+                                    <td>
+                                        {item.productPrice}.00</td>
+
+                                    <td>
+
+
+                                        <div>
+                                            <button style={{ width: '30px', height: '26px' }} onClick={dec} ><center><i class="fa-solid fa-circle-minus"></i></center></button> &nbsp;&nbsp;&nbsp;&nbsp;
+                                            {count}
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <button style={{ width: '30px', height: '26px' }} onClick={inc}><center><i class="fa-solid fa-circle-plus"></i></center></button>
+                                        </div>
+
+                                    </td>
                                 </tr>
                             )
                         })}
-                        <tr>
+                        <tr style={{ height: '60px' }}>
                             <td><b>Total Price (LKR)</b></td>
-                            <td>{localStorage.getItem("totalPrice")}.00</td>
+                            <td><b>
+                                {localStorage.getItem("totalPrice")}.00</b></td>
                         </tr>
                     </tbody>
                 </table>
