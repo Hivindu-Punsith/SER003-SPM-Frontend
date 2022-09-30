@@ -21,7 +21,8 @@ import {
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import { ValidateAddNewEquipment } from "./Validation";
-import { getAllEquipments , createEquipment } from "../../services/EquipmentServices";
+import { getAllEquipments , createEquipment, deleteEquipment, updateEquipment } from "../../services/EquipmentServices";
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 const ViewAllEquipments = () => {
 
@@ -39,6 +40,8 @@ const ViewAllEquipments = () => {
     const [electricEqDetails, setElectricDetails] = useState([]);
     const [liftingMachineDetails, setLiftingMachinesDetails] = useState([]);
     const [otherDetails, setotherDetails] = useState([]);
+
+    const [openUpdateModal, setopenUpdateModal] = useState(false);
 
    // const [EquipmentDetails, setEquipmentDetails] = useState({});
     const [loading, setLoading] = useState(false);
@@ -158,6 +161,7 @@ const ViewAllEquipments = () => {
                     company_name: item?.company_name,
                     date_of_purchaced: item?.date_of_purchaced,
                     category: item?.category,
+                    _id: item?._id
                 }
             })
 
@@ -193,6 +197,7 @@ const ViewAllEquipments = () => {
                     company_name: item?.company_name,
                     date_of_purchaced: item?.date_of_purchaced,
                     category: item?.category,
+                    _id: item?._id
                 }
             })
 
@@ -229,6 +234,7 @@ const ViewAllEquipments = () => {
                     company_name: item?.company_name,
                     date_of_purchaced: item?.date_of_purchaced,
                     category: item?.category,
+                    _id: item?._id
                 }
             })
 
@@ -264,6 +270,7 @@ const ViewAllEquipments = () => {
                     company_name: item?.company_name,
                     date_of_purchaced: item?.date_of_purchaced,
                     category: item?.category,
+                    _id: item?._id
                 }
             })
 
@@ -299,6 +306,7 @@ const ViewAllEquipments = () => {
                     company_name: item?.company_name,
                     date_of_purchaced: item?.date_of_purchaced,
                     category: item?.category,
+                    _id: item?._id
                 }
             })
 
@@ -310,11 +318,6 @@ const ViewAllEquipments = () => {
             setLoading(false);
         }
     }
-
-
-
-
-
 
     useEffect(() => {
         GetEquipments();
@@ -376,8 +379,168 @@ const ViewAllEquipments = () => {
         setother(true);
     };
 
+    const removeEquipment = async (id) => {
+        console.log(id);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let data = deleteEquipment(id);
+                console.log("Delete ", data);
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+                GetEquipments();
+            }
+        })
+    }
 
+    //----------------------------Search-----------------------
+
+    const filterData = (EquipmentDetails, Searchkey) => {
+        console.log(EquipmentDetails, Searchkey);
+        const result = EquipmentDetails.filter(
+            (equipment) =>
+                // console.log(product),
+                equipment.name.toString().toLowerCase().includes(Searchkey) ||
+                equipment.quantity.toString().toLowerCase().includes(Searchkey) ||
+                equipment.value.toString().toLowerCase().includes(Searchkey) ||
+                equipment.company_name.toString().toLowerCase().includes(Searchkey) ||
+                equipment.date_of_purchaced.toString().toLowerCase().includes(Searchkey),
+        );
+        setAllDetails(result);
+    }
+
+    const handleSearchArea = (e) => {
+        const Searchkey = e.currentTarget.value;
+        axios.get("http://localhost:5000/gym/equipment/getAllEquipments").then((res) => {
+
+            console.log(res.data.status);
+            if (res.data?.status == "1") {
+                filterData(data?.data?.equipments, Searchkey);
+            }
+        });
+    }
+
+    //---------------------------------------------------------
+
+    const [equipment, setEquipment] = useState("");
+
+    const [updatename, setupdatename] = useState("");
+    const [updatequantity, setupdatequantity] = useState("");
+    const [updatevalue, setupdatevalue] = useState("");
+    const [updatecompany_name, setupdatecompanyname] = useState("");
+    const [updatedate_of_purchaced, setupdatedate] = useState("");
     
+
+    const [updatecategory, setupdatecategory] = useState({
+        category: "",
+      });
+
+    const handleUpdateName = (e) => {
+        e.preventDefault();
+        setupdatename(e.target.value)
+    }
+    const handleUpdateQuantity = (e) => {
+        e.preventDefault();
+        setupdatequantity(e.target.value)
+    }
+    const handleUpdateValue = (e) => {
+        e.preventDefault();
+        setupdatevalue(e.target.value)
+    }
+    const handleUpdateCompanyName = (e) => {
+        e.preventDefault();
+        setupdatecompanyname(e.target.value)
+    }
+    const handleUpdateDate = (e) => {
+        e.preventDefault();
+        setupdatedate(e.target.value)
+    }
+    const handleUpdateCategory = (e)=>{
+        console.log(e);
+        setupdatecategory({ ...category, [e.name] : e });
+    }
+
+    const getSelectedEquipment = (e,equipment) => {
+        e.preventDefault();
+
+        setEquipment(equipment)
+
+        setupdatename(equipment.name);
+        setupdatequantity(equipment.quantity);
+        setupdatevalue(equipment.value);
+        setupdatecompanyname(equipment.company_name);
+        setupdatedate(equipment.date_of_purchaced);
+        setupdatecategory();
+
+        setopenUpdateModal(true);
+    }
+
+    //update user 
+    const updateEquipmentForm = async (e) => {
+
+    e.preventDefault();
+    
+    var formData = {
+        name: updatename,
+        quantity: updatequantity,
+        value:updatevalue,
+        company_name:updatecompany_name,
+        date_of_purchaced: updatedate_of_purchaced,
+        category: updatecategory
+    }
+    
+    let validate = ValidateAddNewEquipment(formData);
+    let msg = validate?.message;
+    if(validate.status == false)
+    {
+        Swal.fire({
+            toast: true,
+            icon: 'warning',
+            html: `<span>${msg}</span>`,
+            animation: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: false,
+        });
+    }
+    
+    else{
+            var data = await updateEquipment(equipment._id,formData);
+            console.log("data",data)
+            if(data?.data?.status == 1)
+            {
+            Swal.fire({
+                icon: 'success',
+                //title: 'Congrats!',
+                text: 'Update successful...!',
+                })
+            setopenUpdateModal(false);
+            //navigate("/memberships");
+            GetEquipments();
+            }
+            else
+            {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Update Failed..!',
+                    text: `${data?.data?.message}`,
+                });
+            }
+        }
+    };
+
+
     const columns = [
         {
             name: (<Badge color="dark" style={{ fontSize: "18px" }} >Name</Badge>),
@@ -456,11 +619,11 @@ const ViewAllEquipments = () => {
 
                 <div className="row">
                     <div className="col">
-                        <img src={editIcon} style={{height: "25px", width:"25px"}} />
+                    <a onClick={(e)=>getSelectedEquipment(e,data)}> <img src={editIcon} style={{height: "25px", width:"25px",cursor: "pointer"}} /> </a>
                     </div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <div className="col">
-                        <img src={binIcon} style={{height: "25px", width:"25px"}} />
+                        <a onClick={() => removeEquipment(data?._id)}><img src={binIcon} style={{height: "25px", width:"25px", cursor: "pointer"}} /></a> 
                     </div>
                 </div>
       
@@ -507,6 +670,31 @@ const ViewAllEquipments = () => {
                         <CardTitle style={{display: electricEq ? "flex" : "none", color: "black", fontSize: "30px", float:"left" }}><b>Electric Machines</b></CardTitle>
                         <CardTitle style={{display: liftingMachine ? "flex" : "none", color: "black", fontSize: "30px", float:"left" }}><b>Lifting Machines</b></CardTitle>
                         <CardTitle style={{display: other ? "flex" : "none", color: "black", fontSize: "30px", float:"left" }}><b>Other Equipments</b></CardTitle>
+                      
+                        <div style={{ fontSize: "15px", float: "right" , marginLeft:"10px"}}>                            
+                            <ReactHTMLTableToExcel                                
+                                id="test-table-xls-button"
+                                className="download-table-xls-button btn btn-dark"
+                                table="table-to-xls"
+                                filename="Full User Details"
+                                sheet="tablexls"
+                                buttonText={<i class="fa-solid fa-print"></i>}
+                            />
+                        </div>
+
+                        <br /> <br /><br /> <br />
+                        <div style={{ float: "left" }}>
+                            <input
+                                className="form-control"
+                                style={{ width: "400px" }}
+                                type="search"
+                                placeholder="Search for Equipments"
+                                name="searchQuery"
+                                onChange={(e) => handleSearchArea(e)}
+                            >
+                            </input>
+                        </div>
+                      
                         {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
                         <Button className="btn btn-dark" style={{ fontSize: "15px", float:"right"}}  onClick={() => setopenModal(true)}><i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Add New Equipment</b></Button>
                         <br/>
@@ -560,6 +748,46 @@ const ViewAllEquipments = () => {
 
                     </CardBody>
                 </Card>
+
+                <table id="table-to-xls" style={{display:"none"}}>
+                    <tr>
+                        <th>Equipment ID</th>
+                        <th>Name</th>
+                        <th>Quantitiy</th>
+                        <th>Value</th>
+                        <th>Company Name</th>
+                        <th>Category</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
+                    </tr>
+                    {allDetails.map((all)=>{
+                        return (
+                            <tr>
+                                <td>{all?._id}</td>
+                                <td>{all?.name}</td>
+                                <td>{all?.quantity}</td>
+                                <td>{all?.value}</td>
+                                <td>{all?.company_name}</td>
+                                <td>{all?.category}</td>
+                                <td>{moment(all?.createdAt).format(" YYYY-MM-DD ")}</td>
+                                <td>{moment(all?.updatedAt).format(" YYYY-MM-DD ")}</td>
+                            </tr>
+                        )
+                    })}
+                    <tr></tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Total Equipments</th>
+                        <td>{allDetails.length}</td>
+                    </tr>                                      
+                </table>
+
                 <div>
                     <Modal
                         isOpen={openModal}
@@ -612,6 +840,63 @@ const ViewAllEquipments = () => {
                             </div>
                         </ModalBody>
                     </Modal>
+
+
+                    
+                {/* Update modal */}
+                <div>
+                    <Modal
+                        isOpen={openUpdateModal}
+                        className="modal-dialog-centered"
+                        fade={true}
+                        backdrop={true}>
+                        <ModalHeader
+                            toggle={() => {
+                                setopenUpdateModal(false);
+                            }}>
+                            <Label>Update User</Label>
+                        </ModalHeader>
+                        <ModalBody>
+                            <div style={{ width: "400px" }}>
+                            <Form>
+                                    <Label>Name</Label>
+                                    <Input type="text" className="input" placeholder="Name" value={updatename} onChange={(e) => handleUpdateName(e)} />
+                                    <br />
+
+                                    <Label>Quantity</Label>
+                                    <Input type="number" className="input" placeholder="Quantitiy" value={updatequantity} onChange={(e) => handleUpdateQuantity(e)} />
+                                    <br />
+
+                                    <Label>Value(LKR)</Label>
+                                    <Input type="number" className="input" placeholder="Value" value={updatevalue} onChange={(e) => handleUpdateValue(e)} />
+                                    <br />
+
+                                    <label>Select Category</label>                               
+                                    <Select
+                                        className="React"
+                                        classNamePrefix="select"
+                                        options={catergoryList}
+                                        value={category.category}
+                                        onChange={(e) => handleUpdateCategory(e)}
+                                        name="category"
+                                    />
+
+                                    <Label style={{ marginTop: '10px' }}>Company Name</Label>
+                                    <Input type="text" className="input" placeholder="Company" value={updatecompany_name} onChange={(e) => handleUpdateCompanyName(e)} />
+                                    <br />                                  
+
+                                    <Label>Date of Purchace</Label>
+                                    <Input type="date" className="input" placeholder="Date of purchace" value={updatedate_of_purchaced} onChange={(e) => handleUpdateDate(e)} />
+                                    <br />
+
+                                    <Button  className="btn btn-dark" onClick={(e) => updateEquipmentForm(e)} style={{marginTop:"20px"}}>Update Equipment</Button>
+
+                                </Form>
+                            </div>
+                        </ModalBody>
+                    </Modal>
+                </div>
+
                 </div>
             </div>
 
