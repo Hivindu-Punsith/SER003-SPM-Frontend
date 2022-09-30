@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
+import axios from "axios";
 import {
     Badge,
     Card,
@@ -18,7 +19,7 @@ import {
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import { ValidateAddNewMembership } from "./Validation";
-import { createMembership , getAllMemberships } from "../../services/MembershipServices";
+import { createMembership , getAllMemberships, deleteMembership } from "../../services/MembershipServices";
 import editIcon from "../../assests/images/pencil.png"
 import binIcon from "../../assests/images/bin.png"
 
@@ -50,6 +51,34 @@ const ViewAllMemberships = () => {
         e.preventDefault();
         setdescription(e.target.value)
     }
+
+    //----------------------------Search-----------------------
+
+    const filterData = (MembershipDetails, Searchkey) => {
+        console.log(MembershipDetails, Searchkey);
+        const result = MembershipDetails.filter(
+            (membership) =>
+                // console.log(product),
+                membership.name.toString().toLowerCase().includes(Searchkey) ||
+                membership.price.toString().toLowerCase().includes(Searchkey) ||
+                membership.duration.toString().toLowerCase().includes(Searchkey) ||
+                membership.description.toString().toLowerCase().includes(Searchkey),
+        );
+        setMembershipDetails(result);
+    }
+
+    const handleSearchArea = (e) => {
+        const Searchkey = e.currentTarget.value;
+        axios.get("http://localhost:5000/gym/membership/getAllMemberships").then((res) => {
+
+            console.log(res.data.status);
+            if (res.data?.status == "1") {
+                filterData(data?.data?.memberships, Searchkey);
+            }
+        });
+    }
+
+    //---------------------------------------------------------
 
     const addMembership = async (e) => {
 
@@ -112,6 +141,7 @@ const ViewAllMemberships = () => {
                     price: item?.price,
                     duration: item?.duration,
                     description: item?.description,
+                    _id: item?._id
                 }
             })
 
@@ -128,7 +158,29 @@ const ViewAllMemberships = () => {
         GetMemberships();
     }, [])
 
-    
+    const removeMembership = async (id) => {
+        console.log(id);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let data = deleteMembership(id);
+                console.log("Delete ", data);
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+                GetMemberships();
+            }
+        })
+    }
     const columns = [
         {
             name: (<Badge color="dark" style={{ fontSize: "18px" }} >Name</Badge>),
@@ -192,19 +244,12 @@ const ViewAllMemberships = () => {
                     </div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <div className="col">
-                        <img src={binIcon} style={{height: "25px", width:"25px"}} />
+                       <a onClick={() => removeMembership(data?._id)}><img src={binIcon} style={{height: "25px", width:"25px"}} /></a> 
                     </div>
                 </div>
             ),
           },
-
-
-
-
-
-
     ];
-
 
     return (
         <div style={{ marginTop: "70px", marginBottom: "70px" }}>
@@ -213,7 +258,20 @@ const ViewAllMemberships = () => {
                     <CardHeader>
                         <center>
                         <CardTitle style={{ color: "black", fontSize: "30px", float:"left" }}><b>All Memberships</b></CardTitle>
-                        {/* <Button className="btn btn-dark" style={{ fontSize: "15px"}} ><i class="fa-solid fa-print"></i><b> </b></Button> */}
+
+                        <br /> <br /><br /> <br />
+                        <div style={{ float: "left" }}>
+                            <input
+                                className="form-control"
+                                style={{ width: "400px" }}
+                                type="search"
+                                placeholder="Search for Memberships"
+                                name="searchQuery"
+                                onChange={(e) => handleSearchArea(e)}
+                            >
+                            </input>
+                        </div>
+
                         <br/>
                         <Button className="btn btn-dark" style={{ fontSize: "15px", float:"right"}}  onClick={() => setopenModal(true)}><i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Add New Membership</b></Button>
                         </center>

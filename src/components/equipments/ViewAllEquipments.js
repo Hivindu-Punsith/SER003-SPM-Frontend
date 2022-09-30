@@ -21,7 +21,7 @@ import {
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import { ValidateAddNewEquipment } from "./Validation";
-import { getAllEquipments , createEquipment } from "../../services/EquipmentServices";
+import { getAllEquipments , createEquipment, deleteEquipment } from "../../services/EquipmentServices";
 
 const ViewAllEquipments = () => {
 
@@ -158,6 +158,7 @@ const ViewAllEquipments = () => {
                     company_name: item?.company_name,
                     date_of_purchaced: item?.date_of_purchaced,
                     category: item?.category,
+                    _id: item?._id
                 }
             })
 
@@ -193,6 +194,7 @@ const ViewAllEquipments = () => {
                     company_name: item?.company_name,
                     date_of_purchaced: item?.date_of_purchaced,
                     category: item?.category,
+                    _id: item?._id
                 }
             })
 
@@ -229,6 +231,7 @@ const ViewAllEquipments = () => {
                     company_name: item?.company_name,
                     date_of_purchaced: item?.date_of_purchaced,
                     category: item?.category,
+                    _id: item?._id
                 }
             })
 
@@ -264,6 +267,7 @@ const ViewAllEquipments = () => {
                     company_name: item?.company_name,
                     date_of_purchaced: item?.date_of_purchaced,
                     category: item?.category,
+                    _id: item?._id
                 }
             })
 
@@ -299,6 +303,7 @@ const ViewAllEquipments = () => {
                     company_name: item?.company_name,
                     date_of_purchaced: item?.date_of_purchaced,
                     category: item?.category,
+                    _id: item?._id
                 }
             })
 
@@ -310,11 +315,6 @@ const ViewAllEquipments = () => {
             setLoading(false);
         }
     }
-
-
-
-
-
 
     useEffect(() => {
         GetEquipments();
@@ -376,6 +376,29 @@ const ViewAllEquipments = () => {
         setother(true);
     };
 
+    const removeEquipment = async (id) => {
+        console.log(id);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let data = deleteEquipment(id);
+                console.log("Delete ", data);
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+                GetEquipments();
+            }
+        })
+    }
 
     
     const columns = [
@@ -460,7 +483,7 @@ const ViewAllEquipments = () => {
                     </div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <div className="col">
-                        <img src={binIcon} style={{height: "25px", width:"25px"}} />
+                        <a onClick={() => removeEquipment(data?._id)}><img src={binIcon} style={{height: "25px", width:"25px"}} /></a> 
                     </div>
                 </div>
       
