@@ -74,9 +74,9 @@ const ViewAllMemberships = () => {
         const Searchkey = e.currentTarget.value;
         axios.get("http://localhost:5000/gym/membership/getAllMemberships").then((res) => {
 
-            console.log(res.data.status);
+            console.log(res.data);
             if (res.data?.status == "1") {
-                filterData(data?.data?.memberships, Searchkey);
+                filterData(res?.data?.data?.memberships, Searchkey);
             }
         });
     }

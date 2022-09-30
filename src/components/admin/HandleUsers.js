@@ -408,6 +408,33 @@ const HandleUsers = () => {
     }
 
 
+        //----------------------------Search-----------------------
+
+        const filterData = (searchUserDeatils, Searchkey) => {
+            console.log(searchUserDeatils, Searchkey);
+            const result = searchUserDeatils.filter(
+                (user) =>
+                    // console.log(product),
+                    user.fullName.toString().toLowerCase().includes(Searchkey) ||
+                    user.email.toString().toLowerCase().includes(Searchkey) ||
+                    user.gym_id.toString().toLowerCase().includes(Searchkey),
+            );
+            setUserDetails(result);
+        }
+    
+        const handleSearchArea = async (e) => {
+            const Searchkey = e.currentTarget.value;
+            await GetAllUserDetails().then((res) => {
+                console.log(res.data);
+                if (res.data?.status == "1") {
+                    filterData(res?.data?.data?.users, Searchkey);
+                }
+            });
+        }
+    
+        //---------------------------------------------------------
+
+
     return (
         <div style={{ marginTop: "70px", marginBottom: "70px" }}>
             <div style={{ margin: "10px" }}>
@@ -428,6 +455,18 @@ const HandleUsers = () => {
                         </div>
                         <Button className="btn btn-dark" style={{ fontSize: "15px", float: "right" }}  onClick={() => setopenModal(true)}><i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Add New User</b></Button>
                         </center>
+                        <br/><br/><br/>
+                        <div style={{ float: "right" }}>
+                            <input
+                                className="form-control"
+                                style={{ width: "400px" }}
+                                type="search"
+                                placeholder="Search for Users"
+                                name="searchQuery"
+                                onChange={(e) => handleSearchArea(e)}
+                            >
+                            </input>
+                        </div>
                     </CardHeader>
                     <CardBody>
                         <DataTable

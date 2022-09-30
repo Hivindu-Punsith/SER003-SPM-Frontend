@@ -23,6 +23,7 @@ import Swal from 'sweetalert2';
 import { ValidateAddNewEquipment } from "./Validation";
 import { getAllEquipments , createEquipment, deleteEquipment, updateEquipment } from "../../services/EquipmentServices";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import axios from "axios";
 
 const ViewAllEquipments = () => {
 
@@ -423,9 +424,9 @@ const ViewAllEquipments = () => {
         const Searchkey = e.currentTarget.value;
         axios.get("http://localhost:5000/gym/equipment/getAllEquipments").then((res) => {
 
-            console.log(res.data.status);
+            console.log(res);
             if (res.data?.status == "1") {
-                filterData(data?.data?.equipments, Searchkey);
+                filterData(res?.data?.data?.equipments, Searchkey);
             }
         });
     }
@@ -474,13 +475,14 @@ const ViewAllEquipments = () => {
         e.preventDefault();
 
         setEquipment(equipment)
+        console.log("selected data",equipment);
 
         setupdatename(equipment.name);
         setupdatequantity(equipment.quantity);
         setupdatevalue(equipment.value);
         setupdatecompanyname(equipment.company_name);
         setupdatedate(equipment.date_of_purchaced);
-        setupdatecategory();
+        setupdatecategory({ ...category, "category" : {value:equipment.category , label:equipment.category , name:"category"} });
 
         setopenUpdateModal(true);
     }
@@ -496,7 +498,7 @@ const ViewAllEquipments = () => {
         value:updatevalue,
         company_name:updatecompany_name,
         date_of_purchaced: updatedate_of_purchaced,
-        category: updatecategory
+        category: updatecategory.category
     }
     
     let validate = ValidateAddNewEquipment(formData);
@@ -876,7 +878,7 @@ const ViewAllEquipments = () => {
                                         className="React"
                                         classNamePrefix="select"
                                         options={catergoryList}
-                                        value={category.category}
+                                        value={updatecategory.category}
                                         onChange={(e) => handleUpdateCategory(e)}
                                         name="category"
                                     />
