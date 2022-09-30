@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
+import editIcon from "../../assests/images/pencil.png"
+import binIcon from "../../assests/images/bin.png"
 import {
     Badge,
     Card,
@@ -228,15 +230,15 @@ const HandleUsers = () => {
                 </div>
             ),
         },
-        {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >created At</Badge>),
-            selector: "createdAt",
-            cell: (data) => (
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Label style={{ fontSize: "18px" }}><b>{moment(data?.createdAt).format(" YYYY-MM-DD ")}</b><br /></Label>
-                </div>
-            ),
-        },
+        // {
+        //     name: (<Badge color="dark" style={{ fontSize: "18px" }} >created At</Badge>),
+        //     selector: "createdAt",
+        //     cell: (data) => (
+        //         <div style={{ display: "flex", flexDirection: "column" }}>
+        //             <Label style={{ fontSize: "18px" }}><b>{moment(data?.createdAt).format(" YYYY-MM-DD ")}</b><br /></Label>
+        //         </div>
+        //     ),
+        // },
         {
             name: (<Badge color="dark" style={{ fontSize: "18px" }} >updated At</Badge>),
             selector: "updatedAt",
@@ -247,35 +249,29 @@ const HandleUsers = () => {
             ),
         },
         {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >User Update</Badge>),
-      
+    
             cell: (data) => (
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                {/* <Link to={`/updateSub/${data?._id}`}> */}
-                <Button 
-                    className="btn btn-warning" style={{ fontSize: "16px" }} onClick={(e)=>getSelectedUser(e,data)} ><i class="fa-solid fa-pen-to-square"></i>&nbsp;Update</Button>
-                {/* </Link> */}
-              </div>
+
+                <div className="row">
+                    <div className="col">
+                    <a onClick={(e)=>getSelectedUser(e,data)}> <img src={editIcon} style={{height: "25px", width:"25px",cursor: "pointer"}} /> </a>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div className="col">
+                        <a onClick={(e) => DeleteSelectedUser(e,data)}><img src={binIcon} style={{height: "25px", width:"25px", cursor: "pointer"}} /></a> 
+                    </div>
+                </div>
+                
+            //   <div style={{ display: "flex", flexDirection: "column" }}>
+            //     {/* <Link to={`/updateSub/${data?._id}`}> */}
+            //     <Button 
+            //         className="btn btn-warning" style={{ fontSize: "16px" }} onClick={(e)=>getSelectedUser(e,data)} ><i class="fa-solid fa-pen-to-square"></i>&nbsp;Update</Button>
+            //     {/* </Link> */}
+            //   </div>
       
             ),
           },
-      
-          {
-            name: (<Badge color="dark" style={{ fontSize: "18px" }} >User Delete</Badge>),
-      
-            cell: (data) => (
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <Button className="btn btn-danger" style={{ fontSize: "16px" }} onClick={(e)=>DeleteSelectedUser(e,data)} ><i class="fa-solid fa-trash-can"></i>&nbsp;<b>Delete</b></Button>
-              </div>
-      
-            ),
-          },
-
-
-
-
-
-
+    
     ];
 
 
@@ -367,11 +363,13 @@ const HandleUsers = () => {
                 {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Congrats!',
-                    text: 'Update successfull...!',
+                    //title: 'Congrats!',
+                    text: 'Update successful...!',
                     })
-                navigate("/users");
-                window.location.reload();
+                setopenUpdateModal(false);
+                GetUsers();
+                // navigate("/users");
+                // window.location.reload();
                 }
                 else
                 {
