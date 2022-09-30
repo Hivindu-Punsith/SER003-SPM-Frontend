@@ -333,14 +333,14 @@ const Profile = () => {
                         </div>
                             <br />
                             <Button
-                            color="primary"
+                            color="danger"
                             onClick={(e) => ChangetoUpdate(e)}
                             style={{ display: updateChange ? "none" : "flex" }}
                             >
                             Click To Update
                             </Button>
                             <Button
-                            className="btn btn-success"
+                            className="btn btn-dark"
                             onClick={(e) => UpdateData(e)}
                             style={{ display: updateChange ? "flex" : "none" }}
                             >
