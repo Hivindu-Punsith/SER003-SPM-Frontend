@@ -125,5 +125,22 @@ export async function DeleteUser(id){
   }
 
 export async function GetUserPlans(id){
-    return await axios.get(GetPlansURL+id);
+    let result;
+    await axios.get(GetPlansURL+id)
+     .then(function(data) {
+         //console.log("success data",data)
+         result = data;
+     })
+     .catch(function (error) {
+         if (error.response) {
+           //console.log(error.response.data);
+           result = error.response;
+           
+         } else if (error.request) {
+           //console.log(error.request);
+           result = error.request;
+         } 
+     
+       });
+  return result;
 }

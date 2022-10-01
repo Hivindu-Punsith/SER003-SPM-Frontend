@@ -116,9 +116,10 @@ const ClientMemberships = () => {
                 <div>
                     <center>
                         <CardText style={{color:"Black" , fontSize:"30px"}}>
-                            {UserDetails?.fullName} :- &nbsp; 
-                            {UserDetails?.memberShip !== null ? UserDetails?.memberShip : "No Membership yet"}
-                            </CardText>
+                            <h2 style={{ color: "black", fontSize: "30px" }} class="animate-charcter"><b>YOUR CURRENT MEMBERSHIP</b></h2><br/>
+
+                           <p style={{fontSize:'40px',textTransform: 'uppercase'}}>{UserDetails?.memberShip !== null ? UserDetails?.memberShip : "No Membership yet"}</p> 
+                        </CardText>
                     </center>
                 </div>
                 <div>
@@ -131,7 +132,7 @@ const ClientMemberships = () => {
                                     <CardHeader>
                                         <CardTitle style={{ color: "black", fontSize: "40px" }}>
                                         <center>
-                                            <b style={{color:`${item?.name == "Gold" ? "#f7ef02" : item?.name == "Silver" ? "#787675" : item?.name == "Bronze" ? "#e67a53" : "#E5E4E2"}`}}>
+                                            <b style={{color:`${item?.name == "Gold" ? "#f7ef02" : item?.name == "Silver" ? "#787675" : item?.name == "Bronze" ? "#e67a53" : "#E5E4E2"}`,textTransform: 'uppercase'}}>
                                                 {item.name}
                                             </b>
                                         </center>
@@ -146,17 +147,22 @@ const ClientMemberships = () => {
                                         </center>
                                     </CardHeader>
                                     <CardBody>
-                                        <CardText><b>Membership Type -:</b> {item.name}</CardText>
-                                        <CardText><b>Membership Price -:</b> Rs.{item.price}.00</CardText>
-                                        <CardText><b>Membership Duration -:</b> {item.duration}</CardText>
-                                        <CardText><b>Membership Description -:</b> {item.description}</CardText>
+                                        <Row><Col>  <CardText><b> Type </b> </CardText></Col> <Col> {item.name}</Col></Row>
+                                        <Row><Col>  <CardText><b> Price </b> </CardText></Col> <Col>Rs.{item.price}.00</Col></Row>
+                                        <Row><Col>  <CardText><b> Duration </b> </CardText></Col> <Col>{item.duration}</Col></Row>
+                                        <Row><Col>  <CardText><b> Description </b> </CardText></Col> <Col>{item.description}</Col></Row>
+
+                                        <br/>
+                                        <center>
                                         <Button
-                                        className="btn btn-warning"
+                                        className="btn btn-dark"
                                         style={{ marginRight: "20px" }}
                                         onClick={(e)=>selectMemberShip(e,item)}
                                         >
-                                        Select Membership
+                                        Update Membership
                                         </Button>
+                                        </center>
+                                      
 
                                     </CardBody>
                                     </Card>
