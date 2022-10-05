@@ -82,7 +82,7 @@ export async function updateEquipment(id,data) {
         value:data?.value,
         company_name:data?.company_name,
         date_of_purchaced:data?.date_of_purchaced,
-        category:data?.category,
+        category:data?.category?.value,
     } 
     let result;
     await  axios.put(UpdateURL + id,alldata)
