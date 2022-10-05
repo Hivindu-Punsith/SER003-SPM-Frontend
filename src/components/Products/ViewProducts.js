@@ -36,7 +36,7 @@ import { getProductByID } from "../../services/ProductService";
 const ViewProducts = () => {
     const navigate = useNavigate();
 
-    const [ProductDetails, setProductDetails] = useState({});
+    const [ProductDetails, setProductDetails] = useState([]);
     const [loading, setLoading] = useState(false);
 
 
@@ -135,10 +135,6 @@ const ViewProducts = () => {
         navigate("/add-new-product");
     }
 
-    const routeToReportGenerate = (e) => {
-        e.preventDefault();
-        navigate("/report-test");
-    }
 
     const columns = [
 
@@ -269,33 +265,66 @@ const ViewProducts = () => {
 
                         <Button className="btn btn-dark" style={{ fontSize: "15px", float: "right", width: '200px' }} onClick={(e) => routeToAddPage(e)}><i class="fa-solid fa-circle-plus"></i><b>  Add New Product</b></Button>
 
-                        <Button
-                            className="btn btn-dark"
-                            style={{ fontSize: "15px", float: "right", width: '50px', marginRight: '20px' }}
-                            onClick={(e) => routeToReportGenerate(e)}>
-                            <i class="fa-solid fa-print"></i><b></b>
-                        </Button>
+                        &nbsp;&nbsp;&nbsp;
+
+                        <div style={{ fontSize: "15px", float: "right", marginLeft: "10px",marginRight: '20px' }}>&nbsp;&nbsp;&nbsp;
+                            <ReactHTMLTableToExcel
+                                id="test-table-xls-button"
+                                className="download-table-xls-button btn btn-dark"
+                                table="table-to-xls"
+                                filename="Products Details"
+                                sheet="tablexls"
+                                buttonText={<i class="fa-solid fa-print"></i>}
+                            />
+                        </div>
 
 
 
                     </CardHeader>
                     <CardBody >
-                        {/* <ReactHTMLTableToExcel
-                            id="test-table-xls-button"
-                            className="download-table-xls-button"
-                            table="table-to-xls"
-                            filename="tablexls"
-                            sheet="tablexls"
-                            buttonText="Download as XLS" /> */}
 
                         <DataTable
-                            // id="table-to-xls"
+
                             data={ProductDetails}
                             columns={columns}
                             progressPending={loading}
                         />
                     </CardBody>
                 </Card>
+
+                <table id="table-to-xls" style={{ display: "none" }}>
+                    <tr>
+                        <th></th>
+                        <th>Product ID</th>
+                        <th>Category</th>
+                        <th>Product Name</th>
+                        <th>Product Price</th>
+                        <th>In stock</th>
+                        <th>Expired Date</th>
+                    </tr>
+                    {ProductDetails.map((product, index) => (
+                        <tr >
+                            <th scope="row">{index + 1}</th>
+                            <td><b>{product?._id}</b></td>
+                            <td><b>{product.category}</b></td>
+                            <td><b>{product.productName}</b></td>
+                            <td><b>LKR. {product.productPrice}</b></td>
+                            <td><b>{product.quantity}</b></td>
+                            <td><b>{moment(product?.expireDate).format(" YYYY-MM-DD ")}</b></td>
+                        </tr>
+                    ))}
+                    <tr></tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Total products</th>
+                        <td>{ProductDetails.length}</td>
+                    </tr>
+                </table>
             </div>
 
         </div>
