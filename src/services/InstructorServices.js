@@ -86,6 +86,7 @@ export async function updateInstructor(id,data) {
         dateOfBirth: data?.dateOfBirth,
         weight: data?.weight,
         height: data?.height,
+        salary: data?.salary,
     };
     return await axios.put(UpdateURL + id, alldata);
 
