@@ -37,21 +37,11 @@ const Payment = () => {
     const [month, setMonth] = useState("");
     const [cvv, setCvv] = useState("");
 
-    // const [data, setData] = useState({
-    //     name: "",
-    //     address: "",
-    //     method: "",
-
-    // });
-
     const handleType = ({ currentTarget: input }) => {
-        setType({ ...ctype, [input.type]: input.value });
+        setType({ ...ctype, [input.ctype]: input.value });
     };
 
-    //    const handleType = (e) => {
-    //         e.preventDefault();
-    //         setType(e.target.value)
-    //     }
+ 
     const handleHolder = (e) => {
         e.preventDefault();
         setHolder(e.target.value)
@@ -112,7 +102,7 @@ const Payment = () => {
                 Swal.fire({
                     icon: 'success',
                     title: 'Successful!',
-                    text: 'Card details entered',
+                    text: 'payment success!',
                 })
                 navigate("/thankyou")
             }
@@ -131,14 +121,10 @@ const Payment = () => {
         name: "",
         address: "",
         method: "",
+        mobile:"+94"
 
     });
 
-    // let methodList = [
-    //     { value: "cash", label: "Cash On Delivery", name: "method" },
-    //     { value: "card", label: "Card", name: "method" },
-
-    // ];
 
     const handelSelectorChange = (e) => {
         console.log(e);
@@ -213,6 +199,7 @@ const Payment = () => {
                             name="name"
                             onChange={handleChange}
                             value={data.name}
+                            placeholder="Name"
 
                         />
 
@@ -222,6 +209,7 @@ const Payment = () => {
                             name="email"
                             onChange={handleChange}
                             value={data.email}
+                            placeholder="Email"
 
                         />
 
@@ -230,7 +218,9 @@ const Payment = () => {
                             className='form-control'
                             name="mobile"
                             onChange={handleChange}
-                            value={data.mobile}
+                            value= {data.mobile}
+                            maxLength={12}
+                            placeholder="+94-123456789"
 
                         />
 
@@ -240,6 +230,7 @@ const Payment = () => {
                             name="address"
                             onChange={handleChange}
                             value={data.address}
+                            placeholder="Delivery address"
 
 
                         />
@@ -281,27 +272,27 @@ const Payment = () => {
 
                                             <br></br>
                                             <Label>Card Holder Name</Label>
-                                            <Input type="text" className="input" placeholder="Name" value={holder} onChange={(e) => handleHolder(e)} />
+                                            <Input type="text" className="input" placeholder="Card Holder Name" value={holder} onChange={(e) => handleHolder(e)} />
                                             <br />
 
                                             <Label>Card Number</Label>
-                                            <Input type="text" className="input" placeholder="Card number" value={cardNum} onChange={(e) => handleCardNum(e)} />
+                                            <Input maxLength={16} type="text" className="input" placeholder="Card number" value={cardNum} onChange={(e) => handleCardNum(e)} />
                                             <br />
                                             <table>
                                                 <tr>
                                                     <td>
                                                         <Label>Year</Label>
-                                                        <Input type="text" className="input" placeholder="year" value={year} onChange={(e) => handleYear(e)} />
+                                                        <Input maxLength={2} type="text" className="input" placeholder="year" value={year} onChange={(e) => handleYear(e)} />
                                                         &nbsp; &nbsp;
                                                     </td>
                                                     <td>
                                                         <Label>Month</Label>
-                                                        <Input type="text" className="input" placeholder="month" value={month} onChange={(e) => handleMonth(e)} />
+                                                        <Input maxLength={2} type="text" className="input" placeholder="month" value={month} onChange={(e) => handleMonth(e)} />
                                                         &nbsp; &nbsp;
                                                     </td>
                                                     <td>
                                                         <Label>CVV</Label>
-                                                        <Input type="text" className="input" placeholder="cvv" value={cvv} onChange={(e) => handleCvv(e)} />
+                                                        <Input maxLength={3} type="text" className="input" placeholder="cvv" value={cvv} onChange={(e) => handleCvv(e)} />
                                                         &nbsp; &nbsp;
                                                     </td>
                                                 </tr>

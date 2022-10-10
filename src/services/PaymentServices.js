@@ -16,12 +16,6 @@ export async function createPayment(data) {
         address:data?.address,
         method:data?.method,
 
-        // type:data?.type,
-        // holder:data?.holder,
-        // cardNum:data?.cardNum,
-        // year:data?.year,
-        // month:data?.month,
-        // cvv:data?.cvv,
 
 
     } 
