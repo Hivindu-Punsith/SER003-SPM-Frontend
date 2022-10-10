@@ -26,7 +26,7 @@ import FileInput from "../../utils/FileInput";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 import { getAllProducts } from '../../services/ProductService';
-import { validateCreateProduct } from "../auth/productValidation";
+import { validateCreateProduct } from "../Products/productValidation";
 import { createNewProduct } from "../../services/ProductService";
 import { deleteProduct } from "../../services/ProductService";
 import { updateProduct } from "../../services/ProductService";
@@ -120,7 +120,7 @@ const ViewProducts = () => {
                 console.log("Delete ", data);
                 Swal.fire(
                     'Deleted!',
-                    'Your file has been deleted.',
+                    'Product has been deleted.',
                     'success'
                 )
                 GetProducts();
@@ -193,30 +193,7 @@ const ViewProducts = () => {
                 </div>
             ),
         },
-        // {
-        //     name: (<Badge color="dark" ></Badge>),
-
-        //     cell: (data) => (
-        //         <div style={{ display: "flex", flexDirection: "column" }}>
-        //             {/* <Link to={`/updateSub/${data?._id}`}> */}
-        //             <Button
-        //                 className="btn btn-dark" style={{ fontSize: "16px", color:"red" }} href={`/edit-product/${data?._id}`} >Update <i class="fa-solid fa-pen-to-square"></i></Button>
-        //             {/* </Link> */}
-        //         </div>
-
-        //     ),
-        // },
-
-        // {
-        //     name: (<Badge color="secondary"  ></Badge>),
-
-        //     cell: (data) => (
-        //         <div style={{ display: "flex", flexDirection: "column" }}>
-        //             <Button className="btn btn-dark" style={{ fontSize: "16px" , color:"red"}} onClick={() => removeProduct(data?._id)}>Delete <i class="fa-solid fa-trash-can"></i></Button>
-        //         </div>
-
-        //     ),
-        // },
+     
 
         {
             name: (<Badge color="secondary"  ></Badge>),
