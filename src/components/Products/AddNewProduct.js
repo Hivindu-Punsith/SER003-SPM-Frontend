@@ -10,7 +10,7 @@ import {
 import Swal from 'sweetalert2';
 import FileInput from "../../utils/FileInput";
 
-import { validateCreateProduct } from "../auth/productValidation";
+import { validateCreateProduct } from "../Products/productValidation";
 import { createNewProduct } from "../../services/ProductService";
 
 const AddNewProduct = () => {
@@ -119,6 +119,7 @@ const AddNewProduct = () => {
                             name="productName"
                             onChange={handleChange}
                             value={data.productName}
+                            placeholder="Product name"
                         />
 
                         <label style={{ marginTop: '15px' }}>Enter Product Price</label>
@@ -128,6 +129,7 @@ const AddNewProduct = () => {
                             onChange={handleChange}
                             value={data.productPrice}
                             type='number'
+                            placeholder="Product price"
                         />
 
                         <label style={{ marginTop: '15px' }}>Enter Expire Date</label>
@@ -137,6 +139,7 @@ const AddNewProduct = () => {
                             type="date"
                             onChange={handleChange}
                             value={data.expireDate}
+                            placeholder="Stock-expired date"
                         />
 
                         <label style={{ marginTop: '15px' }}>Enter Quantity</label>
@@ -146,6 +149,7 @@ const AddNewProduct = () => {
                             onChange={handleChange}
                             value={data.quantity}
                             type='number'
+                            placeholder="Quantity"
                         />
 
                         <label style={{ marginTop: '15px' }}>Product Image</label>

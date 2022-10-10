@@ -233,10 +233,10 @@ const ClientViewProducts = () => {
       <br></br>
       <br></br>
       <Button
-        className="btn btn-danger" style={{ color: 'black', fontSize: "14px", float: 'right', width: '220px', height: '40px', display: showCart ? "flex" : "none" }}
+        className="btn btn-danger" style={{ color: 'black', fontSize: "14px", float: 'right', width: '140px', height: '40px', display: showCart ? "flex" : "none" }}
         onClick={(e) => hideShoppingCart(e)}
       >
-        <b>Close My Shopping Cart</b>
+        <b>Shop More</b>
         &nbsp;&nbsp;&nbsp;
         <center>
           <i class="fa-solid fa-cart-arrow-down"></i>

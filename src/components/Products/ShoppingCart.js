@@ -43,7 +43,7 @@ const MyShoppingCart = (props) => {
 
 
     return (
-        <div className='container' style={{ width: '760px' ,border: '5px solid black',marginBottom:'100px'}}>
+        <div className='container' style={{ width: '960px' ,border: '2px solid black',marginBottom:'100px'}}>
             <br></br>
             <br></br>
             <center>

@@ -10,7 +10,7 @@ import {
 import Swal from 'sweetalert2';
 import FileInput from "../../utils/FileInput";
 
-import { validateCreateProduct } from "../auth/productValidation";
+import { validateCreateProduct } from "../Products/productValidation";
 import { updateProduct, getProductByID } from "../../services/ProductService";
 import moment from "moment";
 
