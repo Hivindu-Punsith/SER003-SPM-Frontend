@@ -4,6 +4,7 @@ import StartUrl from "../configs/Url.json";
 
 const CreateNewUserURL = StartUrl?.StartUrl + "/gym/user/create-user";
 const GetAllUsersURL = StartUrl?.StartUrl + "/gym/user/all-users";
+const GetOneUsersURL = StartUrl?.StartUrl + "/gym/user/";
 const UpdateUserInstructorURL = StartUrl?.StartUrl + "/gym/user/update-instructor/";
 const UpdateUsermemberShipURL = StartUrl?.StartUrl + "/gym/user/update-memberShip/";
 const UpdateUserURL = StartUrl?.StartUrl + "/gym/user/update-user/";
@@ -44,6 +45,27 @@ export async function AddNewUsers(data){
 export async function GetAllUserDetails(){
     let result;
     await  axios.get(GetAllUsersURL)
+     .then(function(data) {
+         //console.log("success data",data)
+         result = data;
+     })
+     .catch(function (error) {
+         if (error.response) {
+           //console.log(error.response.data);
+           result = error.response;
+           
+         } else if (error.request) {
+           //console.log(error.request);
+           result = error.request;
+         } 
+     
+       });
+  return result;
+}
+
+export async function GetOneUserDetails(id){
+    let result;
+    await  axios.get(GetOneUsersURL + id)
      .then(function(data) {
          //console.log("success data",data)
          result = data;

@@ -32,6 +32,7 @@ import ViewAllClients from "./components/instructors/ViewAllClients";
 import HandleInstructors from "./components/admin/HandleInstructors";
 import ClientMemberships from "./components/memberships/ClientMemberships";
 import EditProduct from "./components/Products/EditProduct";
+import HandlePlans from "./components/instructors/HandlePlans";
 
 
 
@@ -62,6 +63,7 @@ const SiteRouter = () => {
                 <Route path="/memberships" element={<ViewAllMemberships/>}/>
                 <Route path="/client-memberships" element={<ClientMemberships/>}/>
                 <Route path="/clients" element={<ViewAllClients/>}/>
+                <Route path="/clients/:id" element={<HandlePlans/>}/>
                 <Route path="/instructors" element={<HandleInstructors/>}/>
                
 
