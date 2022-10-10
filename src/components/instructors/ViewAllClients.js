@@ -20,11 +20,11 @@ import {
   Container,
   CardText,
 } from "reactstrap";
-import { GetAllUserDetails } from "../../services/UserServices";
+import { GetAllUserDetails, GetUserPlans } from "../../services/UserServices";
 import userImg from "../../assests/images/user.png";
 import { ValidateAddNewWorkout, ValidateAddNewMeal } from "./Validation";
-import { createWorkout } from "../../services/WorkoutServices";
-import { createDiet } from "../../services/DietServices";
+import { createWorkout, getWorkoutById, updateWorkout, deleteWorkout } from "../../services/WorkoutServices";
+import { createDiet, getDietById, updateDiet, deleteDiet } from "../../services/DietServices";
 import Swal from "sweetalert2";
 
 const ViewAllClients = () => {
@@ -232,12 +232,13 @@ const ViewAllClients = () => {
           createdAt: item?.createdAt,
           updatedAt: item?.updatedAt,
           status: item?.status,
+          instructor: item?.instructor,
           _id: item?._id,
         };
       });
 
       setUserDetails(newData);
-      console.log("data", UserDetails);
+      console.log("data users", newData);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -245,8 +246,50 @@ const ViewAllClients = () => {
     }
   };
 
+  const getUserPlans = async () => {
+    try {
+      setLoading(true);
+
+      let data = await GetUserPlans(UserDetails._id);
+
+      console.log("all Plans", data);
+      let newData = data?.data?.data?.plans?.map((item) => {
+        return {
+          user_id: item?.user_id,
+          workout_type: item?.workout_type,
+          exercise1: item?.exercise1,
+          exercise2: item?.exercise2,
+          exercise3: item?.exercise3,
+          exercise4: item?.exercise4,
+          exercise5: item?.exercise5,
+          exercise6: item?.exercise6,
+          meal1: item?.meal1,
+          meal2: item?.meal2,
+          meal3: item?.meal3,
+          meal4: item?.meal4,
+          meal5: item?.meal5,
+          meal6: item?.meal6,
+          createdAt: item?.createdAt,
+          updatedAt: item?.updatedAt,
+          _id: item?._id,
+        };
+      });
+
+      // setUserPlans(newData);
+      console.log("data plans", newData);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  }
+
+  //filtering userdata 
+  const getFilteredUsers = UserDetails.filter(user => user.instructor !== null)
+
   useEffect(() => {
     GetUsers();
+    getUserPlans();
   }, []);
 
   const [selectedUserID, setselectedUserID] = useState("");
@@ -254,13 +297,13 @@ const ViewAllClients = () => {
   const openDietModal = (e,user) => {
     e.preventDefault();
     setopenModalD(true);
-    setselectedUserID(user._id)
+    setselectedUserID(user.gym_id)
   }
 
   const openWorkModal = (e,user) => {
     e.preventDefault();
     setopenModalW(true);
-    setselectedUserID(user._id);
+    setselectedUserID(user.gym_id);
   }
 
   return (
@@ -287,18 +330,26 @@ const ViewAllClients = () => {
                     </center>
                   </CardHeader>
                   <CardBody>
+                    <CardText>User ID -: {user.gym_id}</CardText>
                     <CardText>User Email -: {user.email}</CardText>
                     <CardText>User Mobile -: {user.mobileno}</CardText>
                     <CardText>User Weight -: {user.weight}kg</CardText>
                     <CardText>User Height -: {user.height}feet</CardText>
                     <Button
-                      style={{ marginRight: "20px" }}
+                      style={{ marginRight: "10px" }}
                       onClick={(e) => openWorkModal(e,user)}
                     >
                       Add Workout
                     </Button>
-                    <Button onClick={(e) => openDietModal(e,user)}>
+                    <Button 
+                      style={{ marginRight: "10px" }}
+                      onClick={(e) => openDietModal(e,user)}>
                       Add Diet Plan
+                    </Button>
+                    <Button 
+                    //  style={{ marginLeft: "20px", marginRight: "20px" }}
+                     onClick={() => navigate(`/clients/${user.gym_id}`)}>
+                      View Details
                     </Button>
                   </CardBody>
                 </Card>
