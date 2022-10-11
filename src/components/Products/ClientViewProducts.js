@@ -21,6 +21,7 @@ import '../Products/style'
 import Swal from 'sweetalert2';
 import MyShoppingCart from './ShoppingCart';
 import categoryPhoto from "../../assests/images/category.png"
+import { Link, useNavigate } from "react-router-dom";
 
 
 const ClientViewProducts = () => {
@@ -193,34 +194,97 @@ const ClientViewProducts = () => {
   const [CartData, setCartData] = useState([]);
   const [showCart, setshowCart] = useState(false);
   const [total, settotal] = useState(0);
+  const [badge, setBadge] = useState(0);
+
+  const navigate = useNavigate();
+
+  //-------------------------------------------------
 
   const addtoCart = (e, data) => {
+
     e.preventDefault();
-    console.log(data);
-    let array = CartData;
-    array.push(data);
-    setCartData(array);
-    console.log(CartData);
-    let itemtotal = total;
-    itemtotal = itemtotal + data.productPrice;
-    settotal(itemtotal);
-    console.log(itemtotal);
-    localStorage.setItem("totalPrice", itemtotal);
-    Swal.fire({
-      toast: true,
-      icon: 'success',
-      html: `<span><b>${data.productName}</b> successfully added to the cart</span>`,
-      animation: true,
-      position: 'top-right',
-      showConfirmButton: false,
-      timer: 2000,
-      timerProgressBar: false,
-    });
-  }
+
+    let userID = localStorage.getItem("userID");
+    let productName = data.productName;
+    let productImage = data.productImage;
+    let productPrice = Number(data.productPrice);
+    let itemID = data._id;
+
+
+    const cartItem = {
+      userID,
+      productImage,
+      productName,
+      productPrice,
+      itemID,
+    };
+
+    console.log(cartItem);
+
+    axios
+      .post("http://localhost:5000/gym/cart/add", cartItem)
+      .then((res) => {
+        console.log(res);
+        Swal.fire({
+          toast: true,
+          icon: 'success',
+          html: `<span><b>${data.productName}</b> successfully added to the cart</span>`,
+          animation: true,
+          position: 'top-right',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            axios
+              .get(
+                "http://localhost:5000/gym/cart/get/" +
+                localStorage.getItem("userID")
+              )
+              .then((res) => {
+                setBadge(res.data.length);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
+  //-------------------------------------------------
+
+  // const addtoCart = (e, data) => {
+  //   e.preventDefault();
+  //   console.log(data);
+  //   let array = CartData;
+  //   array.push(data);
+  //   setCartData(array);
+  //   console.log(CartData);
+  //   let itemtotal = total;
+  //   itemtotal = itemtotal + data.productPrice;
+  //   settotal(itemtotal);
+  //   console.log(itemtotal);
+  //   localStorage.setItem("totalPrice", itemtotal);
+  //   Swal.fire({
+  //     toast: true,
+  //     icon: 'success',
+  //     html: `<span><b>${data.productName}</b> successfully added to the cart</span>`,
+  //     animation: true,
+  //     position: 'top-right',
+  //     showConfirmButton: false,
+  //     timer: 2000,
+  //     timerProgressBar: false,
+  //   });
+  // }
 
   const showShoppingCart = (e) => {
     e.preventDefault();
-    setshowCart(true);
+    navigate("/cart-table");
   }
 
   const hideShoppingCart = (e) => {
@@ -251,7 +315,7 @@ const ClientViewProducts = () => {
               <div class="row">
                 <div class="col-md-12 text-center">
                   <h3 class="animate-charcter"><b>Fitness Hub Shopping Store</b></h3>
-           
+
                 </div>
                 <div>
                   <Button
@@ -302,33 +366,33 @@ const ClientViewProducts = () => {
               </tr>
             </table>
           </center>
-         
+
 
 
           <div>
             <center>
               <div>
-              <h5><b>SHOP BY CAREGORY &nbsp;&nbsp;<img src={categoryPhoto} style={{ width: '3%', height: 'auto' }} ></img></b></h5>
+                <h5><b>SHOP BY CAREGORY &nbsp;&nbsp;<img src={categoryPhoto} style={{ width: '3%', height: 'auto' }} ></img></b></h5>
               </div>
               <br></br>
               <br></br>
-              <Button style={{width:'20%'}} color="dark" onClick={(e) => clothingbtn(e)}>
+              <Button style={{ width: '20%' }} color="dark" onClick={(e) => clothingbtn(e)}>
                 <b>Clothing</b>
               </Button>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-              <Button style={{width:'20%'}} color="dark" onClick={(e) => suppllimentsbtn(e)}>
+              <Button style={{ width: '20%' }} color="dark" onClick={(e) => suppllimentsbtn(e)}>
                 <b>Supplements</b>
               </Button>
 
 
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <Button style={{width:'20%'}} color="dark" onClick={(e) => showaccessoriesbtn(e)}>
+              <Button style={{ width: '20%' }} color="dark" onClick={(e) => showaccessoriesbtn(e)}>
                 <b>Accessories</b>
               </Button>
 
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <Button style={{width:'20%'}}color="dark" onClick={(e) => showProtein_Bars_Snacksbtn(e)}>
+              <Button style={{ width: '20%' }} color="dark" onClick={(e) => showProtein_Bars_Snacksbtn(e)}>
                 <b>Protein Bars & Snacks</b>
               </Button>
               <br />
@@ -339,7 +403,7 @@ const ClientViewProducts = () => {
           <section class="cards" style={{ display: supplliments ? 'flex' : "none", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '30px' }}>
 
             {suppllimentsDetails.map((product) => (
-              <article  class="card" style={{ flex: '0 1 24%', borderWidth: '1px', borderColor: 'white', marginBottom: '20px' }}>
+              <article class="card" style={{ flex: '0 1 24%', borderWidth: '1px', borderColor: 'white', marginBottom: '20px' }}>
                 <img src={product.productImage} alt='No Image Added...' style={{ width: '100%', height: 'auto' }} />
                 <h6>{product.productName}</h6>
                 <p><b>LKR. {product.productPrice}</b></p>

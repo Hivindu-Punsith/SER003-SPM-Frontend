@@ -114,13 +114,14 @@ const EditProduct = () => {
 
 
     return (
-        <div class='card' style={{ marginTop: "70px", marginBottom: "70px", width: '800px', marginLeft: '350px', backgroundColor: 'white',borderWidth:'4px' }}>
+        <div class='container' style={{ marginTop: "70px", marginBottom: "70px", width: '800px',border: '2px solid black', backgroundColor: 'white',borderWidth:'4px' }}>
             <div style={{ margin: "10px" }}>
 
                 <center>
                     <CardTitle style={{ color: "black", fontSize: "40px" }}><h3><b>FitnessHub Shopping Store </b></h3></CardTitle>
-                    <br></br>
+                    
                     <h4><b>Update Product</b></h4>
+                    <br></br>
                 </center>
 
                 <div className="container" style={{ width: '50%', }}>
