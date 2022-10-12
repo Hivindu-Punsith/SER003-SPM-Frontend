@@ -4,7 +4,7 @@ import StartUrl from "../configs/Url.json";
 
 const CreateNewUserURL = StartUrl?.StartUrl + "/gym/user/create-user";
 const GetAllUsersURL = StartUrl?.StartUrl + "/gym/user/all-users";
-const GetOneUsersURL = StartUrl?.StartUrl + "/gym/user/";
+const GetOneUsersURL = StartUrl?.StartUrl + "/gym/user/getOne/";
 const UpdateUserInstructorURL = StartUrl?.StartUrl + "/gym/user/update-instructor/";
 const UpdateUsermemberShipURL = StartUrl?.StartUrl + "/gym/user/update-memberShip/";
 const UpdateUserURL = StartUrl?.StartUrl + "/gym/user/update-user/";
