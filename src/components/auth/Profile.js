@@ -159,7 +159,7 @@ const Profile = () => {
     const [plansEmpty, setplansEmpty] = useState(false);
 
     const getUserWOrkOutAndDietPlans = async (id) => {
-        const data = await GetUserPlans(id);
+        const data = await GetUserPlans(localStorage.getItem("userID"));
         console.log("user Palns",data);
         if(data?.data?.status == 1)
         {
