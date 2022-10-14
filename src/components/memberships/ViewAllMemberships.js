@@ -148,7 +148,10 @@ const ViewAllMemberships = () => {
                 }
             })
 
+            
             setMembershipDetails(newData);
+
+
             setLoading(false);
 
         } catch (error) {
@@ -419,8 +422,7 @@ else{
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th>Total Memberships</th>
-                        <td>{MembershipDetails.length}</td>
+                        <th>Total Memberships {MembershipDetails.length}</th>                        
                     </tr>                                      
                 </table>
 
@@ -476,7 +478,7 @@ else{
                             toggle={() => {
                                 setopenUpdateModal(false);
                             }}>
-                            <Label>Update User</Label>
+                            <Label>Update Membership</Label>
                         </ModalHeader>
                         <ModalBody>
                             <div style={{ width: "400px" }}>
