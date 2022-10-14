@@ -31,6 +31,7 @@ const Login = () => {
         localStorage.setItem("userRole",data?.data?.data?.userRole);
         localStorage.setItem("user",data?.data?.data?.user);
         localStorage.setItem("userID",data?.data?.data?.userID);
+        localStorage.setItem("_id",data?.data?.data?._id);
         navigate("/");
 		window.location.reload();
         }
