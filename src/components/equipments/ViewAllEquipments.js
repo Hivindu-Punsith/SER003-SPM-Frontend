@@ -691,7 +691,7 @@ const ViewAllEquipments = () => {
                                 id="test-table-xls-button"
                                 className="download-table-xls-button btn btn-dark"
                                 table="table-to-xls"
-                                filename="Full User Details"
+                                filename="Equipment Report"
                                 sheet="tablexls"
                                 buttonText={<i class="fa-solid fa-print"></i>}
                             />
