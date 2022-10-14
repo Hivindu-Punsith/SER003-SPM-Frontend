@@ -42,6 +42,9 @@ const ViewAllEquipments = () => {
     const [liftingMachineDetails, setLiftingMachinesDetails] = useState([]);
     const [otherDetails, setotherDetails] = useState([]);
 
+    
+    const [totalvalue, setTotalValue] = useState(0);
+
     const [openUpdateModal, setopenUpdateModal] = useState(false);
 
    // const [EquipmentDetails, setEquipmentDetails] = useState({});
@@ -166,6 +169,15 @@ const ViewAllEquipments = () => {
                 }
             })
 
+            let total = 0;
+
+            data?.data?.data?.equipments?.map((item) => {
+                total = total + parseInt(item?.value)
+                console.log(total);
+            })
+            console.log("total",total);
+            setTotalValue(total);
+
             setAllDetails(newData);
             setLoading(false);
 
@@ -174,6 +186,7 @@ const ViewAllEquipments = () => {
             setLoading(false);
         }
     }
+
 
     const GetLiftingsEquipments = async () => {
         try {
@@ -781,12 +794,11 @@ const ViewAllEquipments = () => {
                         <th></th>
                         <th></th>
                         <th></th>
+                        <th>Total Value - Rs.{totalvalue}.00</th>
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th></th>
-                        <th>Total Equipments</th>
-                        <td>{allDetails.length}</td>
+                        <th>Total Equipments - {allDetails.length}</th>                        
                     </tr>                                      
                 </table>
 
@@ -856,7 +868,7 @@ const ViewAllEquipments = () => {
                             toggle={() => {
                                 setopenUpdateModal(false);
                             }}>
-                            <Label>Update User</Label>
+                            <Label>Update Equipment</Label>
                         </ModalHeader>
                         <ModalBody>
                             <div style={{ width: "400px" }}>
