@@ -686,7 +686,7 @@ const ViewAllEquipments = () => {
                         <CardTitle style={{display: liftingMachine ? "flex" : "none", color: "black", fontSize: "30px", float:"left" }}><b>Lifting Machines</b></CardTitle>
                         <CardTitle style={{display: other ? "flex" : "none", color: "black", fontSize: "30px", float:"left" }}><b>Other Equipments</b></CardTitle>
                       
-                        <div style={{ fontSize: "15px", float: "right" , marginLeft:"10px"}}>                            
+                        <div style={{ fontSize: "15px", float: "right" , marginLeft:"10px", display: all ? "flex" : "none"}}>                            
                             <ReactHTMLTableToExcel                                
                                 id="test-table-xls-button"
                                 className="download-table-xls-button btn btn-dark"
