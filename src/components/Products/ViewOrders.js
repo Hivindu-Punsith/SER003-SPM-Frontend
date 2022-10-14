@@ -36,7 +36,7 @@ const ViewOrders = () => {
                                 id="test-table-xls-button"
                                 className="download-table-xls-button btn btn-dark"
                                 table="table-to-xls"
-                                filename="Products Details"
+                                filename="Order Details"
                                 sheet="tablexls"
                                 buttonText={<i class="fa-solid fa-print"></i>}
                             />
