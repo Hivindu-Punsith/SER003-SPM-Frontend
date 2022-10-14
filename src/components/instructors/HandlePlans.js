@@ -34,6 +34,7 @@ const HandlePlans = () => {
 
     const [workoutData, setWorkoutData] = useState([]);
     const [dietData, setDietData] = useState([]);
+    const [userData, setuserData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [openModalW, setopenModalW] = useState(false);
     const [openModalD, setopenModalD] = useState(false);
@@ -275,9 +276,42 @@ const HandlePlans = () => {
         }
       };
 
+      const getUserDetails= async () => {
+        try {
+          setLoading(true);
+          let data = await GetOneUserDetails(id?.id);
+          console.log("iddd", id?.id);
+          console.log("user data single", data);
+          
+          let newData = data?.data?.data?.user?.map((item)=>{
+            return {
+              gym_id: item?.gym_id,
+              fullName: item?.fullName,
+              email: item?.email,
+              mobileno: item?.mobileno,
+              dateOfBirth: item?.dateOfBirth,
+              weight: item?.weight,
+              height: item?.height,
+              memberShip: item?.memberShip,
+              createdAt: item?.createdAt,
+              updatedAt: item?.updatedAt,
+              status: item?.status,
+              instructor: item?.instructor,
+              _id: item?._id,
+            };
+          });
+          setuserData(newData);
+          setLoading(false);
+        } catch (error) {
+          console.log(error);
+          setLoading(false);
+        }
+      }
+
       useEffect(() => {
         getWorkouts();
         getDiets();
+        getUserDetails();
       }, []);
 
       const columnsW = [
@@ -849,6 +883,12 @@ const HandlePlans = () => {
       return (
         <div style={{ marginTop: "70px", marginBottom: "70px" }}>
           <div style={{ margin: "10px" }}>
+            <center>
+              <div>
+               <h2 style={{ color: "black", fontSize: "30px" }} class="animate-charcter"><b>Client Details</b></h2>
+              </div>
+            </center>
+            <br />
             <Card>
               <CardHeader>
                 <center>

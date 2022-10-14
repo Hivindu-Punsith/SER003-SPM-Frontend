@@ -23,6 +23,7 @@ import Payment from "./components/Products/Payment";
 import ThankPage from "./components/Products/ThankPage";
 import Test from "./components/Products/Test";
 import Cart from "./components/cart/Cart";
+import ViewOrders from "./components/Products/ViewOrders";
 
 //equipments
 import ViewAllEquipments from "./components/equipments/ViewAllEquipments";
@@ -34,6 +35,7 @@ import HandleInstructors from "./components/admin/HandleInstructors";
 import ClientMemberships from "./components/memberships/ClientMemberships";
 import EditProduct from "./components/Products/EditProduct";
 import HandlePlans from "./components/instructors/HandlePlans";
+import ViewRequests from "./components/instructors/ViewRequests";
 
 
 
@@ -64,6 +66,7 @@ const SiteRouter = () => {
                 <Route path="/memberships" element={<ViewAllMemberships/>}/>
                 <Route path="/client-memberships" element={<ClientMemberships/>}/>
                 <Route path="/clients" element={<ViewAllClients/>}/>
+                <Route path="/instructor-requests/:id" element={<ViewRequests/>}/>
                 <Route path="/clients/:id" element={<HandlePlans/>}/>
                 <Route path="/instructors" element={<HandleInstructors/>}/>
                
@@ -74,6 +77,7 @@ const SiteRouter = () => {
                 <Route path="/thankyou" element={<ThankPage/>}/>
                 <Route path="/report-test" element={<Test/>}/>
                 <Route path="/cart-table" element={<Cart/>}/>
+                <Route path="/orders" element={<ViewOrders/>}/>
 
               </>
               )

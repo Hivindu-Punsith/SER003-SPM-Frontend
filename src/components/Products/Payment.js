@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select"
 import Swal from 'sweetalert2';
@@ -121,8 +122,9 @@ const Payment = () => {
         name: "",
         address: "",
         method: "",
-        mobile:"+94"
-
+        mobile:"+94",
+        total:"",
+        Items:[]
     });
 
 
@@ -137,11 +139,38 @@ const Payment = () => {
         setData({ ...data, [input.name]: input.value });
     };
 
+    const [cart, setCart] = useState([]);
+    const [total, setTotal] = useState(0);
+    const [userID, setUserID] = useState("");
+  
+  
+    useEffect(() => {
+      function getCart() {
+        axios
+          .get(
+            "http://localhost:5000/gym/cart/get/" +
+            localStorage.getItem("userID")
+          )
+          .then((res) => {
+            setCart(res.data);
+            setTotal(res.data.reduce((total, item) => total + item.productPrice, 0)); //total price
+            setUserID(res.data);
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+      getCart(); //getCart();
+    }, []);
 
     const addPayment = async (e) => {
 
         e.preventDefault();
 
+        data.Items = cart;
+        data.total = total;
+        console.log("data set ",data);
         let validate = validateAddPayment(data);
         let msg = validate?.message;
         if (validate.status == false) {
@@ -157,6 +186,7 @@ const Payment = () => {
             });
         }
         else {
+            
             let newdata = await createPayment(data);
             console.log(" payment data ", newdata);
             if (newdata?.status == 200) {

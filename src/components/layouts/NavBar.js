@@ -10,6 +10,9 @@ const NavBar = ()=> {
 
   const { Token, userRole } = useContext(AuthContext);
 
+  const instructor_id = localStorage.getItem("_id");
+
+  console.log("insss",instructor_id);
   const handleSubmit = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userRole");
@@ -75,13 +78,13 @@ const NavBar = ()=> {
                 <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/client-products">Store</a>
                 {/* <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red"}} className="navbar-brand" aria-current="page" href="/equipments">Equipment</a> */}
                 <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/client-memberships">Memberships</a>
-                <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/workout-plans">Workout Plans</a>
+                {/* <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/workout-plans">Workout Plans</a> */}
                 <a style={{ display: userRole == "user" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/req-instructor">Request Instructor</a>
                 
 
                 {/* Instructor pages */}
-                <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/clients">Members</a>
-                <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/instructor-requests">Instructor Requests</a>
+                {/* <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/clients">Members</a> */}
+                <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href={`/instructor-requests/${instructor_id}`}>My Members</a>
                 <a style={{ display: userRole == "instructor" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/client-products">Store</a>
 
 
@@ -91,7 +94,7 @@ const NavBar = ()=> {
                 <a style={{ display: userRole == "admin" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/memberships">Memberships</a>
                 <a style={{ display: userRole == "admin" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/equipments">Equipments</a>
                 <a style={{ display: userRole == "admin" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/instructors">Instructors</a>
- 
+                <a style={{ display: userRole == "admin" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/orders">Order Details</a>
 
 
               </div>

@@ -159,7 +159,7 @@ const Profile = () => {
     const [plansEmpty, setplansEmpty] = useState(false);
 
     const getUserWOrkOutAndDietPlans = async (id) => {
-        const data = await GetUserPlans(id);
+        const data = await GetUserPlans(localStorage.getItem("userID"));
         console.log("user Palns",data);
         if(data?.data?.status == 1)
         {
@@ -382,14 +382,14 @@ const Profile = () => {
                                             <center><h3 style={{color:"red" , fontSize:"30px"}}>Work Out Plan</h3></center> 
                                             <br/>  
                                                 <div>
-                                                    <h5 style={{fontSize:"20px"}}>Workout Type : <label style={{color:"red"}}>{userWorkout.workout_type}</label></h5>
-                                                    <h5 style={{fontSize:"20px"}}>Exercise 1 : <label style={{color:"red"}}>{userWorkout.exercise1}</label></h5>
-                                                    <h5 style={{fontSize:"20px"}}>Exercise 2 : <label style={{color:"red"}}>{userWorkout.exercise2}</label></h5>
-                                                    <h5 style={{fontSize:"20px"}}>Exercise 3 : <label style={{color:"red"}}>{userWorkout.exercise3}</label></h5>
-                                                    <h5 style={{fontSize:"20px"}}>Exercise 4 : <label style={{color:"red"}}>{userWorkout.exercise4}</label></h5>
-                                                    <h5 style={{fontSize:"20px"}}>Exercise 5 : <label style={{color:"red"}}>{userWorkout.exercise5}</label></h5>
-                                                    <h5 style={{fontSize:"20px"}}>Exercise 6 : <label style={{color:"red"}}>{userWorkout.exercise6}</label></h5>
-                                                    <h5 style={{fontSize:"20px"}}>Last Updated Date : <label style={{color:"red"}}>{moment(userWorkout.updatedAt).format("YYYY-MM-DD")}</label></h5>
+                                                    <h5 style={{fontSize:"20px"}}>Workout Type : <label style={{color:"red"}}>{userWorkout?.workout_type}</label></h5>
+                                                    <h5 style={{fontSize:"20px"}}>Exercise 1 : <label style={{color:"red"}}>{userWorkout?.exercise1}</label></h5>
+                                                    <h5 style={{fontSize:"20px"}}>Exercise 2 : <label style={{color:"red"}}>{userWorkout?.exercise2}</label></h5>
+                                                    <h5 style={{fontSize:"20px"}}>Exercise 3 : <label style={{color:"red"}}>{userWorkout?.exercise3}</label></h5>
+                                                    <h5 style={{fontSize:"20px"}}>Exercise 4 : <label style={{color:"red"}}>{userWorkout?.exercise4}</label></h5>
+                                                    <h5 style={{fontSize:"20px"}}>Exercise 5 : <label style={{color:"red"}}>{userWorkout?.exercise5}</label></h5>
+                                                    <h5 style={{fontSize:"20px"}}>Exercise 6 : <label style={{color:"red"}}>{userWorkout?.exercise6}</label></h5>
+                                                    <h5 style={{fontSize:"20px"}}>Last Updated Date : <label style={{color:"red"}}>{moment(userWorkout?.updatedAt).format("YYYY-MM-DD")}</label></h5>
                                                     <br/>
                                                     <Button className="btn btn-dark" onClick={pdfGenerateToWorkOut}> Download Workout Plan</Button>
                                                 </div>                     
@@ -400,14 +400,14 @@ const Profile = () => {
                                             <center><h3 style={{color:"red" , fontSize:"30px"}}>Diet Plan</h3></center>
                                             <br/> 
                                                 <div>
-                                                    <h5 style={{fontSize:"20px"}}>Workout Type : <label style={{color:"red"}}>{userDiet.workout_type}</label></h5>
-                                                    <h5 style={{fontSize:"20px"}}>Meal 1 : <label style={{color:"red"}}>{userDiet.meal1}</label></h5>
-                                                    <h5 style={{fontSize:"20px"}}>Meal 2 : <label style={{color:"red"}}>{userDiet.meal2}</label></h5>
-                                                    <h5 style={{fontSize:"20px"}}>Meal 3 : <label style={{color:"red"}}>{userDiet.meal3}</label></h5>
-                                                    <h5 style={{fontSize:"20px"}}>Meal 4 : <label style={{color:"red"}}>{userDiet.meal4}</label></h5>
-                                                    <h5 style={{fontSize:"20px"}}>Meal 5 : <label style={{color:"red"}}>{userDiet.meal5}</label></h5>
-                                                    <h5 style={{fontSize:"20px"}}>Meal 6 : <label style={{color:"red"}}>{userDiet.meal6}</label></h5>
-                                                    <h5 style={{fontSize:"20px"}}>Last Updated Date : <label style={{color:"red"}}>{moment(userDiet.updatedAt ).format("YYYY-MM-DD")}</label></h5>
+                                                    <h5 style={{fontSize:"20px"}}>Workout Type : <label style={{color:"red"}}>{userDiet?.workout_type}</label></h5>
+                                                    <h5 style={{fontSize:"20px"}}>Meal 1 : <label style={{color:"red"}}>{userDiet?.meal1}</label></h5>
+                                                    <h5 style={{fontSize:"20px"}}>Meal 2 : <label style={{color:"red"}}>{userDiet?.meal2}</label></h5>
+                                                    <h5 style={{fontSize:"20px"}}>Meal 3 : <label style={{color:"red"}}>{userDiet?.meal3}</label></h5>
+                                                    <h5 style={{fontSize:"20px"}}>Meal 4 : <label style={{color:"red"}}>{userDiet?.meal4}</label></h5>
+                                                    <h5 style={{fontSize:"20px"}}>Meal 5 : <label style={{color:"red"}}>{userDiet?.meal5}</label></h5>
+                                                    <h5 style={{fontSize:"20px"}}>Meal 6 : <label style={{color:"red"}}>{userDiet?.meal6}</label></h5>
+                                                    <h5 style={{fontSize:"20px"}}>Last Updated Date : <label style={{color:"red"}}>{moment(userDiet?.updatedAt ).format("YYYY-MM-DD")}</label></h5>
                                                     <br/>
                                                     <Button className="btn btn-dark" onClick={pdfGenerateToDiet}> Download Diet Plan</Button>
                                                 </div>                       
