@@ -43,15 +43,15 @@ const ViewOrders = () => {
                         </div>
 
             <div className='container'>
-                <table className="table table-secondary" id="table-to-xls">
+                <table className="table table-bordered" id="table-to-xls">
                  
-                    <thead className="table-danger">
+                    <thead className="table-secondary">
                         <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>email</th>
-                            <th>address</th>
-                            <th>mobile</th>
+                            <th></th>
+                            <th>Customer Name</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Mobile Number</th>
                             <th>Items</th>
                             <th>Total</th>
                         </tr>
@@ -74,12 +74,12 @@ const ViewOrders = () => {
                                         (
                                             <tr>
                                             <td>{item?.productName}</td>
-                                            <td>Rs.{item?.productPrice}.00</td>
+                                            <td>LKR.{item?.productPrice}.00</td>
                                             </tr>
                                         )
                                     )}
                                 </td>
-                                <td>Rs.{product?.total}.00</td>
+                                <td>LKR.{product?.total}.00</td>
                             </tr>
                             )
                         })}
@@ -89,8 +89,8 @@ const ViewOrders = () => {
                             <td></td>
                             <td></td>
                             <td></td>      
-                            <th>Full Totoal</th>
-                            <td>Rs.{Fulltotal}.00</td>
+                            <th>Full Total</th>
+                            <td>LKR.{Fulltotal}.00</td>
                         </tr>
                     </tbody>
                 </table>
