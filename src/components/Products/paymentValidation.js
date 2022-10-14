@@ -5,7 +5,8 @@ export const validateAddPayment = (formData) => {
         EMAIL: "Email must contain @ and at least 3 letter before for the prefix",
         ADDRESS: "The address should at least be 5 letters",
         MOBILE: "Mobile number must contain 10 numbers",
-  
+        TOTAL:"Total is not set",
+        ITEM:"items not set"
 
     };
 
@@ -15,7 +16,8 @@ export const validateAddPayment = (formData) => {
         email: formData.email,
         mobile: formData.mobile,
         address: formData.address,
-       
+       item:formData.Items,
+       total:formData.total
 
     }
 
@@ -23,6 +25,18 @@ export const validateAddPayment = (formData) => {
         status: false,
         message: null
     };
+    if (regdata.item.length == 0) {
+        output.message = messages.ITEM;
+        output.status = false;
+        return output;
+
+    }
+    if (regdata.total <= 0) {
+        output.message = messages.TOTAL;
+        output.status = false;
+        return output;
+
+    }
 
     if (regdata.name.length <= 2) {
         output.message = messages.NAME;
