@@ -598,7 +598,7 @@ const handleSearchArea = async (e) => {
                 setOpenModal(false);
               }}
             >
-              <Label>Add New User</Label>
+              <Label>Add New Instructor</Label>
             </ModalHeader>
             <ModalBody>
               <div style={{ width: "400px" }}>
@@ -699,7 +699,7 @@ const handleSearchArea = async (e) => {
                 setOpenUpdateModal(false);
               }}
             >
-              <Label>Update User</Label>
+              <Label>Update Instructor</Label>
             </ModalHeader>
             <ModalBody>
               <div style={{ width: "400px" }}>
