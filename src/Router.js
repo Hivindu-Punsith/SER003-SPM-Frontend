@@ -23,6 +23,7 @@ import Payment from "./components/Products/Payment";
 import ThankPage from "./components/Products/ThankPage";
 import Test from "./components/Products/Test";
 import Cart from "./components/cart/Cart";
+import ViewOrders from "./components/Products/ViewOrders";
 
 //equipments
 import ViewAllEquipments from "./components/equipments/ViewAllEquipments";
@@ -76,6 +77,7 @@ const SiteRouter = () => {
                 <Route path="/thankyou" element={<ThankPage/>}/>
                 <Route path="/report-test" element={<Test/>}/>
                 <Route path="/cart-table" element={<Cart/>}/>
+                <Route path="/orders" element={<ViewOrders/>}/>
 
               </>
               )

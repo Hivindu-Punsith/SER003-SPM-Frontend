@@ -94,7 +94,7 @@ const NavBar = ()=> {
                 <a style={{ display: userRole == "admin" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/memberships">Memberships</a>
                 <a style={{ display: userRole == "admin" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/equipments">Equipments</a>
                 <a style={{ display: userRole == "admin" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/instructors">Instructors</a>
- 
+                <a style={{ display: userRole == "admin" ? "flex" : "none" , textDecoration:"none" , color:"red", marginLeft:"50px", fontFamily: "Monospace"}} className="navbar-brand" aria-current="page" href="/orders">Order Details</a>
 
 
               </div>

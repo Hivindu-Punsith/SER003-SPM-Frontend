@@ -15,7 +15,8 @@ export async function createPayment(data) {
         mobile: data?.mobile,
         address:data?.address,
         method:data?.method,
-
+        total:data?.total,
+        Items:data?.Items
 
 
     } 
