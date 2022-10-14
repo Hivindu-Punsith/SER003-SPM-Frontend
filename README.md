@@ -36,8 +36,8 @@ in every managment report generation and search function is available in both ad
 
 ## Technologies
 
-* ReactJS
-* JavScript
+* React JS
+* JavaScript
 * Bootstrap
 
 ## How to get started
