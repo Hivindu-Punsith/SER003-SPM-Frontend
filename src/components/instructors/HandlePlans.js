@@ -153,9 +153,18 @@ const HandlePlans = () => {
         };
     
         let isValid = ValidateAddNewWorkout(regdata);
-    
+        let msg = isValid?.message;
         if (isValid.status == false) {
-          alert(isValid.message);
+          Swal.fire({
+            toast: true,
+            icon: "warning",
+            html: `<span>${msg}</span>`,
+            animation: true,
+            position: "top-right",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: false,
+          });
         } else {
           console.log("sending data", regdata);
           let data = await createWorkout(regdata);
@@ -193,9 +202,18 @@ const HandlePlans = () => {
         };
     
         let isValid = ValidateAddNewMeal(regdata);
-    
+        let msg = isValid?.message;
         if (isValid.status == false) {
-          alert(isValid.message);
+          Swal.fire({
+            toast: true,
+            icon: "warning",
+            html: `<span>${msg}</span>`,
+            animation: true,
+            position: "top-right",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: false,
+          });
         } else {
           console.log("sending data", regdata);
           let data = await createDiet(regdata);
