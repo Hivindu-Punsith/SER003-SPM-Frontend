@@ -1,6 +1,6 @@
 export const ValidateAddNewWorkout = (formData) => {
   const messages = {
-    WORKOUT_NAME_EMPTY: "The name should at least be 3 letters...",
+    WORKOUT_NAME_EMPTY: "The exercise should at least be 3 letters...",
     WORKOUT_TYPE_EMPTY: "Please select a workout type...",
   };
 
