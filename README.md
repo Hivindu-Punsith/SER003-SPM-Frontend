@@ -35,7 +35,7 @@ In Membership Managment admin can add , update , delete memberships. In equipmen
 In Store management admin can add , update , delete items and user can buy items fron the store. In Instructor management Instructor can add, update , delete his/her members diet plans and workout plans, 
 in every managment report generation and search function is available in both admin and user sides.
 
-![4645873](https://user-images.githubusercontent.com/89182652/195965385-94ef8ec4-9a34-42b3-8ada-d234a45f4c88.png)
+![7001291](https://user-images.githubusercontent.com/89182652/195965445-feaacf87-e4cd-4025-a28b-720b1352a596.png)
 
 ## Technologies
 
